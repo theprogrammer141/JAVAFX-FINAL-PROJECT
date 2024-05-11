@@ -28,7 +28,7 @@ public class ChangePassword extends Application {
     }
 
     private GridPane createRegistrationFormPane() {
-        Image backgroundImage = new Image("file:///D:/JAVAFX FINAL PROJECT/createaccount.png");
+        Image backgroundImage = new Image("file:///JAVAFX FINAL PROJECT/createaccount.png");
 
         BackgroundImage background = new BackgroundImage(
                 backgroundImage,

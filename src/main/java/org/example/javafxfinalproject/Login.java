@@ -22,7 +22,7 @@ public class Login extends Application {
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Orphanage Organization Management System");
 
-        Image backgroundImage = new Image("file:///D:/JAVAFX FINAL PROJECT/background.jpeg");
+        Image backgroundImage = new Image("file:///JAVAFX FINAL PROJECT/background.jpeg");
 
         BackgroundImage background = new BackgroundImage(
                 backgroundImage,
