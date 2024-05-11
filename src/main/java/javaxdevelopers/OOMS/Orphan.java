@@ -24,7 +24,7 @@ public class Orphan extends Person implements Serializable {
 
     public  static void addOrphan(OOM organization){
         int id = organization.getOrphansList().size() + 1;
-        if (id<=10) {
+        if (id<=30) {
             Orphan child=new Orphan();
             child.inputData();
             child.setId(id);

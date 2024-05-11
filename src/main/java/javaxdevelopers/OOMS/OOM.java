@@ -24,6 +24,7 @@ public class OOM {
     */
     public OOM(){
         readStaffFromFile();
+        //setBankAccount(new Account());
         readAccountFromFile();
         readDonationFromFile();
         readOrphanFromFile();

@@ -38,7 +38,7 @@ public class Staff extends Person implements Serializable {
     //checks if there is room for more staff and then calls inputData method to set values
     //of staff object and then store it in staffList in management class
     int id = organization.getStaffList().size() + 1;
-    if (id<=5) {
+    if (id<=15) {
         Staff employee = new Staff();
         employee.inputData();
         employee.setId(id);

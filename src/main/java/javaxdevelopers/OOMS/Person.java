@@ -39,7 +39,8 @@ public class Person implements Serializable {
         System.out.println("Enter 1 for Educated: ");
         if (input.nextInt()==1) {
             this.setEducation(Education.inputEducation());
-        }
+        }else
+            this.setEducation(new Education());
     }
     public void displayData() {
         System.out.println("Name: " + this.getName());
