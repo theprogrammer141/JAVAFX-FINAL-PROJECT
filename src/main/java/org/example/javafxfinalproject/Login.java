@@ -17,8 +17,6 @@ import javafx.stage.Stage;
 
 
 public class Login extends Application {
-    private String username = "admin";
-    private String password = "admin";
 
     @Override
     public void start(Stage primaryStage) {
