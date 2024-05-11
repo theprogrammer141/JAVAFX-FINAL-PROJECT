@@ -28,7 +28,7 @@ public class SignUp extends Application {
     }
 
     private GridPane createRegistrationFormPane() {
-        Image backgroundImage = new Image("file:///C:/Users/abdul/OneDrive/Desktop/createaccount.png");
+        Image backgroundImage = new Image("file:///D:/JAVAFX FINAL PROJECT/createaccount.png");
 
         BackgroundImage background = new BackgroundImage(
                 backgroundImage,
