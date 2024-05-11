@@ -47,20 +47,22 @@ public class Login extends Application {
 
         Label userName = new Label("Username:");
         userName.setFont(Font.font("Tahoma", 15));
-        userName.setStyle("-fx-text-fill: white");
+        userName.setStyle("-fx-text-fill: black");
         grid.add(userName, 0, 1);
 
         TextField userTextField = new TextField();
-        userTextField.setStyle("-fx-background-color: transparent;-fx-border-radius: 20px; -fx-border-color: black; -fx-text-fill: white");
+        userTextField.setPromptText("Enter Username");
+        userTextField.setStyle("-fx-background-color: transparent;-fx-border-radius: 20px; -fx-border-color: black; -fx-text-fill: white; -fx-prompt-text-fill: black");
         grid.add(userTextField, 1, 1);
 
         Label pw = new Label("Password:");
         pw.setFont(Font.font("Tahoma", 15));
-        pw.setStyle("-fx-text-fill: white");
+        pw.setStyle("-fx-text-fill: black");
         grid.add(pw, 0, 2);
 
         PasswordField passwordBox = new PasswordField();
-        passwordBox.setStyle("-fx-background-color: transparent; -fx-border-radius: 20px; -fx-border-color: black; -fx-text-fill: white");
+        passwordBox.setPromptText("Enter Password");
+        passwordBox.setStyle("-fx-background-color: transparent; -fx-border-radius: 20px; -fx-border-color: black; -fx-text-fill: white; -fx-prompt-text-fill: black");
         grid.add(passwordBox, 1, 2);
 
         Button forgotPassword = new Button("Forgot Password?");
@@ -85,7 +87,7 @@ public class Login extends Application {
         Label signUplabel = new Label("Don't have an account?");
         signUplabel.setAlignment(Pos.BOTTOM_RIGHT);
         signUplabel.setFont(Font.font("Tahoma", 15));
-        signUplabel.setStyle("-fx-text-fill: white; -fx-background-radius: 30px; -fx-background-color: transparent;");
+        signUplabel.setStyle("-fx-text-fill: black; -fx-background-radius: 30px; -fx-background-color: transparent;");
 
         HBox signupBtn = new HBox(10);
         signupBtn.setAlignment(Pos.BOTTOM_RIGHT);
