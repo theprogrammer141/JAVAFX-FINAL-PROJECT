@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
@@ -98,7 +99,11 @@ public class StaffReport extends Application {
             }
         }
 
+        Button backButton = new Button("Back");
+        backButton.setStyle(" -fx-text-fill: white;-fx-background-color: black; -fx-background-radius: 30px; -fx-border-color: white; -fx-border-radius: 40px");
+
         grid.add(root, 0, 0);
+        grid.add(backButton, 0, 20);
 
         Scene scene = new Scene(grid, 800, 600);
         primaryStage.setTitle("Staff Report");
