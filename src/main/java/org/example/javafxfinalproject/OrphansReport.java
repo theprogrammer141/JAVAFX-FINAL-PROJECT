@@ -9,11 +9,22 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javaxdevelopers.OOMS.*;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
+
 
 public class OrphansReport extends Application {
+    OOM organization = new OOM();
+    ArrayList<Orphan> orphans = new ArrayList<>();
 
     @Override
     public void start(Stage primaryStage) {
+        loadOrphanData();
+
         Image backgroundImage = new Image("file:///JAVAFX FINAL PROJECT/ReportGeneratorBackground.jpeg");
 
         BackgroundImage image = new BackgroundImage(
@@ -31,68 +42,49 @@ public class OrphansReport extends Application {
         grid.setPadding(new Insets(25, 25, 25, 25));
         grid.setBackground(new Background(image));
 
+        VBox root = new VBox(10);
 
         Label title = new Label("ORPHANS REPORT");
         title.setFont(Font.font("Impact", 40));
+        root.getChildren().add(title);
 
-        Label totalOrphansLabel = new Label("Total Orphans: ");
+        Label totalOrphansLabel = new Label("Total Orphans: " + organization.getOrphansList().size());
         totalOrphansLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
         totalOrphansLabel.setFont(Font.font(20));
-        Label ageGroupsLabel = new Label("By Age Groups:-");
-        ageGroupsLabel.setStyle("-fx-text-fill: black; -fx-font-weight: bold;");
-        ageGroupsLabel.setFont(Font.font(15));
-        Label oneToFiveLabel = new Label("(1-5 years): ");
-        oneToFiveLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
-        Label sixToTenLabel = new Label("(6-10 years): ");
-        sixToTenLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
-        Label elevenToFifteenLabel = new Label("(11-15 years): ");
-        elevenToFifteenLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
-        Label sixteenToEighteenLabel = new Label("(16-18 years): ");
-        sixteenToEighteenLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
-        Label orphansByGenderLabel = new Label("By Gender:-");
-        orphansByGenderLabel.setStyle("-fx-text-fill: black; -fx-font-weight: bold;");
-        orphansByGenderLabel.setFont(Font.font(15));
-        Label maleLabel = new Label("Male Percentage: ");
-        maleLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
-        Label femaleLabel = new Label("Female Percentage: ");
-        femaleLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
-        Label othersLabel = new Label("Others: ");
-        othersLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
-        Label orphansByEducationLabel = new Label("By Education:-");
-        orphansByEducationLabel.setStyle("-fx-text-fill: black; -fx-font-weight: bold;");
-        orphansByEducationLabel.setFont(Font.font(15));
-        Label educatedLabel = new Label("Educated: ");
-        educatedLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
-        Label nonEducatedLabel = new Label("Non-Educated: ");
-        nonEducatedLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
-        Label orphansBySkillLabel = new Label("By Skill:-");
-        orphansBySkillLabel.setStyle("-fx-text-fill: black; -fx-font-weight: bold;");
-        orphansBySkillLabel.setFont(Font.font(15));
-        Label skilledLabel = new Label("Skilled: ");
-        skilledLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
-        Label nonSkilledLabel = new Label("Non-Skilled: ");
-        nonSkilledLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+        root.getChildren().add(totalOrphansLabel);
 
-        VBox root = new VBox(10);
-        root.getChildren().addAll(
-                title,
-                totalOrphansLabel,
-                ageGroupsLabel,
-                oneToFiveLabel,
-                sixToTenLabel,
-                elevenToFifteenLabel,
-                sixteenToEighteenLabel,
-                orphansByGenderLabel,
-                maleLabel,
-                femaleLabel,
-                othersLabel,
-                orphansByEducationLabel,
-                educatedLabel,
-                nonEducatedLabel,
-                orphansBySkillLabel,
-                skilledLabel,
-                nonSkilledLabel
-        );
+        if(orphans != null)
+        {
+            for(Orphan orphan : orphans) {
+                Label orphanIdLabel = new Label("Orphan ID: " + orphan.getId());
+                orphanIdLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+                root.getChildren().add(orphanIdLabel);
+
+                Label orphanNameLabel = new Label("Name: " + orphan.getName());
+                orphanNameLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+                root.getChildren().add(orphanNameLabel);
+
+                Label orphanAgeLabel = new Label("Age: " + orphan.getAge());
+                orphanAgeLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+                root.getChildren().add(orphanAgeLabel);
+
+                Label orphanGenderLabel = new Label("Gender: " + orphan.getGender());
+                orphanGenderLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+                root.getChildren().add(orphanGenderLabel);
+
+                Label orphanEducationLevelLabel = new Label("Education Level: " + orphan.getEducation().getEducationLevel());
+                orphanEducationLevelLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+                root.getChildren().add(orphanEducationLevelLabel);
+
+                Label orphanEducationInstituteLabel = new Label("Education Institute: " + orphan.getEducation().getInstitute());
+                orphanEducationInstituteLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+                root.getChildren().add(orphanEducationInstituteLabel);
+
+                Label line = new Label("----------------------");
+                line.setStyle("-fx-font-weight: bold; -fx-font-size: 20");
+                root.getChildren().add(line);
+            }
+        }
 
         grid.add(root, 0, 0);
 
@@ -100,6 +92,14 @@ public class OrphansReport extends Application {
         primaryStage.setTitle("Orphans Report");
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    private void loadOrphanData() {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("OrphanData.ser"))) {
+            orphans = (ArrayList<Orphan>) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {

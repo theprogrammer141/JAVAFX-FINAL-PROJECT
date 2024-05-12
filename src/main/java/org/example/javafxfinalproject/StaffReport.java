@@ -9,11 +9,22 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javaxdevelopers.OOMS.*;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
+
 
 public class StaffReport extends Application {
+    OOM organization = new OOM();
+    ArrayList<Staff> staff = new ArrayList<>();
 
     @Override
     public void start(Stage primaryStage) {
+        loadStaffData();
+
         Image backgroundImage = new Image("file:///JAVAFX FINAL PROJECT/ReportGeneratorBackground.jpeg");
 
         BackgroundImage image = new BackgroundImage(
@@ -31,75 +42,76 @@ public class StaffReport extends Application {
         grid.setPadding(new Insets(25, 25, 25, 25));
         grid.setBackground(new Background(image));
 
+        VBox root = new VBox(10);
 
         Label title = new Label("STAFF REPORT");
         title.setFont(Font.font("Impact", 40));
+        root.getChildren().add(title);
 
-        Label totalStaffLabel = new Label("Total Staff: ");
+        Label totalStaffLabel = new Label("Total Staff: " + organization.getStaffList().size());
         totalStaffLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
         totalStaffLabel.setFont(Font.font(20));
-        Label ageGroupsLabel = new Label("By Age Groups:-");
-        ageGroupsLabel.setStyle("-fx-text-fill: black; -fx-font-weight: bold;");
-        ageGroupsLabel.setFont(Font.font(15));
-        Label twentyToTwentyFiveLabel = new Label("(20-25 years): ");
-        twentyToTwentyFiveLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
-        Label TwentyFiveToThirtyLabel = new Label("(25-30 years): ");
-        TwentyFiveToThirtyLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
-        Label thirtyToThirtyFiveLabel = new Label("(35-40 years): ");
-        thirtyToThirtyFiveLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
-        Label fortyPlusLabel = new Label("(40+ years): ");
-        fortyPlusLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
-        Label staffByGenderLabel = new Label("By Gender:-");
-        staffByGenderLabel.setStyle("-fx-text-fill: black; -fx-font-weight: bold;");
-        staffByGenderLabel.setFont(Font.font(15));
-        Label maleLabel = new Label("Male Percentage: ");
-        maleLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
-        Label femaleLabel = new Label("Female Percentage: ");
-        femaleLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
-        Label othersLabel = new Label("Others: ");
-        othersLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
-        Label staffByEducationLabel = new Label("By Education:-");
-        staffByEducationLabel.setStyle("-fx-text-fill: black; -fx-font-weight: bold;");
-        staffByEducationLabel.setFont(Font.font(15));
-        Label educatedLabel = new Label("Educated: ");
-        educatedLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
-        Label nonEducatedLabel = new Label("Non-Educated: ");
-        nonEducatedLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
-        Label staffBySkillLabel = new Label("By Skill:-");
-        staffBySkillLabel.setStyle("-fx-text-fill: black; -fx-font-weight: bold;");
-        staffBySkillLabel.setFont(Font.font(15));
-        Label skilledLabel = new Label("Skilled: ");
-        skilledLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
-        Label nonSkilledLabel = new Label("Non-Skilled: ");
-        nonSkilledLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+        root.getChildren().add(totalStaffLabel);
 
-        VBox root = new VBox(10);
-        root.getChildren().addAll(
-                title,
-                totalStaffLabel,
-                ageGroupsLabel,
-                twentyToTwentyFiveLabel,
-                TwentyFiveToThirtyLabel,
-                thirtyToThirtyFiveLabel,
-                fortyPlusLabel,
-                staffByGenderLabel,
-                maleLabel,
-                femaleLabel,
-                othersLabel,
-                staffByEducationLabel,
-                educatedLabel,
-                nonEducatedLabel,
-                staffBySkillLabel,
-                skilledLabel,
-                nonSkilledLabel
-        );
+        if(staff != null)
+        {
+            for(Staff staff1 : staff) {
+                Label staffIdLabel = new Label("Staff ID: " + staff1.getId());
+                staffIdLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+                root.getChildren().add(staffIdLabel);
+
+                Label staffNameLabel = new Label("Name: " + staff1.getName());
+                staffNameLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+                root.getChildren().add(staffNameLabel);
+
+                Label staffAgeLabel = new Label("Age: " + staff1.getAge());
+                staffAgeLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+                root.getChildren().add(staffAgeLabel);
+
+                Label staffGenderLabel = new Label("Gender: " + staff1.getGender());
+                staffGenderLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+                root.getChildren().add(staffGenderLabel);
+
+                Label staffEducationLevelLabel = new Label("Education Level: " + staff1.getEducation().getEducationLevel());
+                staffEducationLevelLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+                root.getChildren().add(staffEducationLevelLabel);
+
+                Label staffEducationInstituteLabel = new Label("Education Institute: " + staff1.getEducation().getInstitute());
+                staffEducationInstituteLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+                root.getChildren().add(staffEducationInstituteLabel);
+
+                Label staffContactLabel = new Label("Contact: " + staff1.getContact());
+                staffContactLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+                root.getChildren().add(staffContactLabel);
+
+                Label staffRoleLabel = new Label("Role: " + staff1.getRole());
+                staffRoleLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+                root.getChildren().add(staffRoleLabel);
+
+                Label staffPayLabel = new Label("Pay: " + staff1.getPay());
+                staffPayLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+                root.getChildren().add(staffPayLabel);
+
+                Label line = new Label("----------------------");
+                line.setStyle("-fx-font-weight: bold; -fx-font-size: 20");
+                root.getChildren().add(line);
+            }
+        }
 
         grid.add(root, 0, 0);
 
         Scene scene = new Scene(grid, 800, 600);
-        primaryStage.setTitle("Orphans Report");
+        primaryStage.setTitle("Staff Report");
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    private void loadStaffData() {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("staffData.ser"))) {
+            staff = (ArrayList<Staff>) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
