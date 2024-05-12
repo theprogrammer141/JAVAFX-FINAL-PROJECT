@@ -8,7 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-public class RemoveOrphan extends Application {
+public class UpdateOrphan extends Application {
 
     @Override
     public void start(Stage primaryStage) {
@@ -17,7 +17,7 @@ public class RemoveOrphan extends Application {
         outerLayout.setStyle("-fx-background-color: #47a690; -fx-border-color: black; -fx-border-width: 1;");
 
         // Title
-        Label titleLabel = new Label("Remove Orphan");
+        Label titleLabel = new Label("Update Orphan");
         titleLabel.setStyle("-fx-font-size: 24px; -fx-text-fill: white; -fx-alignment: center;");
         titleLabel.setMaxWidth(Double.MAX_VALUE);
         titleLabel.setAlignment(Pos.CENTER);
@@ -25,22 +25,40 @@ public class RemoveOrphan extends Application {
         BorderPane.setAlignment(titleLabel, Pos.CENTER);
         BorderPane.setMargin(titleLabel, new Insets(12, 0, 12, 0));
 
+        Label update = new Label("Make Desired Changes!");
+        update.setStyle("-fx-font-size: 24px; -fx-text-fill: yellow;");
+        update.setAlignment(Pos.CENTER);
+        update.setMaxWidth(Double.MAX_VALUE);
+
         // Main content VBox
         VBox mainContent = new VBox(2);
+        mainContent.getChildren().add(update);
         mainContent.setAlignment(Pos.TOP_CENTER);
         mainContent.setPadding(new Insets(0, 50, 10, 0));
-
+        //mainContent.setMinHeight(500);
+        //mainContent.setMinWidth(450);
 
         VBox removalSection = createRemovalSection();
         removalSection.setAlignment(Pos.CENTER);
 
         removalSection.setPadding(new Insets(0,50,10,0));
-
+        //removalSection.setMinWidth(350);
+        //removalSection.setMinHeight(180);
 
         HBox contentBox = new HBox();
         contentBox.getChildren().addAll(removalSection,mainContent);
         contentBox.setSpacing(20);
-        contentBox.setPadding(new Insets(45,0,0,10));
+        contentBox.setPadding(new Insets(35,0,0,60));
+        outerLayout.setCenter(contentBox);
+
+        mainContent.prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.5));
+        mainContent.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.7));
+        removalSection.prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.5));
+        removalSection.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.7));
+        contentBox.prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.5));
+        contentBox.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.7));
+
+
 
         // Personal Details Section
         VBox personalDetailsSection = createSection("Personal Details", "lightblue");
@@ -54,26 +72,18 @@ public class RemoveOrphan extends Application {
         VBox skillDetailsSection = createSection("Skill Details", "lightblue");
         mainContent.getChildren().add(skillDetailsSection);
 
-        mainContent.prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.5));
-        mainContent.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.7));
-        removalSection.prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.5));
-        removalSection.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.7));
-        contentBox.prefWidthProperty().bind(primaryStage.widthProperty());
-        contentBox.prefHeightProperty().bind(primaryStage.heightProperty());
-
-        outerLayout.setCenter(contentBox);
-
 
         // Buttons
         HBox buttonBox = new HBox(10);
         buttonBox.setAlignment(Pos.CENTER);
-        Button addButton = new Button("Confirm Remove");
+
         Button closeButton = new Button("Close");
-        buttonBox.getChildren().addAll(addButton,closeButton);
+        buttonBox.getChildren().addAll(closeButton);
         mainContent.getChildren().add(buttonBox);
 
+
         // Scene and Stage setup
-        Scene scene = new Scene(outerLayout, 800, 650);
+        Scene scene = new Scene(outerLayout, 800, 600);
         primaryStage.setTitle("Orphan Registration System");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -84,13 +94,13 @@ public class RemoveOrphan extends Application {
         removalSection.setAlignment(Pos.TOP_CENTER);
         removalSection.setPadding(new Insets(5));
 
-        Label removalLabel = new Label("To Remove an Orphan");
+        Label removalLabel = new Label("To View an Orphan");
         removalLabel.setStyle("-fx-font-size: 18px; -fx-text-fill: black;");
         removalLabel.setAlignment(Pos.CENTER);
         removalSection.getChildren().add(removalLabel);
 
         HBox idBox = new HBox(5);
-        Label idLabel = new Label("Remove Orphan by ID:");
+        Label idLabel = new Label("View Orphan by ID:");
         TextField idField = new TextField();
         idBox.getChildren().addAll(idLabel, idField);
         idBox.setAlignment(Pos.CENTER);
@@ -98,7 +108,7 @@ public class RemoveOrphan extends Application {
         removalSection.getChildren().add(idBox);
 
         HBox nameBox = new HBox(5);
-        Label nameLabel = new Label("Remove Orphan by Name:");
+        Label nameLabel = new Label("View Orphan by Name:");
         TextField nameField = new TextField();
         nameBox.getChildren().addAll(nameLabel, nameField);
         nameBox.setAlignment(Pos.CENTER);

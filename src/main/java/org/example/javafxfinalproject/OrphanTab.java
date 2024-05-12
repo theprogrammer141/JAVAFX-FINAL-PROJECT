@@ -25,11 +25,47 @@ public class OrphanTab extends Application {
 
         // Buttons
         Button btnAddOrphan = new Button("Add Orphan");
+        addOrphan OrphanInput = new addOrphan();
+        btnAddOrphan.setOnAction(event ->{
+            OrphanInput.start(new Stage());
+            primaryStage.close();
+        });
+
+
         Button btnRemoveOrphan = new Button("Remove Orphan");
+        RemoveOrphan removeOrphan = new RemoveOrphan();
+        btnRemoveOrphan.setOnAction(event ->{
+            removeOrphan.start(new Stage());
+            primaryStage.close();
+        });
+
         Button btnUpdateData = new Button("Update Data");
+        UpdateOrphan updateOrphan =new UpdateOrphan();
+        btnUpdateData.setOnAction(event ->{
+            updateOrphan.start(new Stage());
+            primaryStage.close();
+        });
+
         Button btnDisplayRecord = new Button("Display Record");
+        DisplayOrphan displayOrphan = new DisplayOrphan();
+        btnDisplayRecord.setOnAction(event ->{
+            displayOrphan.start(new Stage());
+            primaryStage.close();
+        });
+
         Button btnViewOrphan = new Button("View Orphan");
+        ViewOrphan viewOrphan = new ViewOrphan();
+        btnViewOrphan.setOnAction(actionEvent -> {
+            viewOrphan.start(new Stage());
+            primaryStage.close();
+        });
+
         Button btnReturn = new Button("Return");
+        MainMenu mainMenu = new MainMenu();
+        btnReturn.setOnAction(actionEvent -> {
+            mainMenu.start(new Stage());
+            primaryStage.close();
+        });
 
         HBox buttonRow1 = new HBox(10, btnAddOrphan, btnRemoveOrphan, btnUpdateData);
         HBox buttonRow2 = new HBox(10, btnDisplayRecord, btnViewOrphan, btnReturn);
