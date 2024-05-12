@@ -133,14 +133,5 @@ public class Person implements Serializable {
             this.age = age;
     }
 
-    @Override
-    public String toString() {
-        return "Person{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", gender='" + gender + '\'' +
-                ", education=" + education +
-                ", age=" + age +
-                '}';
-    }
+
 }

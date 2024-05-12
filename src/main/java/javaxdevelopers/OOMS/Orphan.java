@@ -179,11 +179,5 @@ public class Orphan extends Person implements Serializable {
         this.entryDate = entryDate;
     }
 
-    @Override
-    public String toString() {
-        return super.toString() + "Orphan{" +
-                "skillSet=" + skillSet +
-                ", entryDate='" + entryDate + '\'' +
-                '}';
-    }
+
 }
