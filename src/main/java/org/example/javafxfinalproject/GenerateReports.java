@@ -58,7 +58,11 @@ public class GenerateReports extends Application {
                 donationReportButton
         );
 
+        Button backButton = new Button("Back");
+        backButton.setStyle(" -fx-text-fill: white;-fx-background-color: black; -fx-background-radius: 30px; -fx-border-color: white; -fx-border-radius: 40px");
+
         grid.add(root, 0, 0);
+        grid.add(backButton, 0, 10);
 
         Scene scene = new Scene(grid, 800, 600);
         primaryStage.setScene(scene);
