@@ -219,4 +219,15 @@ public class InventoryItem implements Serializable {
     public void setItemType(String itemType) {
         this.itemType = itemType;
     }
+
+    @Override
+    public String toString() {
+        return "InventoryItem{" +
+                "itemID=" + itemID +
+                ", itemName='" + itemName + '\'' +
+                ", itemPrice=" + itemPrice +
+                ", quantity=" + quantity +
+                ", itemType='" + itemType + '\'' +
+                '}';
+    }
 }

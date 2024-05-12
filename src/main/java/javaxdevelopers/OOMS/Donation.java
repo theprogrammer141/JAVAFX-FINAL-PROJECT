@@ -128,5 +128,13 @@ public class Donation implements Serializable {
         this.date = date;
     }
 
-
+    @Override
+    public String toString() {
+        return "Donation{" +
+                "donationId=" + donationId +
+                ", donorName='" + donorName + '\'' +
+                ", donationAmount=" + donationAmount +
+                ", date='" + date + '\'' +
+                '}';
+    }
 }

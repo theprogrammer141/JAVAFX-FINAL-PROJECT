@@ -246,4 +246,12 @@ public void setPay(double pay) throws NoNegativeValueException {
         throw new NoNegativeValueException("Exception: Pay cannot be less than zero!");
 }
 
+    @Override
+    public String toString() {
+        return super.toString() + "Staff{" +
+                "contact='" + contact + '\'' +
+                ", role='" + role + '\'' +
+                ", pay=" + pay +
+                '}';
+    }
 }
