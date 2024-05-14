@@ -22,15 +22,51 @@ public class StaffTab extends Application {
         headerLabel.setStyle("-fx-font-size: 24px; -fx-text-fill: #000;");
 
         // Buttons
-        Button btnAddOrphan = new Button("Add Staff");
-        Button btnRemoveOrphan = new Button("Remove Staff");
-        Button btnUpdateData = new Button("Update Data");
-        Button btnDisplayRecord = new Button("Display Record");
-        Button btnViewOrphan = new Button("View Staff");
-        Button btnReturn = new Button("Return");
+        Button btnAddStaff = new Button("Add Staff");
+        addStaff staffInput = new addStaff();
+        btnAddStaff.setOnAction(event ->{
+            staffInput.start(new Stage());
+            primaryStage.close();
+        });
 
-        HBox buttonRow1 = new HBox(10, btnAddOrphan, btnRemoveOrphan, btnUpdateData);
-        HBox buttonRow2 = new HBox(10, btnDisplayRecord, btnViewOrphan, btnReturn);
+
+        Button btnRemoveStaff = new Button("Remove Staff");
+        RemoveStaff removeStaff = new RemoveStaff();
+        btnRemoveStaff.setOnAction(event ->{
+            removeStaff.start(new Stage());
+            primaryStage.close();
+        });
+
+        Button btnUpdateData = new Button("Update Data");
+        UpdateStaff updateStaff =new UpdateStaff();
+        btnUpdateData.setOnAction(event ->{
+            updateStaff.start(new Stage());
+            primaryStage.close();
+        });
+
+        Button btnDisplayRecord = new Button("Display Record");
+        DisplayStaff displayStaff = new DisplayStaff();
+        btnDisplayRecord.setOnAction(event ->{
+            displayStaff.start(new Stage());
+            primaryStage.close();
+        });
+
+        Button btnViewStaff = new Button("View Staff");
+        ViewStaff viewStaff = new ViewStaff();
+        btnViewStaff.setOnAction(actionEvent -> {
+            viewStaff.start(new Stage());
+            primaryStage.close();
+        });
+
+        Button btnReturn = new Button("Return");
+        MainMenu mainMenu = new MainMenu();
+        btnReturn.setOnAction(actionEvent -> {
+            mainMenu.start(new Stage());
+            primaryStage.close();
+        });
+
+        HBox buttonRow1 = new HBox(10, btnAddStaff, btnRemoveStaff, btnUpdateData);
+        HBox buttonRow2 = new HBox(10, btnDisplayRecord, btnViewStaff, btnReturn);
         buttonRow1.setAlignment(Pos.CENTER);
         buttonRow2.setAlignment(Pos.CENTER);
 
@@ -46,8 +82,8 @@ public class StaffTab extends Application {
         //buttonBox.setMaxHeight(150);
 
 
-        Image orphanImage = new Image("file:path/C:/Users/khizar/Pictures/Camera Roll/WhatsApp Image 2023-09-27 at 13.36.01.jpg"); // Replace with your image path
-        ImageView imageView = new ImageView(orphanImage);
+        Image StaffImage = new Image("file:path/C:/Users/khizar/Pictures/Camera Roll/WhatsApp Image 2023-09-27 at 13.36.01.jpg"); // Replace with your image path
+        ImageView imageView = new ImageView(StaffImage);
 
         // Footer
         Label footerLabel = new Label("Credits: Your Name or Organization");
@@ -69,11 +105,11 @@ public class StaffTab extends Application {
         footerLabel.styleProperty().bind(Bindings.concat("-fx-font-size: ", root.widthProperty().divide(40).asString(), "px; -fx-text-fill: #000;"));
 
         // Bind button sizes to the width and height of the scene
-        btnAddOrphan.prefWidthProperty().bind(root.widthProperty().divide(4));
-        btnAddOrphan.prefHeightProperty().bind(root.heightProperty().divide(10));
+        btnAddStaff.prefWidthProperty().bind(root.widthProperty().divide(4));
+        btnAddStaff.prefHeightProperty().bind(root.heightProperty().divide(10));
 
-        btnRemoveOrphan.prefWidthProperty().bind(root.widthProperty().divide(4));
-        btnRemoveOrphan.prefHeightProperty().bind(root.heightProperty().divide(10));
+        btnRemoveStaff.prefWidthProperty().bind(root.widthProperty().divide(4));
+        btnRemoveStaff.prefHeightProperty().bind(root.heightProperty().divide(10));
 
         btnUpdateData.prefWidthProperty().bind(root.widthProperty().divide(4));
         btnUpdateData.prefHeightProperty().bind(root.heightProperty().divide(10));
@@ -81,8 +117,8 @@ public class StaffTab extends Application {
         btnDisplayRecord.prefWidthProperty().bind(root.widthProperty().divide(4));
         btnDisplayRecord.prefHeightProperty().bind(root.heightProperty().divide(10));
 
-        btnViewOrphan.prefWidthProperty().bind(root.widthProperty().divide(4));
-        btnViewOrphan.prefHeightProperty().bind(root.heightProperty().divide(10));
+        btnViewStaff.prefWidthProperty().bind(root.widthProperty().divide(4));
+        btnViewStaff.prefHeightProperty().bind(root.heightProperty().divide(10));
 
         btnReturn.prefWidthProperty().bind(root.widthProperty().divide(4));
         btnReturn.prefHeightProperty().bind(root.heightProperty().divide(10));
