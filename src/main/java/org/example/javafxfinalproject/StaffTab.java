@@ -9,20 +9,19 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 public class StaffTab extends Application {
     @Override
     public void start(Stage primaryStage) {
         // Header
-        Label headerLabel = new Label("Staff");
+        Label headerLabel = new Label("Staff Menu");
         headerLabel.setStyle("-fx-font-size: 24px; -fx-text-fill: #000;");
 
         // Buttons
         Button btnAddStaff = new Button("Add Staff");
+        btnAddStaff.setStyle("fx-border-color: white; -fx-border-radius: 40px; -fx-background-color: blue; -fx-text-fill: white; -fx-background-radius: 30px");
         addStaff staffInput = new addStaff();
         btnAddStaff.setOnAction(event ->{
             staffInput.start(new Stage());
@@ -31,6 +30,7 @@ public class StaffTab extends Application {
 
 
         Button btnRemoveStaff = new Button("Remove Staff");
+        btnRemoveStaff.setStyle("fx-border-color: white; -fx-border-radius: 40px; -fx-background-color: blue; -fx-text-fill: white; -fx-background-radius: 30px");
         RemoveStaff removeStaff = new RemoveStaff();
         btnRemoveStaff.setOnAction(event ->{
             removeStaff.start(new Stage());
@@ -38,6 +38,7 @@ public class StaffTab extends Application {
         });
 
         Button btnUpdateData = new Button("Update Data");
+        btnUpdateData.setStyle("fx-border-color: white; -fx-border-radius: 40px; -fx-background-color: blue; -fx-text-fill: white; -fx-background-radius: 30px");
         UpdateStaff updateStaff =new UpdateStaff();
         btnUpdateData.setOnAction(event ->{
             updateStaff.start(new Stage());
@@ -45,6 +46,7 @@ public class StaffTab extends Application {
         });
 
         Button btnDisplayRecord = new Button("Display Record");
+        btnDisplayRecord.setStyle("fx-border-color: white; -fx-border-radius: 40px; -fx-background-color: blue; -fx-text-fill: white; -fx-background-radius: 30px");
         DisplayStaff displayStaff = new DisplayStaff();
         btnDisplayRecord.setOnAction(event ->{
             displayStaff.start(new Stage());
@@ -52,6 +54,7 @@ public class StaffTab extends Application {
         });
 
         Button btnViewStaff = new Button("View Staff");
+        btnViewStaff.setStyle("fx-border-color: white; -fx-border-radius: 40px; -fx-background-color: blue; -fx-text-fill: white; -fx-background-radius: 30px");
         ViewStaff viewStaff = new ViewStaff();
         btnViewStaff.setOnAction(actionEvent -> {
             viewStaff.start(new Stage());
@@ -59,6 +62,7 @@ public class StaffTab extends Application {
         });
 
         Button btnReturn = new Button("Return");
+        btnReturn.setStyle("fx-border-color: white; -fx-border-radius: 40px; -fx-background-color: blue; -fx-text-fill: white; -fx-background-radius: 30px");
         MainMenu mainMenu = new MainMenu();
         btnReturn.setOnAction(actionEvent -> {
             mainMenu.start(new Stage());
@@ -72,34 +76,31 @@ public class StaffTab extends Application {
 
         VBox buttonBox = new VBox(10, buttonRow1, buttonRow2);
         buttonBox.setAlignment(Pos.CENTER);
-
-        //buttonBox.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.1));
-
-        //buttonBox.setStyle("-fx-border-color: black; -fx-border-width: 2px");
         buttonBox.setPadding(new Insets(20));
-        //buttonBox.setStyle("-fx-fit-to-width: TRUE");
-        //buttonBox.setMaxWidth(350);
-        //buttonBox.setMaxHeight(150);
 
-
-        Image StaffImage = new Image("file:path/C:/Users/khizar/Pictures/Camera Roll/WhatsApp Image 2023-09-27 at 13.36.01.jpg"); // Replace with your image path
-        ImageView imageView = new ImageView(StaffImage);
+        Image StaffImage = new Image("file:///JAVAFX FINAL PROJECT/createaccount.png");
+        BackgroundImage image = new BackgroundImage(
+                StaffImage,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.CENTER,
+                new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, true)
+        );
 
         // Footer
-        Label footerLabel = new Label("Credits: Your Name or Organization");
+        Label footerLabel = new Label("Credits: JAVA X DEVELOPERS");
         footerLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #000;");
 
         // Layout
         BorderPane root = new BorderPane();
-        root.setStyle("-fx-background-color: #ADD8E6;"); // Light blue background
         root.setTop(headerLabel);
         BorderPane.setAlignment(headerLabel, Pos.TOP_CENTER);
         root.setCenter(buttonBox);
-
         root.setBottom(footerLabel);
+        root.setBackground(new Background(image));
+
         BorderPane.setAlignment(footerLabel, Pos.BOTTOM_CENTER);
-        root.setMargin(imageView, new Insets(20, 0, 20, 0));
-        root.setMargin(buttonBox, new Insets(0, 0, 15, 0));
+        BorderPane.setMargin(buttonBox, new Insets(0, 0, 15, 0));
         // Bind header and footer font size to the width of the scene
         headerLabel.styleProperty().bind(Bindings.concat("-fx-font-size: ", root.widthProperty().divide(25).asString(), "px; -fx-text-fill: #000;"));
         footerLabel.styleProperty().bind(Bindings.concat("-fx-font-size: ", root.widthProperty().divide(40).asString(), "px; -fx-text-fill: #000;"));
@@ -122,20 +123,11 @@ public class StaffTab extends Application {
 
         btnReturn.prefWidthProperty().bind(root.widthProperty().divide(4));
         btnReturn.prefHeightProperty().bind(root.heightProperty().divide(10));
-        // Repeat the above two lines for each button
 
         // Scene
         Scene scene = new Scene(root, 600, 400);
         primaryStage.setTitle("Orphanage Management System");
         primaryStage.setScene(scene);
-        primaryStage.show();
-
-
-        // Scene
-        //Scene scene = new Scene(root, 600, 400);
-        //primaryStage.setTitle("Orphanage Management System");
-        //primaryStage.setScene(scene);
-
         primaryStage.show();
     }
 
