@@ -27,7 +27,7 @@ public class ChangePassword extends Application {
     }
 
     private GridPane changePasswordPane() {
-        Image backgroundImage = new Image("file:///JAVAFX FINAL PROJECT/createaccount.png");
+        Image backgroundImage = new Image("file:///JAVAFX FINAL PROJECT/background.jpeg");
 
         BackgroundImage background = new BackgroundImage(
                 backgroundImage,
@@ -57,7 +57,7 @@ public class ChangePassword extends Application {
         passwordLabel.setFont(Font.font("Impact", 15));
 
         Label confirmPasswordLabel = new Label("Confirm Password:");
-        confirmPasswordLabel.setFont(Font.font("IMPACT", 15));
+        confirmPasswordLabel.setFont(Font.font("IMPACT", 12));
 
         TextField oldPasswordField = new TextField();
         oldPasswordField.setPromptText("Enter Old Password");
@@ -75,10 +75,10 @@ public class ChangePassword extends Application {
         confirmPasswordField.setMaxWidth(200);
 
         Button changePasswordbutton = new Button("Change Password");
-        changePasswordbutton.setStyle(" -fx-text-fill: white;-fx-background-color: blue; -fx-background-radius: 30px; -fx-border-color: black; -fx-border-radius: 40px");
+        changePasswordbutton.setStyle(" -fx-text-fill: white;-fx-background-color: green; -fx-background-radius: 30px; -fx-border-color: black; -fx-border-radius: 40px");
 
         Button backButton = new Button("Back");
-        backButton.setStyle(" -fx-text-fill: white;-fx-background-color: blue; -fx-background-radius: 30px; -fx-border-color: black; -fx-border-radius: 40px");
+        backButton.setStyle(" -fx-text-fill: white;-fx-background-color: green; -fx-background-radius: 30px; -fx-border-color: black; -fx-border-radius: 40px");
         backButton.setAlignment(Pos.BOTTOM_LEFT);
 
 

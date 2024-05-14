@@ -27,7 +27,7 @@ public class SignUp extends Application {
     }
 
     private GridPane createRegistrationFormPane() {
-        Image backgroundImage = new Image("file:///JAVAFX FINAL PROJECT/createaccount.png");
+        Image backgroundImage = new Image("file:///JAVAFX FINAL PROJECT/background.jpeg");
 
         BackgroundImage background = new BackgroundImage(
                 backgroundImage,
@@ -51,13 +51,13 @@ public class SignUp extends Application {
         titleLabel.setFont(Font.font("TIMES NEW ROMAN", 40));
 
         Label userNameLabel = new Label("Username:");
-        userNameLabel.setFont(Font.font("Impact", 15));
+        userNameLabel.setFont(Font.font("Impact", 13));
 
         Label passwordLabel = new Label("Password:");
-        passwordLabel.setFont(Font.font("Impact", 15));
+        passwordLabel.setFont(Font.font("Impact", 13));
 
         Label confirmPasswordLabel = new Label("Confirm Password:");
-        confirmPasswordLabel.setFont(Font.font("Impact", 15));
+        confirmPasswordLabel.setFont(Font.font("Impact", 12));
 
         TextField usernameField = new TextField();
         usernameField.setPromptText("Enter Username");
@@ -72,10 +72,10 @@ public class SignUp extends Application {
         confirmPasswordField.setStyle("-fx-text-fill: white; -fx-background-color: transparent; -fx-background-radius: 30px; -fx-border-color: black; -fx-border-radius: 40px; -fx-prompt-text-fill: black");
 
         Button signupButton = new Button("SignUp");
-        signupButton.setStyle(" -fx-text-fill: white;-fx-background-color: blue; -fx-background-radius: 30px; -fx-border-color: black; -fx-border-radius: 40px");
+        signupButton.setStyle(" -fx-text-fill: white;-fx-background-color: green; -fx-background-radius: 30px; -fx-border-color: black; -fx-border-radius: 40px");
 
         Button backButton = new Button("Back");
-        backButton.setStyle(" -fx-text-fill: white;-fx-background-color: blue; -fx-background-radius: 30px; -fx-border-color: black; -fx-border-radius: 40px");
+        backButton.setStyle(" -fx-text-fill: white;-fx-background-color: green; -fx-background-radius: 30px; -fx-border-color: black; -fx-border-radius: 40px");
         backButton.setAlignment(Pos.BOTTOM_LEFT);
 
         gridPane.add(titleLabel, 0,0,2,1);
