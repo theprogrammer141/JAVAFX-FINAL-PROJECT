@@ -9,10 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 public class OrphanTab extends Application {
@@ -20,19 +17,20 @@ public class OrphanTab extends Application {
     @Override
     public void start(Stage primaryStage) {
         // Header
-        Label headerLabel = new Label("Orphans");
+        Label headerLabel = new Label("Orphan Menu");
         headerLabel.setStyle("-fx-font-size: 24px; -fx-text-fill: #000;");
 
         // Buttons
         Button btnAddOrphan = new Button("Add Orphan");
+        btnAddOrphan.setStyle("fx-border-color: white; -fx-border-radius: 40px; -fx-background-color: blue; -fx-text-fill: white; -fx-background-radius: 30px");
         addOrphan OrphanInput = new addOrphan();
         btnAddOrphan.setOnAction(event ->{
             OrphanInput.start(new Stage());
             primaryStage.close();
         });
 
-
         Button btnRemoveOrphan = new Button("Remove Orphan");
+        btnRemoveOrphan.setStyle("fx-border-color: white; -fx-border-radius: 40px; -fx-background-color: blue; -fx-text-fill: white; -fx-background-radius: 30px");
         RemoveOrphan removeOrphan = new RemoveOrphan();
         btnRemoveOrphan.setOnAction(event ->{
             removeOrphan.start(new Stage());
@@ -40,6 +38,7 @@ public class OrphanTab extends Application {
         });
 
         Button btnUpdateData = new Button("Update Data");
+        btnUpdateData.setStyle("fx-border-color: white; -fx-border-radius: 40px; -fx-background-color: blue; -fx-text-fill: white; -fx-background-radius: 30px");
         UpdateOrphan updateOrphan =new UpdateOrphan();
         btnUpdateData.setOnAction(event ->{
             updateOrphan.start(new Stage());
@@ -47,6 +46,7 @@ public class OrphanTab extends Application {
         });
 
         Button btnDisplayRecord = new Button("Display Record");
+        btnDisplayRecord.setStyle("fx-border-color: white; -fx-border-radius: 40px; -fx-background-color: blue; -fx-text-fill: white; -fx-background-radius: 30px");
         DisplayOrphan displayOrphan = new DisplayOrphan();
         btnDisplayRecord.setOnAction(event ->{
             displayOrphan.start(new Stage());
@@ -54,6 +54,7 @@ public class OrphanTab extends Application {
         });
 
         Button btnViewOrphan = new Button("View Orphan");
+        btnViewOrphan.setStyle("fx-border-color: white; -fx-border-radius: 40px; -fx-background-color: blue; -fx-text-fill: white; -fx-background-radius: 30px");
         ViewOrphan viewOrphan = new ViewOrphan();
         btnViewOrphan.setOnAction(actionEvent -> {
             viewOrphan.start(new Stage());
@@ -61,6 +62,7 @@ public class OrphanTab extends Application {
         });
 
         Button btnReturn = new Button("Return");
+        btnReturn.setStyle("fx-border-color: white; -fx-border-radius: 40px; -fx-background-color: blue; -fx-text-fill: white; -fx-background-radius: 30px");
         MainMenu mainMenu = new MainMenu();
         btnReturn.setOnAction(actionEvent -> {
             mainMenu.start(new Stage());
@@ -75,33 +77,31 @@ public class OrphanTab extends Application {
         VBox buttonBox = new VBox(10, buttonRow1, buttonRow2);
         buttonBox.setAlignment(Pos.CENTER);
 
-        //buttonBox.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.1));
-
-       // buttonBox.setStyle("-fx-border-color: black; -fx-border-width: 2px");
         buttonBox.setPadding(new Insets(20));
-        //buttonBox.setStyle("-fx-fit-to-width: TRUE");
-        //buttonBox.setMaxWidth(350);
-        //buttonBox.setMaxHeight(150);
 
-
-        Image orphanImage = new Image("file:path/C:/Users/khizar/Pictures/Camera Roll/WhatsApp Image 2023-09-27 at 13.36.01.jpg"); // Replace with your image path
-        ImageView imageView = new ImageView(orphanImage);
+        Image orphanImage = new Image("file:///JAVAFX FINAL PROJECT/createaccount.png");
+        BackgroundImage image = new BackgroundImage(
+                orphanImage,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.CENTER,
+                new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, true)
+        );
 
         // Footer
-        Label footerLabel = new Label("Credits: Your Name or Organization");
+        Label footerLabel = new Label("Credits: JAVA X DEVELOPERS");
         footerLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #000;");
 
         // Layout
         BorderPane root = new BorderPane();
-        root.setStyle("-fx-background-color: #ADD8E6;"); // Light blue background
         root.setTop(headerLabel);
         BorderPane.setAlignment(headerLabel, Pos.TOP_CENTER);
         root.setCenter(buttonBox);
+        root.setBackground(new Background(image));
 
         root.setBottom(footerLabel);
         BorderPane.setAlignment(footerLabel, Pos.BOTTOM_CENTER);
-        root.setMargin(imageView, new Insets(20, 0, 20, 0));
-        root.setMargin(buttonBox, new Insets(0, 0, 15, 0));
+        BorderPane.setMargin(buttonBox, new Insets(0, 0, 15, 0));
         // Bind header and footer font size to the width of the scene
         headerLabel.styleProperty().bind(Bindings.concat("-fx-font-size: ", root.widthProperty().divide(25).asString(), "px; -fx-text-fill: #000;"));
         footerLabel.styleProperty().bind(Bindings.concat("-fx-font-size: ", root.widthProperty().divide(40).asString(), "px; -fx-text-fill: #000;"));
@@ -124,20 +124,10 @@ public class OrphanTab extends Application {
 
         btnReturn.prefWidthProperty().bind(root.widthProperty().divide(4));
         btnReturn.prefHeightProperty().bind(root.heightProperty().divide(10));
-        // Repeat the above two lines for each button
 
-        // Scene
         Scene scene = new Scene(root, 600, 400);
         primaryStage.setTitle("Orphanage Management System");
         primaryStage.setScene(scene);
-        primaryStage.show();
-
-
-        // Scene
-        //Scene scene = new Scene(root, 600, 400);
-        //primaryStage.setTitle("Orphanage Management System");
-        //primaryStage.setScene(scene);
-
         primaryStage.show();
     }
 
