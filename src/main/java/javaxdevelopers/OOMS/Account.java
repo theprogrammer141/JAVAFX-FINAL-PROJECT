@@ -73,6 +73,7 @@ public class Account implements Serializable {
 
     }
     public void checkBalance(){
+
         System.out.println("Remaining balance is: "+this.getBalance());
     }
     public void displayAccount(){
