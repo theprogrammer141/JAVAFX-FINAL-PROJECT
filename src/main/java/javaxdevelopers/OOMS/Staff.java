@@ -245,5 +245,4 @@ public void setPay(double pay) throws NoNegativeValueException {
     else
         throw new NoNegativeValueException("Exception: Pay cannot be less than zero!");
 }
-
 }

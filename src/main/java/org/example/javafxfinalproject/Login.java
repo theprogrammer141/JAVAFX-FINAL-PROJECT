@@ -10,6 +10,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -22,7 +24,7 @@ public class Login extends Application {
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Orphanage Organization Management System");
 
-        Image backgroundImage = new Image("file:///D:/JAVAFX FINAL PROJECT/background.jpeg");
+        Image backgroundImage = new Image("file:///JAVAFX FINAL PROJECT/background.jpeg");
 
         BackgroundImage background = new BackgroundImage(
                 backgroundImage,
@@ -40,6 +42,11 @@ public class Login extends Application {
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
         grid.setBackground(backgroundWithImage);
+
+        Rectangle overlay = new Rectangle();
+        overlay.setWidth(800);
+        overlay.setHeight(600);
+        overlay.setFill(Color.rgb(0,0,0,0.5));
 
         Text scenetitle = new Text("WELCOME TO ORPHANAGE ORGANIZATION MANAGEMENT SYSTEM");
         scenetitle.setFont(Font.font("Times New Roman", FontWeight.BOLD, 20));
@@ -94,30 +101,6 @@ public class Login extends Application {
         signupBtn.getChildren().addAll(signUplabel, signupButton);
         grid.add(signUplabel, 1, 20);
         grid.add(signupBtn, 1, 20);
-
-
-//        final Text actionTarget = new Text();
-//        grid.add(actionTarget, 1, 6);
-
-
-//        loginButton.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent e) {
-//                String enteredUsername = userTextField.getText();
-//                String enteredPassword = passwordBox.getText();
-//
-//                if (enteredUsername.equals(username) && enteredPassword.equals(password)) {
-//                    actionTarget.setFill(Color.GREEN);
-//                    actionTarget.setText("Login Successful");
-//                } else {
-//                    actionTarget.setFill(Color.RED);
-//                    actionTarget.setText("Invalid username or password");
-//                }
-//
-//                userTextField.clear();
-//                passwordBox.clear();
-//            }
-//        });
 
         Scene scene = new Scene(grid, 800, 600);
         primaryStage.setScene(scene);

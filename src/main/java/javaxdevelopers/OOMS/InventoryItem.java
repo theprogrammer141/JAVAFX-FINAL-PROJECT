@@ -219,4 +219,5 @@ public class InventoryItem implements Serializable {
     public void setItemType(String itemType) {
         this.itemType = itemType;
     }
+
 }

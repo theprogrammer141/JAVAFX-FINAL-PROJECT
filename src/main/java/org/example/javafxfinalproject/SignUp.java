@@ -19,7 +19,6 @@ public class SignUp extends Application {
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("SignUp Form");
 
-        // Create the registration form layout pane
         GridPane gridPane = createRegistrationFormPane();
 
         Scene scene = new Scene(gridPane, 600, 600);
@@ -28,7 +27,7 @@ public class SignUp extends Application {
     }
 
     private GridPane createRegistrationFormPane() {
-        Image backgroundImage = new Image("file:///D:/JAVAFX FINAL PROJECT/createaccount.png");
+        Image backgroundImage = new Image("file:///JAVAFX FINAL PROJECT/background.jpeg");
 
         BackgroundImage background = new BackgroundImage(
                 backgroundImage,
@@ -47,18 +46,18 @@ public class SignUp extends Application {
         gridPane.setVgap(10);
         gridPane.setBackground(backgroundWithImage);
 
-        // Add UI controls
+
         Label titleLabel = new Label("CREATE ACCOUNT");
         titleLabel.setFont(Font.font("TIMES NEW ROMAN", 40));
 
         Label userNameLabel = new Label("Username:");
-        userNameLabel.setFont(Font.font("Impact", 15));
+        userNameLabel.setFont(Font.font("Impact", 13));
 
         Label passwordLabel = new Label("Password:");
-        passwordLabel.setFont(Font.font("Impact", 15));
+        passwordLabel.setFont(Font.font("Impact", 13));
 
         Label confirmPasswordLabel = new Label("Confirm Password:");
-        confirmPasswordLabel.setFont(Font.font("Impact", 15));
+        confirmPasswordLabel.setFont(Font.font("Impact", 12));
 
         TextField usernameField = new TextField();
         usernameField.setPromptText("Enter Username");
@@ -73,9 +72,12 @@ public class SignUp extends Application {
         confirmPasswordField.setStyle("-fx-text-fill: white; -fx-background-color: transparent; -fx-background-radius: 30px; -fx-border-color: black; -fx-border-radius: 40px; -fx-prompt-text-fill: black");
 
         Button signupButton = new Button("SignUp");
-        signupButton.setStyle(" -fx-text-fill: white;-fx-background-color: blue; -fx-background-radius: 30px; -fx-border-color: black; -fx-border-radius: 40px");
+        signupButton.setStyle(" -fx-text-fill: white;-fx-background-color: green; -fx-background-radius: 30px; -fx-border-color: black; -fx-border-radius: 40px");
 
-        // Add controls to the grid
+        Button backButton = new Button("Back");
+        backButton.setStyle(" -fx-text-fill: white;-fx-background-color: green; -fx-background-radius: 30px; -fx-border-color: black; -fx-border-radius: 40px");
+        backButton.setAlignment(Pos.BOTTOM_LEFT);
+
         gridPane.add(titleLabel, 0,0,2,1);
         gridPane.add(userNameLabel, 0, 1);
         gridPane.add(usernameField, 1, 1);
@@ -84,14 +86,12 @@ public class SignUp extends Application {
         gridPane.add(confirmPasswordLabel, 0, 3);
         gridPane.add(confirmPasswordField, 1, 3);
         gridPane.add(signupButton, 1, 4);
+        gridPane.add(backButton, 0, 10);
 
-        // Set column constraints
         gridPane.getColumnConstraints().add(new ColumnConstraints(100, 100, Double.MAX_VALUE));
         ColumnConstraints columnOneConstraints = new ColumnConstraints(100, 100, Double.MAX_VALUE);
         columnOneConstraints.setHalignment(HPos.CENTER);
         gridPane.getColumnConstraints().add(columnOneConstraints);
-
-        // Set row constraints (if needed)
 
         return gridPane;
     }

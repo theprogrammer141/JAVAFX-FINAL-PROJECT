@@ -15,11 +15,7 @@ public class Account implements Serializable {
     private double balance;
     private ArrayList<Double> transactions = new ArrayList<>();
 
-    public Account() {
-        setAccountID("abl234245534343");
-        setBankName("HBL");
-        writeAccountToFile(this);
-    }
+
     public static void writeAccountToFile(Account account) {
         try (ObjectOutputStream oos  = new ObjectOutputStream( new FileOutputStream("accountData.ser"))) {
             // Check if the file is already created and not empty
