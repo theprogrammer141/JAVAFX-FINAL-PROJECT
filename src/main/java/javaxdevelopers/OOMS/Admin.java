@@ -3,9 +3,13 @@ package javaxdevelopers.OOMS;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Admin implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     private String adminName;
 
@@ -13,6 +17,12 @@ public class Admin implements Serializable {
 
     public Admin() {
 
+    }
+
+    public Admin(String adminName, String password) {
+        this.adminName = adminName;
+        this.passwords = new ArrayList<>();
+        this.passwords.add(password);
     }
 
     public static void writeAdminToFile(ArrayList<Admin> admin) {
@@ -24,6 +34,20 @@ public class Admin implements Serializable {
             oos.close(); // Close the stream
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static List<Admin> readAdminsFromFile() {
+        File file = new File("adminData.ser");
+        if (!file.exists()) {
+            return new ArrayList<>();
+        }
+
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+            return (List<Admin>) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return new ArrayList<>();
         }
     }
 
