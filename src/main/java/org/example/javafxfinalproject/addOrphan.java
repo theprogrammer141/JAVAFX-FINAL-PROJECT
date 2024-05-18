@@ -1,24 +1,57 @@
 package org.example.javafxfinalproject;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javaxdevelopers.OOMS.Education;
+import javaxdevelopers.OOMS.OOM;
+import javaxdevelopers.OOMS.Orphan;
+import javaxdevelopers.OOMS.Skill;
+import javaxdevelopers.exceptionhandlers.InvalidAgeException;
+import javaxdevelopers.exceptionhandlers.NoNegativeValueException;
+
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class addOrphan extends Application {
+    OOM organization = new OOM();
+    ArrayList<Orphan> orphanArrayList = organization.getOrphansList();
+    TextField nameField = new TextField();
+    TextField ageField = new TextField();
+    DatePicker date = new DatePicker();
+    ToggleGroup group = new ToggleGroup();
+    ToggleGroup educationGroup = new ToggleGroup();
+    TextField degreeName = new TextField();
+    TextField instituteName = new TextField();
+    TextField skillName = new TextField();
+    TextArea skillDescription = new TextArea();
 
     @Override
     public void start(Stage primaryStage) {
-        // Outermost layout with dark green background and black border
+        Image image = new Image("file:///D:\\2nd sem\\OOPs\\JAVAFX-FINAL-PROJECT-FX\\createaccount.png");
+        BackgroundImage backgroundImage = new BackgroundImage(
+                image,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.CENTER,
+                new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, true)
+        );
+        Background background = new Background(backgroundImage);
         BorderPane outerLayout = new BorderPane();
-        outerLayout.setStyle("-fx-background-color: #47a690; -fx-border-color: black; -fx-border-width: 1;");
+        outerLayout.setBackground(background);
+
+        outerLayout.setStyle(" -fx-border-color: black; -fx-border-width: 3px;-fx-font-size: 18");
 
         // Title
-        Label titleLabel = new Label("Orphan Registration");
-        titleLabel.setStyle("-fx-font-size: 24px; -fx-text-fill: white; -fx-alignment: center;");
+        Label titleLabel = new Label("Orphan Registration Form");
+        titleLabel.setStyle("-fx-font-size: 26px; -fx-text-fill: Black; -fx-alignment: center; -fx-font-family: 'Arial Black';-fx-font-weight: bold");
         titleLabel.setMaxWidth(Double.MAX_VALUE);
         titleLabel.setAlignment(Pos.CENTER);
         outerLayout.setTop(titleLabel);
@@ -29,72 +62,138 @@ public class addOrphan extends Application {
         VBox mainContent = new VBox(2);
         mainContent.setAlignment(Pos.TOP_CENTER);
         mainContent.setPadding(new Insets(10, 150, 10, 150));
+        mainContent.prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.5));
+        mainContent.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.7));
         outerLayout.setCenter(mainContent);
 
         // Personal Details Section
-        VBox personalDetailsSection = createSection("Personal Details", "lightblue");
-        mainContent.getChildren().add(personalDetailsSection);
+        VBox personalDetailsSection = new VBox(5);
+        personalDetailsSection.setStyle("-fx-background-color: lightblue; -fx-border-color: black; -fx-border-width: 2;-fx-background-radius: 30px;-fx-border-radius: 30px");
+        personalDetailsSection.setAlignment(Pos.TOP_CENTER);
+        personalDetailsSection.setPadding(new Insets(15));
 
-        // Education Details Section
-        VBox educationDetailsSection = createSection("Education Details", "lightblue");
-        mainContent.getChildren().add(educationDetailsSection);
-
-        // Skill Details Section
-        VBox skillDetailsSection = createSection("Skill Details", "lightblue");
-        mainContent.getChildren().add(skillDetailsSection);
-
-        // Buttons
-        HBox buttonBox = new HBox(10);
-        buttonBox.setAlignment(Pos.CENTER);
-        Button addButton = new Button("Add");
-        Button resetButton = new Button("Reset");
-        Button closeButton = new Button("Close");
-        buttonBox.getChildren().addAll(addButton, resetButton, closeButton);
-        mainContent.getChildren().add(buttonBox);
-        mainContent.setMaxWidth(1000);
-
-        // Scene and Stage setup
-        Scene scene = new Scene(outerLayout, 800, 600);
-        primaryStage.setTitle("Orphan Registration System");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
-
-    private VBox createSection(String titleText, String color) {
-        VBox section = new VBox(5);
-        section.setStyle("-fx-background-color: " + color + "; -fx-border-color: black; -fx-border-width: 1;");
-        section.setAlignment(Pos.TOP_CENTER);
-        section.setPadding(new Insets(15));
-
-        Label title = new Label(titleText);
-        title.setStyle("-fx-font-size: 18px; -fx-text-fill: black;");
-        section.getChildren().add(title);
+        Label title = new Label("Personal Details");
+        title.setStyle("-fx-font-size: 20px; -fx-text-fill: black;-fx-font-weight: bold");
+        personalDetailsSection.getChildren().add(title);
 
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(Pos.CENTER);
         gridPane.setHgap(10);
         gridPane.setVgap(10);
 
-        if ("Personal Details".equals(titleText)) {
-            addFormField(gridPane, "Orphan Name:", new TextField(), 0);
-            gridPane.add(new Label("Gender:"),0,1);
-            gridPane.add(createGenderRadioButtons(), 1, 1);
-            addFormField(gridPane, "Orphan Age:", new TextField(), 2);
-            addFormField(gridPane, "Date of Enrollment:", new DatePicker(), 3);
-        } else if ("Education Details".equals(titleText)) {
-            gridPane.add(new Label("Education status:"),0,0);
-            gridPane.add(createEducationStatusRadioButtons(),1,0);
-            addFormField(gridPane, "Degree name: ",new TextField(),1);
-            addFormField(gridPane,"Institute Name: ", new TextField(),2);
-        } else if ("Skill Details".equals(titleText)) {
-            addFormField(gridPane, "Skill Name:", new TextField(), 0);
-            addFormField(gridPane, "Skill Description:", new TextArea(), 1);
-        }
+        addFormField(gridPane, "Orphan Name:", nameField, 0);
+        gridPane.add(new Label("Gender:"),0,1);
+        gridPane.add(createGenderRadioButtons(), 1, 1);
+        addFormField(gridPane, "Staff Age:", ageField, 2);
+        addFormField(gridPane, "Date of Enrollment:", date, 3);
+        personalDetailsSection.getChildren().add(gridPane);
+        mainContent.getChildren().add(personalDetailsSection);
 
-        section.getChildren().add(gridPane);
-        return section;
+        // Education Details Section
+        VBox educationDetailsSection = new VBox(5);
+        educationDetailsSection.setStyle("-fx-background-color: lightblue; -fx-border-color: black; -fx-border-width: 2;-fx-background-radius: 30px;-fx-border-radius: 30px");
+        educationDetailsSection.setAlignment(Pos.TOP_CENTER);
+        educationDetailsSection.setPadding(new Insets(15));
+
+        Label educationTitle = new Label("Education Details");
+        educationTitle.setStyle("-fx-font-size: 20px; -fx-text-fill: black;-fx-font-weight: bold");
+        educationDetailsSection.getChildren().add(educationTitle);
+
+        GridPane educationGridPane = new GridPane();
+        educationGridPane.setAlignment(Pos.CENTER);
+        educationGridPane.setHgap(10);
+        educationGridPane.setVgap(10);
+
+        educationGridPane.add(new Label("Education status:"),0,0);
+        educationGridPane.add(createEducationStatusRadioButtons(),1,0);
+        addFormField(educationGridPane, "Degree name: ",degreeName,1);
+        addFormField(educationGridPane,"Institute Name: ", instituteName,2);
+        educationDetailsSection.getChildren().add(educationGridPane);
+        mainContent.getChildren().add(educationDetailsSection);
+
+        // Skill Details Section
+        VBox skillDetailsSection = new VBox(5);
+        skillDetailsSection.setStyle("-fx-background-color: lightblue; -fx-border-color: black; -fx-border-width: 2;-fx-background-radius: 30px;-fx-border-radius: 30px");
+        skillDetailsSection.setAlignment(Pos.TOP_CENTER);
+        skillDetailsSection.setPadding(new Insets(15));
+
+        Label skillTitle = new Label("Skill Details: ");
+        skillTitle.setStyle("-fx-font-size: 20px; -fx-text-fill: black;-fx-font-weight: bold");
+        skillDetailsSection.getChildren().add(skillTitle);
+
+        GridPane skillGridPane = new GridPane();
+        skillGridPane.setAlignment(Pos.CENTER);
+        skillGridPane.setHgap(10);
+        skillGridPane.setVgap(10);
+
+        addFormField(skillGridPane, "Skill Name:", skillName, 0);
+        addFormField(skillGridPane, "Skill Description:", skillDescription, 1);
+        skillDetailsSection.getChildren().add(skillGridPane);
+        mainContent.getChildren().add(skillDetailsSection);
+
+        // Buttons
+        HBox buttonBox = new HBox(50);
+        buttonBox.setAlignment(Pos.CENTER);
+        Button addButton = new Button("Add Orphan");
+        addButton.setStyle("-fx-background-radius: 30px;-fx-border-width: 1px;-fx-border-color: black;-fx-border-radius: 30px");
+
+        Button resetButton = new Button("Reset Data");
+        resetButton.setStyle("-fx-background-radius: 30px;-fx-border-width: 1px;-fx-border-color: black;-fx-border-radius: 30px");
+
+        Button closeButton = new Button("Close Tab");
+        closeButton.setStyle("-fx-background-radius: 30px;-fx-border-width: 1px;-fx-border-color: black;-fx-border-radius: 30px");
+
+        buttonBox.getChildren().addAll(addButton, resetButton, closeButton);
+        mainContent.getChildren().add(buttonBox);
+
+        mainContent.setMaxWidth(1000);
+        addButton.setOnAction(new inputData());
+        closeButton.setOnAction(e -> {
+            new OrphanTab().start(new Stage());
+            primaryStage.close();
+        });
+
+        // Scene and Stage setup
+        Scene scene = new Scene(outerLayout);
+        primaryStage.setTitle("Orphan Registration Form");
+        primaryStage.setScene(scene);
+        primaryStage.setMaximized(true);
+        primaryStage.show();
     }
+    class inputData implements EventHandler<ActionEvent>{
 
+        @Override
+        public void handle(ActionEvent actionEvent) {
+            Orphan orphan = new Orphan();
+            orphan.setId(orphanArrayList.size()+1);
+            orphan.setName(nameField.getText());
+
+            RadioButton selectedGender = (RadioButton) group.getSelectedToggle();
+            orphan.setGender(selectedGender.getText());
+            orphan.setEntryDate(date.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+            try {
+                orphan.setAge(Integer.parseInt(ageField.getText()));
+            } catch (NoNegativeValueException | InvalidAgeException e) {
+                throw new RuntimeException(e);
+            }
+            Education education = new Education();
+            RadioButton educationButton = (RadioButton) educationGroup.getSelectedToggle();
+            if (educationButton.getText().equals("Educated")){
+                education.setEducationLevel(degreeName.getText());
+                education.setInstitute(instituteName.getText());
+            }
+            orphan.setEducation(education);
+            ArrayList<Skill> skillArrayList = new ArrayList<>();
+            Skill skill = new Skill();
+            skill.setSkillName(skillName.getText());
+            skill.setSkillDescription(skillDescription.getText());
+            skill.setSkillID(0);
+            skillArrayList.add(skill);
+            orphan.setSkillSet(skillArrayList);
+            orphanArrayList.add(orphan);
+            Orphan.writeOrphanToFile(orphanArrayList);
+        }
+    }
     private void addFormField(GridPane gridPane, String labelText, Control inputControl, int rowIndex) {
         Label label = new Label(labelText);
         if (inputControl instanceof TextArea){
@@ -106,7 +205,6 @@ public class addOrphan extends Application {
     }
 
     private HBox createGenderRadioButtons() {
-        ToggleGroup group = new ToggleGroup();
         RadioButton male = new RadioButton("Male");
         male.setToggleGroup(group);
         RadioButton female = new RadioButton("Female");
@@ -119,11 +217,10 @@ public class addOrphan extends Application {
     }
 
     private HBox createEducationStatusRadioButtons() {
-        ToggleGroup group = new ToggleGroup();
         RadioButton educated = new RadioButton("Educated");
-        educated.setToggleGroup(group);
+        educated.setToggleGroup(educationGroup);
         RadioButton notEducated = new RadioButton("Not Educated");
-        notEducated.setToggleGroup(group);
+        notEducated.setToggleGroup(educationGroup);
         HBox hbox = new HBox(10, educated, notEducated);
         hbox.setAlignment(Pos.CENTER_LEFT);
         return hbox;

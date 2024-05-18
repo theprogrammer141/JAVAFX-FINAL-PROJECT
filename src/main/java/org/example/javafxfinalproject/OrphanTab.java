@@ -56,7 +56,7 @@ public class OrphanTab extends Application {
         Button btnViewOrphan = new Button("View Orphan");
         ViewOrphan viewOrphan = new ViewOrphan();
         btnViewOrphan.setOnAction(actionEvent -> {
-            viewOrphan.start(new Stage());
+            new ViewOrphan().start(new Stage());
             primaryStage.close();
         });
 
@@ -75,13 +75,7 @@ public class OrphanTab extends Application {
         VBox buttonBox = new VBox(10, buttonRow1, buttonRow2);
         buttonBox.setAlignment(Pos.CENTER);
 
-        //buttonBox.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.1));
-
-       // buttonBox.setStyle("-fx-border-color: black; -fx-border-width: 2px");
         buttonBox.setPadding(new Insets(20));
-        //buttonBox.setStyle("-fx-fit-to-width: TRUE");
-        //buttonBox.setMaxWidth(350);
-        //buttonBox.setMaxHeight(150);
 
 
         Image orphanImage = new Image("file:path/C:/Users/khizar/Pictures/Camera Roll/WhatsApp Image 2023-09-27 at 13.36.01.jpg"); // Replace with your image path
@@ -93,15 +87,15 @@ public class OrphanTab extends Application {
 
         // Layout
         BorderPane root = new BorderPane();
-        root.setStyle("-fx-background-color: #ADD8E6;"); // Light blue background
+        root.setStyle("-fx-background-color: #ADD8E6;-fx-font-size: 26;-fx-font-weight: bold"); // Light blue background
         root.setTop(headerLabel);
         BorderPane.setAlignment(headerLabel, Pos.TOP_CENTER);
         root.setCenter(buttonBox);
 
         root.setBottom(footerLabel);
         BorderPane.setAlignment(footerLabel, Pos.BOTTOM_CENTER);
-        root.setMargin(imageView, new Insets(20, 0, 20, 0));
-        root.setMargin(buttonBox, new Insets(0, 0, 15, 0));
+        BorderPane.setMargin(imageView, new Insets(20, 0, 20, 0));
+        BorderPane.setMargin(buttonBox, new Insets(0, 0, 15, 0));
         // Bind header and footer font size to the width of the scene
         headerLabel.styleProperty().bind(Bindings.concat("-fx-font-size: ", root.widthProperty().divide(25).asString(), "px; -fx-text-fill: #000;"));
         footerLabel.styleProperty().bind(Bindings.concat("-fx-font-size: ", root.widthProperty().divide(40).asString(), "px; -fx-text-fill: #000;"));
@@ -124,19 +118,13 @@ public class OrphanTab extends Application {
 
         btnReturn.prefWidthProperty().bind(root.widthProperty().divide(4));
         btnReturn.prefHeightProperty().bind(root.heightProperty().divide(10));
-        // Repeat the above two lines for each button
 
         // Scene
-        Scene scene = new Scene(root, 600, 400);
+        Scene scene = new Scene(root);
         primaryStage.setTitle("Orphanage Management System");
         primaryStage.setScene(scene);
+        primaryStage.setMaximized(true);
         primaryStage.show();
-
-
-        // Scene
-        //Scene scene = new Scene(root, 600, 400);
-        //primaryStage.setTitle("Orphanage Management System");
-        //primaryStage.setScene(scene);
 
         primaryStage.show();
     }

@@ -31,33 +31,128 @@ public class RemoveOrphan extends Application {
         mainContent.setPadding(new Insets(0, 50, 10, 0));
 
 
-        VBox removalSection = createRemovalSection();
-        removalSection.setAlignment(Pos.CENTER);
+        VBox searchSection = new VBox(2);
+        searchSection.setStyle("-fx-background-color: lightblue; -fx-border-color: black; -fx-border-width: 1;");
+        searchSection.setAlignment(Pos.TOP_CENTER);
+        searchSection.setPadding(new Insets(5));
 
-        removalSection.setPadding(new Insets(0,50,10,0));
+        Label searchLabel = new Label("To Remove an Orphan");
+        searchLabel.setStyle("-fx-font-size: 18px; -fx-text-fill: black;");
+        searchLabel.setAlignment(Pos.CENTER);
+
+        HBox idBox = new HBox(5);
+        Label idLabel = new Label("Search Orphan by ID:");
+        TextField idField = new TextField();
+        idBox.getChildren().addAll(idLabel, idField);
+        idBox.setAlignment(Pos.CENTER);
+        idBox.setSpacing(12);
+        searchSection.getChildren().add(idBox);
+
+        HBox nameBox = new HBox(5);
+        Label nameLabel = new Label("Search Orphan by Name:");
+        TextField searchNameField = new TextField();
+        nameBox.getChildren().addAll(nameLabel,searchNameField);
+        nameBox.setAlignment(Pos.CENTER);
+        searchSection.getChildren().add(nameBox);
+
+        Button confirmButton = new Button("Search");
+        confirmButton.setAlignment(Pos.BASELINE_RIGHT);
+        searchSection.getChildren().add(confirmButton);
+        searchSection.setMaxHeight(180);
+        searchSection.setMaxWidth(500);
+        searchSection.setSpacing(10);
+        searchSection.setAlignment(Pos.CENTER);
+
+        searchSection.setPadding(new Insets(0,50,10,0));
+        searchSection.setMinHeight(180);
+
+
+
+        searchSection.setPadding(new Insets(0,50,10,0));
 
 
         HBox contentBox = new HBox();
-        contentBox.getChildren().addAll(removalSection,mainContent);
+        contentBox.getChildren().addAll(searchSection,mainContent);
         contentBox.setSpacing(20);
         contentBox.setPadding(new Insets(45,0,0,10));
 
         // Personal Details Section
-        VBox personalDetailsSection = createSection("Personal Details", "lightblue");
+        VBox personalDetailsSection = new VBox(5);
+        personalDetailsSection.setStyle("-fx-background-color: lightblue; -fx-border-color: black; -fx-border-width: 1;");
+        personalDetailsSection.setAlignment(Pos.TOP_CENTER);
+        personalDetailsSection.setPadding(new Insets(15));
+
+        Label title = new Label("Personal Details");
+        title.setStyle("-fx-font-size: 18px; -fx-text-fill: black;");
+        personalDetailsSection.getChildren().add(title);
+
+        GridPane gridPane = new GridPane();
+        gridPane.setAlignment(Pos.CENTER);
+        gridPane.setHgap(10);
+        gridPane.setVgap(10);
+        TextField nameField = new TextField();
+        TextField ageField = new TextField();
+        DatePicker date = new DatePicker();
+        addFormField(gridPane, "Orphan Name:", nameField, 0);
+        gridPane.add(new Label("Gender:"),0,1);
+        gridPane.add(createGenderRadioButtons(), 1, 1);
+        addFormField(gridPane, "Orphan Age:", ageField, 2);
+        addFormField(gridPane, "Date of Enrollment:", date, 3);
+        personalDetailsSection.getChildren().add(gridPane);
         mainContent.getChildren().add(personalDetailsSection);
 
         // Education Details Section
-        VBox educationDetailsSection = createSection("Education Details", "lightblue");
+        VBox educationDetailsSection = new VBox(5);
+        educationDetailsSection.setStyle("-fx-background-color: lightblue; -fx-border-color: black; -fx-border-width: 1;");
+        educationDetailsSection.setAlignment(Pos.TOP_CENTER);
+        educationDetailsSection.setPadding(new Insets(15));
+
+        Label educationTitle = new Label("Education Details");
+        educationTitle.setStyle("-fx-font-size: 18px; -fx-text-fill: black;");
+        educationDetailsSection.getChildren().add(educationTitle);
+
+        GridPane educationGridPane = new GridPane();
+        educationGridPane.setAlignment(Pos.CENTER);
+        educationGridPane.setHgap(10);
+        educationGridPane.setVgap(10);
+
+        TextField degreeName = new TextField();
+        TextField instituteName = new TextField();
+
+        educationGridPane.add(new Label("Education status:"),0,0);
+        educationGridPane.add(createEducationStatusRadioButtons(),1,0);
+        addFormField(educationGridPane, "Degree name: ",degreeName,1);
+        addFormField(educationGridPane,"Institute Name: ", instituteName,2);
+        educationDetailsSection.getChildren().add(educationGridPane);
         mainContent.getChildren().add(educationDetailsSection);
 
         // Skill Details Section
-        VBox skillDetailsSection = createSection("Skill Details", "lightblue");
+        VBox skillDetailsSection = new VBox(5);
+        skillDetailsSection.setStyle("-fx-background-color: lightblue; -fx-border-color: black; -fx-border-width: 1;");
+        skillDetailsSection.setAlignment(Pos.TOP_CENTER);
+        skillDetailsSection.setPadding(new Insets(15));
+
+        Label skillTitle = new Label("Skill Details: ");
+        skillTitle.setStyle("-fx-font-size: 18px; -fx-text-fill: black;");
+        skillDetailsSection.getChildren().add(skillTitle);
+
+        GridPane skillGridPane = new GridPane();
+        skillGridPane.setAlignment(Pos.CENTER);
+        skillGridPane.setHgap(10);
+        skillGridPane.setVgap(10);
+
+        TextField skillName = new TextField();
+        TextArea skillDescription = new TextArea();
+
+        addFormField(skillGridPane, "Skill Name:", skillName, 0);
+        addFormField(skillGridPane, "Skill Description:", skillDescription, 1);
+        skillDetailsSection.getChildren().add(skillGridPane);
         mainContent.getChildren().add(skillDetailsSection);
 
         mainContent.prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.5));
         mainContent.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.7));
-        removalSection.prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.5));
-        removalSection.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.7));
+        searchSection.prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.5));
+        searchSection.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.7));
         contentBox.prefWidthProperty().bind(primaryStage.widthProperty());
         contentBox.prefHeightProperty().bind(primaryStage.heightProperty());
 
@@ -74,82 +169,10 @@ public class RemoveOrphan extends Application {
 
         // Scene and Stage setup
         Scene scene = new Scene(outerLayout, 800, 650);
-        primaryStage.setTitle("Orphan Registration System");
+        primaryStage.setTitle("Orphan Removal");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-    private VBox createRemovalSection() {
-        VBox removalSection = new VBox(2);
-        removalSection.setStyle("-fx-background-color: lightblue; -fx-border-color: black; -fx-border-width: 1;");
-        removalSection.setAlignment(Pos.TOP_CENTER);
-        removalSection.setPadding(new Insets(5));
-
-        Label removalLabel = new Label("To Remove an Orphan");
-        removalLabel.setStyle("-fx-font-size: 18px; -fx-text-fill: black;");
-        removalLabel.setAlignment(Pos.CENTER);
-        removalSection.getChildren().add(removalLabel);
-
-        HBox idBox = new HBox(5);
-        Label idLabel = new Label("Remove Orphan by ID:");
-        TextField idField = new TextField();
-        idBox.getChildren().addAll(idLabel, idField);
-        idBox.setAlignment(Pos.CENTER);
-        idBox.setSpacing(12);
-        removalSection.getChildren().add(idBox);
-
-        HBox nameBox = new HBox(5);
-        Label nameLabel = new Label("Remove Orphan by Name:");
-        TextField nameField = new TextField();
-        nameBox.getChildren().addAll(nameLabel, nameField);
-        nameBox.setAlignment(Pos.CENTER);
-        removalSection.getChildren().add(nameBox);
-        //removalSection.setAlignment(Pos.TOP_CENTER);
-
-        Button confirmButton = new Button("Search");
-        confirmButton.setAlignment(Pos.BASELINE_RIGHT);
-        removalSection.getChildren().add(confirmButton);
-        removalSection.setMaxHeight(180);
-        removalSection.setMaxWidth(500);
-        removalSection.setSpacing(10);
-
-        return removalSection;
-    }
-
-    private VBox createSection(String titleText, String color) {
-        VBox section = new VBox(5);
-        section.setStyle("-fx-background-color: " + color + "; -fx-border-color: black; -fx-border-width: 1;");
-        section.setAlignment(Pos.TOP_CENTER);
-        section.setPadding(new Insets(15));
-
-        Label title = new Label(titleText);
-        title.setStyle("-fx-font-size: 18px; -fx-text-fill: black;");
-        section.getChildren().add(title);
-
-        GridPane gridPane = new GridPane();
-        gridPane.setAlignment(Pos.CENTER);
-        gridPane.setHgap(10);
-        gridPane.setVgap(10);
-
-        if ("Personal Details".equals(titleText)) {
-            addFormField(gridPane, "Orphan Name:", new TextField(), 0);
-            gridPane.add(new Label("Gender:"),0,1);
-            gridPane.add(createGenderRadioButtons(), 1, 1);
-            addFormField(gridPane, "Orphan Age:", new TextField(), 2);
-            addFormField(gridPane, "Date of Enrollment:", new DatePicker(), 3);
-        } else if ("Education Details".equals(titleText)) {
-            gridPane.add(new Label("Education status:"),0,0);
-            gridPane.add(createEducationStatusRadioButtons(),1,0);
-            addFormField(gridPane, "Degree name: ",new TextField(),1);
-            addFormField(gridPane,"Institute Name: ", new TextField(),2);
-        } else if ("Skill Details".equals(titleText)) {
-            addFormField(gridPane, "Skill Name:", new TextField(), 0);
-            addFormField(gridPane, "Skill Description:", new TextArea(), 1);
-        }
-
-        section.getChildren().add(gridPane);
-        return section;
-    }
-
     private void addFormField(GridPane gridPane, String labelText, Control inputControl, int rowIndex) {
         Label label = new Label(labelText);
         if (inputControl instanceof TextArea){
