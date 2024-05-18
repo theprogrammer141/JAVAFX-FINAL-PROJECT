@@ -1,5 +1,6 @@
 package javaxdevelopers.OOMS;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class ReportGenerator {
@@ -81,7 +82,7 @@ public class ReportGenerator {
 
     //METHOD FOR CALCULATING ORPHANS ACCORDING TO AGE GROUPS
     //(1 - 5 YEARS), (6 - 10 YEARS), (11 - 15 YEARS), (16 - 20 YEARS), (20+ YEARS)
-    public static void countOrphansByAgeGroups(ArrayList<Orphan> orphans)
+    public static int[] countOrphansByAgeGroups(ArrayList<Orphan> orphans)
     {
         int[] orphanAgeGroups = new int[4];
         for(Orphan orphan : orphans)
@@ -109,6 +110,7 @@ public class ReportGenerator {
         System.out.println("Number Of Orphans in Age Group(6-10 years): " + orphanAgeGroups[1]);
         System.out.println("Number Of Orphans in Age Group(11-15 years): " + orphanAgeGroups[2]);
         System.out.println("Number Of Orphans in Age Group(16-18 years): " + orphanAgeGroups[3]);
+        return orphanAgeGroups;
     }
 
     //METHOD FOR CALCULATING PERCENTAGE OF MALE ORPHANS
