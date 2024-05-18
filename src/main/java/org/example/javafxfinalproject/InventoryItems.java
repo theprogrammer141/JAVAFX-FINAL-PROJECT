@@ -18,8 +18,8 @@ public class InventoryItems extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Image image = new Image("file:///D:/JAVA/JAVAFX-FINAL-PROJECT/src/trol.jpeg");
-        Image image2 = new Image("file:///D:/JAVA/JAVAFX-FINAL-PROJECT/src/tf.jpeg");
+        Image image = new Image("file:///JAVAFX-FINAL-PROJECT/trol.jpeg");
+        Image image2 = new Image("file:///JAVAFX-FINAL-PROJECT/tf.jpeg");
         BackgroundSize backgroundSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, true);
         BackgroundImage background = new BackgroundImage(image2, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
         Background background2 = new Background(background);

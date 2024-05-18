@@ -23,7 +23,7 @@ public class AddItems extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Image image = new Image("file:///D:/JAVA/JAVAFX-FINAL-PROJECT/src/pr.jpeg");
+        Image image = new Image("file:///JAVAFX-FINAL-PROJECT/pr.jpeg");
         // Background Image Settings
         BackgroundImage backgroundImage = new BackgroundImage(
                 image,

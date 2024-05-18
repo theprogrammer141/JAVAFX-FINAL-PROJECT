@@ -22,9 +22,8 @@ public class UpdateName extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-
         // Load Background Image
-        Image image = new Image("file:///D:/JAVA/JAVAFX-FINAL-PROJECT/src/rec.jpeg");
+        Image image = new Image("file:///JAVAFX-FINAL-PROJECT/rec.jpeg");
 
         // Background Image Settings
         BackgroundImage backgroundImage = new BackgroundImage(
