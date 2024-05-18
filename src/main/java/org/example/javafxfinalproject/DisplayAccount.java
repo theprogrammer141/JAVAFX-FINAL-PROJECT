@@ -23,7 +23,7 @@ public class DisplayAccount extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Image image = new Image("file:///JAVAFX-FINAL-PROJECT/rec.jpeg");
+        Image image = new Image("file:///JAVAFX FINAL PROJECT/rec.jpeg");
 
         // Create Background Image Settings
         BackgroundSize backgroundSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, true);

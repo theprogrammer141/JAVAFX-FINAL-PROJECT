@@ -21,7 +21,7 @@ public class Account extends Application {
 
     public void start(Stage primaryStage) {
         // Background Image
-        Image backgroundImage = new Image("file:///JAVAFX-FINAL-PROJECT/xd.jpeg");
+        Image backgroundImage = new Image("file:///JAVAFX FINAL PROJECT/xd.jpeg");
         BackgroundImage background = new BackgroundImage(
                 backgroundImage,
                 BackgroundRepeat.NO_REPEAT,
