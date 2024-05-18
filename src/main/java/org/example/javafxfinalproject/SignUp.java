@@ -11,6 +11,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -21,13 +22,13 @@ public class SignUp extends Application {
 
         GridPane gridPane = createRegistrationFormPane();
 
-        Scene scene = new Scene(gridPane, 600, 600);
+        Scene scene = new Scene(gridPane, 800, 600);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
     private GridPane createRegistrationFormPane() {
-        Image backgroundImage = new Image("file:///JAVAFX FINAL PROJECT/background.jpeg");
+        Image backgroundImage = new Image("file:///JAVAFX FINAL PROJECT/background2.jpg");
 
         BackgroundImage background = new BackgroundImage(
                 backgroundImage,
@@ -49,33 +50,38 @@ public class SignUp extends Application {
 
         Label titleLabel = new Label("CREATE ACCOUNT");
         titleLabel.setFont(Font.font("TIMES NEW ROMAN", 40));
+        titleLabel.setTextFill(Paint.valueOf("white"));
 
         Label userNameLabel = new Label("Username:");
         userNameLabel.setFont(Font.font("Impact", 13));
+        userNameLabel.setTextFill(Paint.valueOf("white"));
 
         Label passwordLabel = new Label("Password:");
         passwordLabel.setFont(Font.font("Impact", 13));
+        passwordLabel.setTextFill(Paint.valueOf("white"));
 
         Label confirmPasswordLabel = new Label("Confirm Password:");
         confirmPasswordLabel.setFont(Font.font("Impact", 12));
+        confirmPasswordLabel.setTextFill(Paint.valueOf("white"));
 
         TextField usernameField = new TextField();
         usernameField.setPromptText("Enter Username");
-        usernameField.setStyle("-fx-text-fill: white; -fx-background-color: transparent; -fx-background-radius: 30px; -fx-border-color: black; -fx-border-radius: 40px; -fx-prompt-text-fill: black");
+        usernameField.setStyle("-fx-text-fill: white; -fx-background-color: transparent; -fx-background-radius: 30px; -fx-border-color: white; -fx-border-radius: 40px; -fx-prompt-text-fill: white");
 
         PasswordField passwordField = new PasswordField();
         passwordField.setPromptText("Enter Password");
-        passwordField.setStyle("-fx-text-fill: white; -fx-background-color: transparent; -fx-background-radius: 30px; -fx-border-color: black; -fx-border-radius: 40px; -fx-prompt-text-fill: black");
+        passwordField.setStyle("-fx-text-fill: white; -fx-background-color: transparent; -fx-background-radius: 30px; -fx-border-color: white; -fx-border-radius: 40px; -fx-prompt-text-fill: white");
 
         PasswordField confirmPasswordField = new PasswordField();
         confirmPasswordField.setPromptText("Confirm Password");
-        confirmPasswordField.setStyle("-fx-text-fill: white; -fx-background-color: transparent; -fx-background-radius: 30px; -fx-border-color: black; -fx-border-radius: 40px; -fx-prompt-text-fill: black");
+        confirmPasswordField.setStyle("-fx-text-fill: white; -fx-background-color: transparent; -fx-background-radius: 30px; -fx-border-color: white; -fx-border-radius: 40px; -fx-prompt-text-fill: white");
 
         Button signupButton = new Button("SignUp");
-        signupButton.setStyle(" -fx-text-fill: white;-fx-background-color: green; -fx-background-radius: 30px; -fx-border-color: black; -fx-border-radius: 40px");
+        signupButton.setStyle(" -fx-text-fill: white;-fx-background-color: purple; -fx-background-radius: 30px; -fx-border-color: black; -fx-border-radius: 10px");
+        GridPane.setHalignment(signupButton, HPos.RIGHT);
 
         Button backButton = new Button("Back");
-        backButton.setStyle(" -fx-text-fill: white;-fx-background-color: green; -fx-background-radius: 30px; -fx-border-color: black; -fx-border-radius: 40px");
+        backButton.setStyle(" -fx-text-fill: white;-fx-background-color: purple; -fx-background-radius: 30px; -fx-border-color: black; -fx-border-radius: 10px");
         backButton.setAlignment(Pos.BOTTOM_LEFT);
 
         gridPane.add(titleLabel, 0,0,2,1);
@@ -85,7 +91,7 @@ public class SignUp extends Application {
         gridPane.add(passwordField, 1, 2);
         gridPane.add(confirmPasswordLabel, 0, 3);
         gridPane.add(confirmPasswordField, 1, 3);
-        gridPane.add(signupButton, 1, 4);
+        gridPane.add(signupButton, 1, 10);
         gridPane.add(backButton, 0, 10);
 
         gridPane.getColumnConstraints().add(new ColumnConstraints(100, 100, Double.MAX_VALUE));
