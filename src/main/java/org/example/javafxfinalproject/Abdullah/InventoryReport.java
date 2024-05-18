@@ -1,4 +1,4 @@
-package org.example.javafxfinalproject;
+package org.example.javafxfinalproject.Abdullah;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -10,7 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javaxdevelopers.OOMS.Donation;
+import javaxdevelopers.OOMS.InventoryItem;
 import javaxdevelopers.OOMS.OOM;
 
 import java.io.FileInputStream;
@@ -18,9 +18,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
-public class DonationsReport extends Application {
+public class InventoryReport extends Application {
     OOM organization = new OOM();
-    ArrayList<Donation> donations = new ArrayList<>();
+    ArrayList<InventoryItem> inventoryItems = new ArrayList<>();
 
     @Override
     public void start(Stage primaryStage) {
@@ -46,34 +46,38 @@ public class DonationsReport extends Application {
 
         VBox root = new VBox(10);
 
-        Label title = new Label("DONATIONS REPORT");
+        Label title = new Label("INVENTORY REPORT");
         title.setFont(Font.font("Impact", 40));
         root.getChildren().add(title);
 
-        Label totalItemsLabel = new Label("Total Items: " + organization.getDonationsList().size());
+        Label totalItemsLabel = new Label("Total Items: " + organization.getItemsList().size());
         totalItemsLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
         totalItemsLabel.setFont(Font.font(20));
         root.getChildren().add(totalItemsLabel);
 
-        if(donations != null)
+        if(inventoryItems != null)
         {
-            for(Donation donation : donations)
+            for(InventoryItem item : inventoryItems)
             {
-                Label donationNumberLabel = new Label("Donation #: " + donation.getDonationId());
-                donationNumberLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
-                root.getChildren().add(donationNumberLabel);
+                Label itemNumberLabel = new Label("Item #: " + item.getItemID());
+                itemNumberLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+                root.getChildren().add(itemNumberLabel);
 
-                Label donorNameLabel = new Label("Donor Name: " + donation.getDonorName());
-                donorNameLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
-                root.getChildren().add(donorNameLabel);
+                Label itemNameLabel = new Label("Item Name: " + item.getItemName());
+                itemNameLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+                root.getChildren().add(itemNameLabel);
 
-                Label donationAmountLabel = new Label("Donation Amount: " + donation.getDonationAmount());
-                donationAmountLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
-                root.getChildren().add(donationAmountLabel);
+                Label itemPriceLabel = new Label("Item Price: " + item.getItemPrice());
+                itemPriceLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+                root.getChildren().add(itemPriceLabel);
 
-                Label donationDateLabel = new Label("Donation Date: " + donation.getDate());
-                donationDateLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
-                root.getChildren().add(donationDateLabel);
+                Label itemQuantityLabel = new Label("Item Quantity: " + item.getQuantity());
+                itemQuantityLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+                root.getChildren().add(itemQuantityLabel);
+
+                Label itemTypeLabel = new Label("Item Type: " + item.getItemType());
+                itemTypeLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+                root.getChildren().add(itemTypeLabel);
 
                 Label line = new Label("----------------------");
                 line.setStyle("-fx-font-weight: bold; -fx-font-size: 20");
@@ -85,17 +89,17 @@ public class DonationsReport extends Application {
         backButton.setStyle(" -fx-text-fill: white;-fx-background-color: black; -fx-background-radius: 30px; -fx-border-color: white; -fx-border-radius: 40px");
 
         grid.add(root, 0, 0);
-        grid.add(backButton, 0 ,10);
+        grid.add(backButton, 0, 10);
 
         Scene scene = new Scene(grid, 800, 600);
-        primaryStage.setTitle("Donations Report");
+        primaryStage.setTitle("Inventory Report");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
     private void loadInventoryData() {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("donationData.ser"))) {
-            donations = (ArrayList<Donation>) ois.readObject();
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("itemData.ser"))) {
+            inventoryItems = (ArrayList<InventoryItem>) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
