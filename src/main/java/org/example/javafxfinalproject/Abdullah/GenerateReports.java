@@ -48,6 +48,9 @@ public class GenerateReports extends Application {
         Button donationReportButton = new Button("Generate Donation Report");
         donationReportButton.setStyle("-fx-text-fill: white; -fx-background-color: black; -fx-border-color: white; -fx-border-radius: 40px; -fx-background-radius: 30px");
 
+        Button backButton = new Button("Back");
+        backButton.setStyle(" -fx-text-fill: white;-fx-background-color: black; -fx-background-radius: 30px; -fx-border-color: white; -fx-border-radius: 40px");
+
         VBox root = new VBox(10);
         root.setAlignment(Pos.CENTER);
         root.getChildren().addAll(
@@ -55,14 +58,11 @@ public class GenerateReports extends Application {
                 orphanReportButton,
                 staffReportButton,
                 inventoryReportButton,
-                donationReportButton
+                donationReportButton,
+                backButton
         );
 
-        Button backButton = new Button("Back");
-        backButton.setStyle(" -fx-text-fill: white;-fx-background-color: black; -fx-background-radius: 30px; -fx-border-color: white; -fx-border-radius: 40px");
-
         grid.add(root, 0, 0);
-        grid.add(backButton, 0, 10);
 
         Scene scene = new Scene(grid, 800, 600);
         primaryStage.setScene(scene);
