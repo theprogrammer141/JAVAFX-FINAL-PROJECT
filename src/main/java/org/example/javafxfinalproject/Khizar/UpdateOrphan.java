@@ -1,4 +1,4 @@
-package org.example.javafxfinalproject;
+package org.example.javafxfinalproject.Khizar;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -8,7 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-public class RemoveOrphan extends Application {
+public class UpdateOrphan extends Application {
 
     @Override
     public void start(Stage primaryStage) {
@@ -17,7 +17,7 @@ public class RemoveOrphan extends Application {
         outerLayout.setStyle("-fx-background-color: #47a690; -fx-border-color: black; -fx-border-width: 1;");
 
         // Title
-        Label titleLabel = new Label("Remove Orphan");
+        Label titleLabel = new Label("Update Orphan");
         titleLabel.setStyle("-fx-font-size: 24px; -fx-text-fill: white; -fx-alignment: center;");
         titleLabel.setMaxWidth(Double.MAX_VALUE);
         titleLabel.setAlignment(Pos.CENTER);
@@ -25,18 +25,23 @@ public class RemoveOrphan extends Application {
         BorderPane.setAlignment(titleLabel, Pos.CENTER);
         BorderPane.setMargin(titleLabel, new Insets(12, 0, 12, 0));
 
+        Label update = new Label("Make Desired Changes!");
+        update.setStyle("-fx-font-size: 24px; -fx-text-fill: yellow;");
+        update.setAlignment(Pos.CENTER);
+        update.setMaxWidth(Double.MAX_VALUE);
+
         // Main content VBox
         VBox mainContent = new VBox(2);
+        mainContent.getChildren().add(update);
         mainContent.setAlignment(Pos.TOP_CENTER);
         mainContent.setPadding(new Insets(0, 50, 10, 0));
-
 
         VBox searchSection = new VBox(2);
         searchSection.setStyle("-fx-background-color: lightblue; -fx-border-color: black; -fx-border-width: 1;");
         searchSection.setAlignment(Pos.TOP_CENTER);
         searchSection.setPadding(new Insets(5));
 
-        Label searchLabel = new Label("To Remove an Orphan");
+        Label searchLabel = new Label("To Update an Orphan");
         searchLabel.setStyle("-fx-font-size: 18px; -fx-text-fill: black;");
         searchLabel.setAlignment(Pos.CENTER);
 
@@ -66,15 +71,20 @@ public class RemoveOrphan extends Application {
         searchSection.setPadding(new Insets(0,50,10,0));
         searchSection.setMinHeight(180);
 
-
-
-        searchSection.setPadding(new Insets(0,50,10,0));
-
-
         HBox contentBox = new HBox();
         contentBox.getChildren().addAll(searchSection,mainContent);
         contentBox.setSpacing(20);
-        contentBox.setPadding(new Insets(45,0,0,10));
+        contentBox.setPadding(new Insets(35,0,0,60));
+        outerLayout.setCenter(contentBox);
+
+        mainContent.prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.6));
+        mainContent.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.7));
+        searchSection.prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.5));
+        searchSection.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.7));
+        contentBox.prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.6));
+        contentBox.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.7));
+
+
 
         // Personal Details Section
         VBox personalDetailsSection = new VBox(5);
@@ -106,6 +116,7 @@ public class RemoveOrphan extends Application {
         educationDetailsSection.setStyle("-fx-background-color: lightblue; -fx-border-color: black; -fx-border-width: 1;");
         educationDetailsSection.setAlignment(Pos.TOP_CENTER);
         educationDetailsSection.setPadding(new Insets(15));
+
 
         Label educationTitle = new Label("Education Details");
         educationTitle.setStyle("-fx-font-size: 18px; -fx-text-fill: black;");
@@ -149,30 +160,22 @@ public class RemoveOrphan extends Application {
         skillDetailsSection.getChildren().add(skillGridPane);
         mainContent.getChildren().add(skillDetailsSection);
 
-        mainContent.prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.5));
-        mainContent.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.7));
-        searchSection.prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.5));
-        searchSection.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.7));
-        contentBox.prefWidthProperty().bind(primaryStage.widthProperty());
-        contentBox.prefHeightProperty().bind(primaryStage.heightProperty());
-
-        outerLayout.setCenter(contentBox);
-
-
         // Buttons
         HBox buttonBox = new HBox(10);
         buttonBox.setAlignment(Pos.CENTER);
-        Button addButton = new Button("Confirm Remove");
+
         Button closeButton = new Button("Close");
-        buttonBox.getChildren().addAll(addButton,closeButton);
+        buttonBox.getChildren().addAll(closeButton);
         mainContent.getChildren().add(buttonBox);
 
+
         // Scene and Stage setup
-        Scene scene = new Scene(outerLayout, 800, 650);
-        primaryStage.setTitle("Orphan Removal");
+        Scene scene = new Scene(outerLayout, 870, 700);
+        primaryStage.setTitle("Orphan Registration System");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
     private void addFormField(GridPane gridPane, String labelText, Control inputControl, int rowIndex) {
         Label label = new Label(labelText);
         if (inputControl instanceof TextArea){

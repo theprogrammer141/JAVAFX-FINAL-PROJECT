@@ -1,4 +1,4 @@
-package org.example.javafxfinalproject;
+package org.example.javafxfinalproject.Khizar;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -9,7 +9,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javaxdevelopers.OOMS.OOM;
-import javaxdevelopers.OOMS.Orphan;
 import javaxdevelopers.OOMS.Staff;
 
 import java.util.ArrayList;
@@ -32,18 +31,9 @@ public class DisplayStaff extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Image image = new Image("file:///D:\\2nd sem\\OOPs\\JAVAFX-FINAL-PROJECT-FX\\createaccount.png");
-        BackgroundImage backgroundImage = new BackgroundImage(
-                image,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.CENTER,
-                new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, true)
-        );
-        Background background = new Background(backgroundImage);
+
         BorderPane outerLayout = new BorderPane();
-        outerLayout.setBackground(background);
-        outerLayout.setStyle("-fx-border-width: 3px; -fx-border-color: black;");
+        outerLayout.setStyle("-fx-border-width: 3px; -fx-border-color: black;-fx-background-color: rgba(232,209,64,0.94)");
         outerLayout.setPadding(new Insets(10,60,30,60));
 
         Label titleLabel = new Label("Display Staff");
