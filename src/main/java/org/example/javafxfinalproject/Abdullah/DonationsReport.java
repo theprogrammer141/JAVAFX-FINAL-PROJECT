@@ -1,5 +1,8 @@
 package org.example.javafxfinalproject.Abdullah;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
+import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -11,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javaxdevelopers.OOMS.Donation;
 import javaxdevelopers.OOMS.OOM;
 
@@ -84,6 +88,23 @@ public class DonationsReport extends Application {
 
         Button backButton = new Button("Back");
         backButton.setStyle(" -fx-text-fill: white;-fx-background-color: black; -fx-background-radius: 30px; -fx-border-color: white; -fx-border-radius: 40px");
+
+        backButton.setOnAction(handler ->
+        {
+            new GenerateReports().start(new Stage());
+            primaryStage.close();
+        });
+
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(3), grid);
+        fadeTransition.setFromValue(0);
+        fadeTransition.setToValue(20);
+
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(5), grid);
+        translateTransition.setFromY(-primaryStage.getHeight());
+        translateTransition.setToY(0);
+
+        ParallelTransition parallelTransition = new ParallelTransition(fadeTransition, translateTransition);
+        parallelTransition.play();
 
         grid.add(root, 0, 0);
         grid.add(backButton, 0 ,10);

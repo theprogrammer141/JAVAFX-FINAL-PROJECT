@@ -1,5 +1,8 @@
 package org.example.javafxfinalproject.Khizar;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
+import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Insets;
@@ -10,6 +13,12 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.example.javafxfinalproject.Abdullah.AddDonation;
+import org.example.javafxfinalproject.Abdullah.GenerateReports;
+import org.example.javafxfinalproject.Abdullah.Login;
+import org.example.javafxfinalproject.Account;
+import org.example.javafxfinalproject.InventoryItems;
 
 public class MainMenu extends Application {
     @Override
@@ -97,12 +106,67 @@ public class MainMenu extends Application {
 
         btnReportGenerator.prefWidthProperty().bind(root.widthProperty().divide(4));
         btnReportGenerator.prefHeightProperty().bind(root.heightProperty().divide(10));
-        // Repeat the above two lines for each button
+
         btnLogOut.prefWidthProperty().bind(root.widthProperty().divide(8));
         btnLogOut.prefHeightProperty().bind(root.heightProperty().divide(16));
-        // Repeat the above two lines for each button
 
-        // Scene
+        btnOrphan.setOnAction(handler ->
+        {
+            new OrphanTab().start(new Stage());
+            primaryStage.close();
+        });
+
+        btnStaff.setOnAction(handler ->
+        {
+            new StaffTab().start(new Stage());
+            primaryStage.close();
+        });
+
+        btnAccount.setOnAction(handler ->
+        {
+            new Account().start(new Stage());
+            primaryStage.close();
+        });
+
+        btnInventory.setOnAction(handler ->
+        {
+            new InventoryItems().start(new Stage());
+            primaryStage.close();
+        });
+
+        btnDonation.setOnAction(handler ->
+        {
+            try {
+                new AddDonation().start(new Stage());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+            primaryStage.close();
+        });
+
+        btnReportGenerator.setOnAction(handler ->
+        {
+            new GenerateReports().start(new Stage());
+            primaryStage.close();
+        });
+
+        btnLogOut.setOnAction(handler ->
+        {
+            new Login().start(new Stage());
+            primaryStage.close();
+        });
+
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(3), root);
+        fadeTransition.setFromValue(0);
+        fadeTransition.setToValue(20);
+
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(5), root);
+        translateTransition.setFromY(-primaryStage.getHeight());
+        translateTransition.setToY(0);
+
+        ParallelTransition parallelTransition = new ParallelTransition(fadeTransition, translateTransition);
+        parallelTransition.play();
+
         Scene scene = new Scene(root, 600, 400);
         primaryStage.setTitle("Orphanage Management System");
         primaryStage.setScene(scene);

@@ -103,6 +103,12 @@ public class StaffReport extends Application {
         Button backButton = new Button("Back");
         backButton.setStyle(" -fx-text-fill: white;-fx-background-color: black; -fx-background-radius: 30px; -fx-border-color: white; -fx-border-radius: 40px");
 
+        backButton.setOnAction(handler ->
+        {
+            new GenerateReports().start(new Stage());
+            primaryStage.close();
+        });
+
         grid.add(root, 0, 0);
         grid.add(backButton, 0, 20);
 
