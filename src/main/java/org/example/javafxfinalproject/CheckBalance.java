@@ -22,39 +22,67 @@ public class CheckBalance extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Image image = new Image("file:///D:/JAVA/JAVAFX-FINAL-PROJECT/src/rec.jpeg");
-        // Background Image Settings
+        Image image = new Image("file:///D:/JAVA/JAVAFX-FINAL-PROJECT/src/xd.jpeg");
+
+        // Create Background Image Settings
+        BackgroundSize backgroundSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, true);
         BackgroundImage backgroundImage = new BackgroundImage(
                 image,
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.CENTER,
-                new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, true)
+                backgroundSize
         );
+
+        // Create Background with Image
         Background background = new Background(backgroundImage);
         GridPane grid = new GridPane();
-        grid.setBackground(background);
-        grid.setHgap(10);
         grid.setVgap(10);
+        grid.setHgap(10);
         grid.setAlignment(Pos.CENTER);
-        Text scenetitle = new Text("ARE YOU SURE TO REMOVE THIS ITEM");
+
+        // Set the size of the GridPane to match the size of the scene
+        grid.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+
+        grid.setBackground(background);
+
+        Text scenetitle = new Text("----Available Balance----");
         scenetitle.setFont(Font.font("Times New Roman", FontWeight.BOLD, 20));
-        scenetitle.setFill(Color.NAVY);
-        grid.add(scenetitle,2,0);
-        Text accID2 = new Text("ITEM NAME :");
-        accID2.setFill(Color.NAVY);
-        grid.add(accID2,1,3);
+        scenetitle.setFill(Color.BLACK);
+        grid.add(scenetitle, 1, 0);
+
+        // Bank Name Label and ComboBox
+        Label lbl1 = new Label("Account ID:");
+        lbl1.setFont(Font.font("Tahoma", 15));
+        lbl1.setTextFill(Color.WHITE);
+        grid.add(lbl1, 0, 1);
+
         TextField tx1 = new TextField();
-        grid.add(tx1,2,3);
-        Button br = new Button("Return");
-        br.setAlignment(javafx.geometry.Pos.CENTER_RIGHT);
-        grid.add(br,4,7);
-        //borderPane.setBottom(returnB);
-        Scene scene = new Scene(grid,600,600);
+        tx1.setMaxSize(200,20);
+        grid.add(tx1,1,1);
+
+
+        Label lbl3 = new Label("Balance:");
+        lbl3.setFont(Font.font("Tahoma", 15));
+        lbl3.setTextFill(Color.WHITE);
+        grid.add(lbl3, 0, 2);
+
+        TextField tx3 = new TextField();
+        tx3.setMaxSize(200,20);
+        grid.add(tx3,1,2);
+
+
+        Button rtrn = new Button("Return");
+
+        rtrn.setStyle("-fx-background-color: Navy");
+
+        rtrn.setTextFill(Color.CYAN);
+
+        grid.add(rtrn,4,6);
+
+        Scene scene = new Scene(grid, 800, 600);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Display Balance");
         primaryStage.show();
-
-
     }
 }

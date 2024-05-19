@@ -72,7 +72,7 @@ public class DepositMoney extends Application {
         // Set Up Scene
         Scene scene = new Scene(borderPane, 800, 600);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Withdraw Money");
+        primaryStage.setTitle("Deposit Money");
         primaryStage.show();
     }
 

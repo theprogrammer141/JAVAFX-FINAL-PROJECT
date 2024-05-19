@@ -15,7 +15,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class DisplayAccount extends Application {
+public class DisplayAccountDetails extends Application {
 
     public static void main(String[] args) {
         launch(args);
@@ -47,13 +47,13 @@ public class DisplayAccount extends Application {
 
         grid.setBackground(background);
 
-        Text scenetitle = new Text("----Item Details----");
+        Text scenetitle = new Text("----Account Details----");
         scenetitle.setFont(Font.font("Times New Roman", FontWeight.BOLD, 20));
         scenetitle.setFill(Color.BLACK);
         grid.add(scenetitle, 1, 0);
 
         // Bank Name Label and ComboBox
-        Label lbl1 = new Label("Name:");
+        Label lbl1 = new Label("Account ID:");
         lbl1.setFont(Font.font("Tahoma", 15));
         lbl1.setTextFill(Color.WHITE);
         grid.add(lbl1, 0, 1);
@@ -62,7 +62,7 @@ public class DisplayAccount extends Application {
         tx1.setMaxSize(150,20);
         grid.add(tx1,1,1);
 
-        Label lbl2 = new Label("Price:");
+        Label lbl2 = new Label("Name:");
         lbl2.setFont(Font.font("Tahoma", 15));
         lbl2.setTextFill(Color.WHITE);
         grid.add(lbl2, 0, 2);
@@ -71,7 +71,7 @@ public class DisplayAccount extends Application {
         tx2.setMaxSize(150,20);
         grid.add(tx2,1,2);
 
-        Label lbl3 = new Label("Quantity:");
+        Label lbl3 = new Label("Balance:");
         lbl3.setFont(Font.font("Tahoma", 15));
         lbl3.setTextFill(Color.WHITE);
         grid.add(lbl3, 0, 3);
@@ -80,13 +80,13 @@ public class DisplayAccount extends Application {
         tx3.setMaxSize(150,20);
         grid.add(tx3,1,3);
 
-        Label lbl4 = new Label("Item Type:");
+        Label lbl4 = new Label("Transaction History:");
         lbl4.setFont(Font.font("Tahoma", 15));
         lbl4.setTextFill(Color.WHITE);
         grid.add(lbl4, 0, 4);
 
-        TextArea tx4 = new TextArea();
-        tx4.setMaxSize(300,150);
+        TextField tx4 = new TextField();
+        tx4.setMaxSize(150,20);
         grid.add(tx4,1,4);
 
         Button rtrn = new Button("Return");
@@ -99,6 +99,7 @@ public class DisplayAccount extends Application {
 
         Scene scene = new Scene(grid, 800, 600);
         primaryStage.setScene(scene);
+        primaryStage.setTitle("Account details");
         primaryStage.show();
     }
 }

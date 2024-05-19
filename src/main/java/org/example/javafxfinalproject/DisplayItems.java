@@ -1,6 +1,7 @@
 package org.example.javafxfinalproject;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -22,8 +23,8 @@ public class DisplayItems extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Image image = new Image("file:///D:/JAVA/JAVAFX-FINAL-PROJECT/src/rec.jpeg");
         // Background Image Settings
+        Image image = new Image("file:///D:/JAVA/JAVAFX-FINAL-PROJECT/src/op.jpeg");
         BackgroundImage backgroundImage = new BackgroundImage(
                 image,
                 BackgroundRepeat.NO_REPEAT,
@@ -31,52 +32,49 @@ public class DisplayItems extends Application {
                 BackgroundPosition.CENTER,
                 new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, true)
         );
-
-        // Create Background with Image
         Background background = new Background(backgroundImage);
 
-        // Main Layout - BorderPane
-        //BorderPane borderPane = new BorderPane();
-        //grid.setBackground(background);
-
+        // Main Layout - GridPane
         GridPane grid = new GridPane();
         grid.setBackground(background);
         grid.setHgap(10);
         grid.setVgap(10);
+        grid.setPadding(new Insets(20));
         grid.setAlignment(Pos.CENTER);
-        grid.setVisible(true);
+
+        // Scene Title
         Text scenetitle = new Text("-----Item Details-----");
-        scenetitle.setFont(Font.font("Times New Roman", FontWeight.BOLD, 20));
+        scenetitle.setFont(Font.font("Arial", FontWeight.BOLD, 26));
         scenetitle.setFill(Color.NAVY);
-        grid.add(scenetitle,2,0);
-        Label accID2 = new Label("Name");
-        grid.add(accID2,1,1);
-        TextField tx1 = new TextField();
-        grid.add(tx1,2,1);
-        Label accID = new Label("Price");
-        grid.add(accID,1,2);
-        TextField tx2 = new TextField();
-        grid.add(tx2,2,2);
-        Label bal = new Label("Quantity");
-        grid.add(bal,1,3);
-        TextField tx3 = new TextField();
-        grid.add(tx3,2,3);
-        Label accT = new Label("Item Type");
-        grid.add(accT,1,4);
-        TextField tx4 = new TextField();
-        grid.add(tx4,2,4);
+        grid.add(scenetitle, 0, 0, 2, 1); // Column span for centering
 
-        //borderPane.setCenter(grid);
+        // Labels and TextFields
+        createLabelAndTextField(grid, "Name", 0, 1, Color.NAVY);
+        createLabelAndTextField(grid, "Price", 0, 2, Color.NAVY);
+        createLabelAndTextField(grid, "Quantity", 0, 3, Color.NAVY);
+        createLabelAndTextField(grid, "Item Type", 0, 4, Color.NAVY);
 
+        // Return Button
         Button br = new Button("Return");
-        br.setTextFill(Color.NAVY);
-        br.setAlignment(javafx.geometry.Pos.CENTER_RIGHT);
-        grid.add(br,4,6);
-        //borderPane.setBottom(returnB);
-        Scene scene = new Scene(grid,600,600);
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Display Account");
-        primaryStage.show();
+        br.setStyle("-fx-background-color: lightgray; -fx-text-fill: navy; -fx-font-size: 16px; -fx-font-family: 'Arial';");
+        br.setPrefWidth(100);
+        grid.add(br, 1, 5);
+        GridPane.setMargin(br, new Insets(20, 0, 0, 0));
 
+        // Scene Setup
+        Scene scene = new Scene(grid, 600, 600);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Display Item");
+        primaryStage.show();
+    }
+
+    private void createLabelAndTextField(GridPane grid, String labelText, int col, int row, Color color) {
+        Label label = new Label(labelText);
+        label.setTextFill(color);
+        label.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        TextField textField = new TextField();
+        textField.setMaxWidth(200);
+        grid.add(label, col, row);
+        grid.add(textField, col + 1, row);
     }
 }
