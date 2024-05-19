@@ -1,4 +1,4 @@
-package org.example.javafxfinalproject;
+package org.example.javafxfinalproject.Khizar;
 
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
@@ -96,6 +95,7 @@ public class StaffTab extends Application {
         root.setTop(headerLabel);
         BorderPane.setAlignment(headerLabel, Pos.TOP_CENTER);
         root.setCenter(buttonBox);
+        root.setStyle("-fx-background-color: #ADD8E6;-fx-font-size: 26;-fx-font-weight: bold"); // Light blue background
         root.setBottom(footerLabel);
         root.setBackground(new Background(image));
 
@@ -125,7 +125,8 @@ public class StaffTab extends Application {
         btnReturn.prefHeightProperty().bind(root.heightProperty().divide(10));
 
         // Scene
-        Scene scene = new Scene(root, 600, 400);
+        Scene scene = new Scene(root);
+        primaryStage.setMaximized(true);
         primaryStage.setTitle("Orphanage Management System");
         primaryStage.setScene(scene);
         primaryStage.show();

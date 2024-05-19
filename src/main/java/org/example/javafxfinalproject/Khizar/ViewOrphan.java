@@ -1,4 +1,4 @@
-package org.example.javafxfinalproject;
+package org.example.javafxfinalproject.Khizar;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -8,8 +8,26 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javaxdevelopers.OOMS.OOM;
+import javaxdevelopers.OOMS.Orphan;
+
+import java.util.ArrayList;
 
 public class ViewOrphan extends Application {
+    OOM organization = new OOM();
+    ArrayList<Orphan> orphanArrayList = organization.getOrphansList();
+    Label name;
+    TextField idSearch;
+    TextField nameSearch;
+    Label age;
+    Label gender;
+    Label dateOfEnrollment;
+    Label degree;
+    Label institute;
+    Label status;
+    Label skillName;
+    Label skillDescription;
+
 
     @Override
     public void start(Stage primaryStage){
@@ -42,10 +60,10 @@ public class ViewOrphan extends Application {
         searchLabel.setStyle("-fx-font-size: 24;-fx-font-weight: bold");
         Label searchByID = new Label("Search by id: ");
         searchByID.setStyle("-fx-font-size: 18px");
-        TextField idSearch = new TextField();
+        idSearch = new TextField();
         Label searchByName = new Label("Search By Name: ");
         searchByName.setStyle("-fx-font-size: 18px");
-        TextField nameSearch = new TextField();
+        nameSearch = new TextField();
         Button search = new Button("Search Orphan");
         search.setStyle("-fx-background-radius: 30px;-fx-background-color: #2abd2a;-fx-border-width: 2px;-fx-border-color: black;-fx-border-radius: 40px");
         Button returnButton = new Button("Return");
@@ -54,12 +72,18 @@ public class ViewOrphan extends Application {
         buttonBox.setStyle("-fx-font-size: 15px");
         buttonBox.setSpacing(65);
 
+        HBox warningBox = new HBox();
+        Label warning = new Label("Cannot find Orphan!");
+        warningBox.getChildren().add(warning);
+        warning.setStyle("-fx-font-size: 20px;-fx-text-fill: red;-fx-font-weight: bold");
+        warningBox.setStyle("visibility: false");
+
         HBox searchTitle = new HBox(searchLabel);
         HBox idSearchBox = new HBox(searchByID,idSearch);
-        idSearchBox.setSpacing(36);
+        idSearchBox.setSpacing(46);
         HBox nameSearchBox = new HBox(searchByName,nameSearch);
-        nameSearchBox.setSpacing(2);
-        VBox searchBox = new VBox(searchTitle,idSearchBox,nameSearchBox,buttonBox);
+        nameSearchBox.setSpacing(12);
+        VBox searchBox = new VBox(searchTitle,idSearchBox,nameSearchBox,buttonBox,warningBox);
         content.getChildren().add(searchBox);
         searchBox.setSpacing(13);
         searchBox.setStyle("-fx-border-color: black; -fx-border-width: 2px;-fx-border-radius: 12%;-fx-padding: 20px;");
@@ -76,13 +100,13 @@ public class ViewOrphan extends Application {
         Label personalHeading = new Label("Personal Details:");
         personalHeading.setStyle("-fx-font-weight: bold;-fx-font-size: 24px");
         Label nameLabel = new Label("Name: ");
-        Label name = new Label();
+        name = new Label();
         Label genderLabel = new Label("Gender: ");
-        Label gender = new Label();
+        gender = new Label();
         Label ageLabel = new Label("Age:");
-        Label age = new Label();
+        age = new Label();
         Label dateOfEnrollmentLabel = new Label("Date Of Enrollment:");
-        Label dateOfEnrollment = new Label();
+        dateOfEnrollment = new Label();
 
 
 
@@ -94,12 +118,11 @@ public class ViewOrphan extends Application {
 
         VBox personalDetails = new VBox(personalHeadingBox,nameBox,genderBox,ageBox,dateBox);
         personalDetails.setSpacing(7);
-       /* nameBox.setSpacing(10);
+        nameBox.setSpacing(10);
         ageBox.setSpacing(10);
         genderBox.setSpacing(10);
         dateBox.setSpacing(10);
 
-        */
         personalDetails.setPadding(new Insets(10,0,10,60));
         personalHeadingBox.setAlignment(Pos.CENTER);
         mainContent.getChildren().add(personalDetails);
@@ -109,11 +132,11 @@ public class ViewOrphan extends Application {
         Label educationHeading = new Label("Education Details:");
         educationHeading.setStyle("-fx-font-weight: bold;-fx-font-size: 24px");
         Label statusLabel = new Label("Education Status: ");
-        Label status = new Label();
+        status = new Label();
         Label degreeLabel = new Label("Highest Degree: ");
-        Label degree = new Label();
+        degree = new Label();
         Label instituteLabel = new Label("Institute name:");
-        Label institute = new Label();
+        institute = new Label();
 
         HBox educationHeadingBox = new HBox(educationHeading);
         HBox statusBox = new HBox(statusLabel, status);
@@ -132,9 +155,9 @@ public class ViewOrphan extends Application {
         Label skillHeading = new Label("Skill Details:");
         skillHeading.setStyle("-fx-font-weight: bold;-fx-font-size: 24px");
         Label skillNameLabel = new Label("Skill Name: ");
-        Label skillName = new Label();
+        skillName = new Label();
         Label skillDescriptionLabel = new Label("Skill Description: ");
-        Label skillDescription = new Label();
+        skillDescription = new Label();
 
         HBox skillHeadingBox = new HBox(skillHeading);
         HBox skillNameBox = new HBox(skillNameLabel, skillName);
@@ -148,17 +171,77 @@ public class ViewOrphan extends Application {
         skillDetails.setMaxHeight(100);
         mainContent.getChildren().add(skillDetails);
 
-
-
         mainContent.prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.5));
         mainContent.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.7));
 
-        Scene scene = new Scene(outerLayout);
+
+        search.setOnAction(e -> setValues(warningBox));
+        returnButton.setOnAction(e ->
+        {
+            new OrphanTab().start(new Stage());
+            primaryStage.close();
+        }
+        );
+
         primaryStage.setMaximized(true);
+        Scene scene = new Scene(outerLayout);
         primaryStage.setScene(scene);
         primaryStage.setTitle("View Orphan");
+
         primaryStage.show();
     }
+    public void setValues(HBox warning){
+        Orphan orphan = searchOrphan();
+
+        name.setText("");
+        age.setText("");
+        gender.setText("");
+        dateOfEnrollment.setText("");
+        status.setText("");
+        degree.setText("");
+        institute.setText("");
+        skillName.setText("");
+        skillDescription.setText("");
+
+        if (orphan == null){
+            warning.setStyle("visibility: true");
+        }else {
+            warning.setStyle("visibility: false");
+            name.setText(orphan.getName());
+            age.setText(Integer.toString(orphan.getAge()));
+            dateOfEnrollment.setText(orphan.getEntryDate());
+            gender.setText(orphan.getGender());
+            if (orphan.getEducation().getEducationLevel() == null) {
+                status.setText("Non-educated");
+                degree.setText("None");
+                institute.setText("None");
+            } else {
+                status.setText("Educated");
+                degree.setText(orphan.getEducation().getEducationLevel());
+                institute.setText(orphan.getEducation().getInstitute());
+            }
+            if (!orphan.getSkillSet().isEmpty()) {
+                skillName.setText(orphan.getSkillSet().getFirst().getSkillName());
+                skillDescription.setText(orphan.getSkillSet().getFirst().getSkillDescription());
+            }
+        }
+    }
+    public Orphan searchOrphan(){
+
+        if (!idSearch.getText().isEmpty()){
+            for (Orphan orphan1: orphanArrayList){
+                if (orphan1.getId()==Integer.parseInt(idSearch.getText()))
+                    return orphan1;
+            }
+        } else if (!nameSearch.getText().isEmpty()){
+            for (Orphan orphan1: orphanArrayList){
+                if (orphan1.getName().equalsIgnoreCase(nameSearch.getText()))
+                    return orphan1;
+            }
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         launch(args);
     }

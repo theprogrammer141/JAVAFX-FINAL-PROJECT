@@ -1,4 +1,4 @@
-package org.example.javafxfinalproject;
+package org.example.javafxfinalproject.Khizar;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -181,6 +181,9 @@ public class addOrphan extends Application {
             if (educationButton.getText().equals("Educated")){
                 education.setEducationLevel(degreeName.getText());
                 education.setInstitute(instituteName.getText());
+            }else {
+                education.setEducationLevel("None");
+                education.setInstitute("None");
             }
             orphan.setEducation(education);
             ArrayList<Skill> skillArrayList = new ArrayList<>();

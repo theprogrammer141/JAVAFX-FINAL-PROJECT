@@ -1,4 +1,4 @@
-package org.example.javafxfinalproject;
+package org.example.javafxfinalproject.Khizar;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -9,10 +9,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javaxdevelopers.OOMS.Education;
 import javaxdevelopers.OOMS.OOM;
 import javaxdevelopers.OOMS.Staff;
+import javaxdevelopers.exceptionhandlers.InvalidAgeException;
+import javaxdevelopers.exceptionhandlers.InvalidContactNumberException;
+import javaxdevelopers.exceptionhandlers.NoNegativeValueException;
 
 import java.util.ArrayList;
 
@@ -20,18 +23,8 @@ public class addStaff extends Application {
 
     @Override
     public void start(Stage primaryStage){
-        Image image = new Image("file:///D:\\2nd sem\\OOPs\\JAVAFX-FINAL-PROJECT-FX\\staffBackground.jpg");
-        BackgroundImage backgroundImage = new BackgroundImage(
-                image,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.CENTER,
-                new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, true)
-        );
-        Background background = new Background(backgroundImage);
         BorderPane outerLayout = new BorderPane();
-        outerLayout.setBackground(background);
-
+        outerLayout.setStyle("-fx-background-color: rgba(232,209,64,0.94)");
         //title label
         Label titleLabel = new Label("Staff Registration");
         titleLabel.setStyle("-fx-font-size: 26;-fx-font-weight: bold;");
@@ -177,8 +170,11 @@ public class addStaff extends Application {
         primaryStage.setScene(scene);
 
         addButton.setOnAction(new InputData(nameField,ageField,genderGroup,education,degree,institute,pay,role,contact));
+
+
         primaryStage.show();
     }
+
 
     public static void main(String[] args) {
         launch(args);
@@ -214,8 +210,37 @@ class InputData implements EventHandler<ActionEvent>{
         ArrayList<Staff> staffList = organization.getStaffList();
         Staff staff = new Staff();
         staff.setId(staffList.size()+1);
-        if(!nameField.getText().isEmpty())
-            staff.setName(nameField.getText());
+        staff.setName(nameField.getText());
+        try {
+            staff.setAge(Integer.parseInt(age.getText()));
+        } catch (NoNegativeValueException | InvalidAgeException e) {
+            throw new RuntimeException(e);
+        }
+        RadioButton selectedGender = (RadioButton) gender.getSelectedToggle();
+        staff.setGender(selectedGender.getText());
+        Education education = new Education();
+        RadioButton educationButton = (RadioButton) educationStatus.getSelectedToggle();
+        if (educationButton.getText().equals("Educated")){
+            education.setEducationLevel(degree.getText());
+            education.setInstitute(institute.getText());
+        }else {
+            education.setEducationLevel("None");
+            education.setInstitute("None");
+        }
+        staff.setEducation(education);
+        staff.setRole(role.getText());
+        try {
+            staff.setContact(contact.getText());
+        } catch (InvalidContactNumberException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            staff.setPay(Double.parseDouble(pay.getText()));
+        } catch (NoNegativeValueException e) {
+            throw new RuntimeException(e);
+        }
+        staffList.add(staff);
+        Staff.writeStaffToFile(staffList);
 
     }
 }
