@@ -168,6 +168,18 @@ public class Login extends Application {
             }
         });
 
+        signUpButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                try {
+                    new SignUp().start(new Stage());
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                primaryStage.close();
+            }
+        });
+
         Scene scene = new Scene(grid, 800, 600);
         primaryStage.setScene(scene);
         primaryStage.show();
