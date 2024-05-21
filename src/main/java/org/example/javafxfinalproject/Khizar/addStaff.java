@@ -24,7 +24,7 @@ public class addStaff extends Application {
     @Override
     public void start(Stage primaryStage){
         BorderPane outerLayout = new BorderPane();
-        outerLayout.setStyle("-fx-background-color: rgba(232,209,64,0.94)");
+    outerLayout.setStyle("-fx-background-color: rgba(232,209,64,0.94)");
         //title label
         Label titleLabel = new Label("Staff Registration");
         titleLabel.setStyle("-fx-font-size: 26;-fx-font-weight: bold;");

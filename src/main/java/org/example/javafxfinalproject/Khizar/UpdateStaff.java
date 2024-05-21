@@ -1,164 +1,233 @@
 package org.example.javafxfinalproject.Khizar;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javaxdevelopers.OOMS.*;
+import javaxdevelopers.exceptionhandlers.InvalidAgeException;
+import javaxdevelopers.exceptionhandlers.InvalidContactNumberException;
+import javaxdevelopers.exceptionhandlers.NoNegativeValueException;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class UpdateStaff extends Application {
+    OOM organization = new OOM();
+    ArrayList<Staff> staffArrayList = organization.getStaffList();
+    Staff staff;
+    TextField name;
+    TextField idSearch;
+    TextField nameSearch;
+    TextField age;
+    RadioButton female;
+    RadioButton male;
+    RadioButton other;
+    ToggleGroup gender;
+    TextField degree;
+    TextField institute;
+    ToggleGroup status;
+    RadioButton educated;
+    RadioButton notEducated;
+    TextField pay;
+    TextField role;
+    TextField contact;
 
     @Override
     public void start(Stage primaryStage) {
         // Outermost layout with dark green background and black border
         BorderPane outerLayout = new BorderPane();
-        outerLayout.setStyle("-fx-background-color: #47a690; -fx-border-color: black; -fx-border-width: 1;");
+        outerLayout.setStyle("-fx-background-color: #47a690; -fx-border-color: black; -fx-border-width: 1;-fx-font-size: 15");
 
         // Title
-        Label titleLabel = new Label("Update Staff");
+        Label titleLabel = new Label("Update Orphan");
         titleLabel.setStyle("-fx-font-size: 24px; -fx-text-fill: white; -fx-alignment: center;");
         titleLabel.setMaxWidth(Double.MAX_VALUE);
         titleLabel.setAlignment(Pos.CENTER);
-
         outerLayout.setTop(titleLabel);
         BorderPane.setAlignment(titleLabel, Pos.CENTER);
+        BorderPane.setMargin(titleLabel, new Insets(12, 0, 12, 0));
 
         Label update = new Label("Make Desired Changes!");
         update.setStyle("-fx-font-size: 24px; -fx-text-fill: yellow;");
         update.setAlignment(Pos.CENTER);
         update.setMaxWidth(Double.MAX_VALUE);
 
+        // Main content VBox
         VBox mainContent = new VBox(2);
+        mainContent.getChildren().add(update);
         mainContent.setAlignment(Pos.TOP_CENTER);
         mainContent.setPadding(new Insets(0, 50, 10, 0));
 
+        VBox searchSection = new VBox(2);
+        searchSection.setStyle("-fx-background-color: lightblue; -fx-border-color: black; -fx-border-width: 1;");
+        searchSection.setAlignment(Pos.TOP_CENTER);
+        searchSection.setPadding(new Insets(5));
 
-        VBox viewSection = createViewSection();
-        viewSection.setAlignment(Pos.CENTER);
-
-        viewSection.setPadding(new Insets(0,50,10,0));
-        VBox.setMargin(viewSection,new Insets(40,0,0,0));
-
-
-        HBox contentBox = new HBox();
-        contentBox.getChildren().addAll(viewSection,mainContent);
-        contentBox.setSpacing(20);
-        contentBox.setPadding(new Insets(50,0,0,10));
-        outerLayout.setCenter(contentBox);
-
-
-        mainContent.prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.5));
-        mainContent.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.7));
-        //outerLayout.setCenter(mainContent);
-        viewSection.prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.5));
-        viewSection.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.7));
-        //outerLayout.setCenter(mainContent);
-        contentBox.prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.5));
-        contentBox.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.7));
-        //outerLayout.setCenter(mainContent);
-
-        mainContent.getChildren().add(update);
-
-        // Personal Details Section
-        VBox personalDetailsSection = createSection("Personal Details", "lightblue");
-        mainContent.getChildren().add(personalDetailsSection);
-
-        // Education Details Section
-        VBox educationDetailsSection = createSection("Education Details", "lightblue");
-        mainContent.getChildren().add(educationDetailsSection);
-
-        // Skill Details Section
-        VBox skillDetailsSection = createSection("Office Details", "lightblue");
-        mainContent.getChildren().add(skillDetailsSection);
-
-        // Buttons
-        HBox buttonBox = new HBox(10);
-        buttonBox.setAlignment(Pos.CENTER);
-        Button closeButton = new Button("Close");
-        Button confirmBtn = new Button("Confirm Update");
-        buttonBox.getChildren().addAll(closeButton,confirmBtn);
-        mainContent.getChildren().add(buttonBox);
-
-        // Scene and Stage setup
-        Scene scene = new Scene(outerLayout, 850, 670);
-        primaryStage.setTitle("Staff Registration System");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
-    private VBox createViewSection() {
-        VBox removalSection = new VBox();
-        removalSection.setStyle("-fx-background-color: lightblue; -fx-border-color: black; -fx-border-width: 1;");
-        removalSection.setAlignment(Pos.TOP_CENTER);
-        removalSection.setPadding(new Insets(5));
-
-        Label removalLabel = new Label("Search Staff To Update");
-        removalLabel.setStyle("-fx-font-size: 18px; -fx-text-fill: black;");
-        removalLabel.setAlignment(Pos.CENTER);
-        removalSection.getChildren().add(removalLabel);
+        Label searchLabel = new Label("To Update a Staff");
+        searchLabel.setStyle("-fx-font-size: 18px; -fx-text-fill: black;");
+        searchLabel.setAlignment(Pos.CENTER);
 
         HBox idBox = new HBox(5);
         Label idLabel = new Label("Search Staff by ID:");
-        TextField idField = new TextField();
-        idBox.getChildren().addAll(idLabel, idField);
-        idBox.setAlignment(Pos.CENTER_RIGHT);
+        idSearch = new TextField();
+        idBox.getChildren().addAll(idLabel, idSearch);
+        idBox.setAlignment(Pos.CENTER);
         idBox.setSpacing(12);
-        removalSection.getChildren().add(idBox);
+        searchSection.getChildren().add(idBox);
 
         HBox nameBox = new HBox(5);
         Label nameLabel = new Label("Search Staff by Name:");
-        TextField nameField = new TextField();
-        nameBox.getChildren().addAll(nameLabel, nameField);
-        nameBox.setAlignment(Pos.CENTER_RIGHT);
-        removalSection.getChildren().add(nameBox);
-        //removalSection.setAlignment(Pos.TOP_CENTER);
+        nameSearch = new TextField();
+        nameBox.getChildren().addAll(nameLabel,nameSearch);
+        nameBox.setAlignment(Pos.CENTER);
+        searchSection.getChildren().add(nameBox);
 
-        Button confirmButton = new Button("Search");
-        confirmButton.setAlignment(Pos.BASELINE_RIGHT);
-        removalSection.getChildren().add(confirmButton);
-        removalSection.setMaxHeight(180);
-        removalSection.setMaxWidth(450);
-        removalSection.setSpacing(10);
+        Button searchButton = new Button("Search");
+        searchButton.setAlignment(Pos.BASELINE_RIGHT);
+        searchSection.getChildren().add(searchButton);
+        searchSection.setMaxHeight(180);
+        searchSection.setMaxWidth(500);
+        searchSection.setSpacing(10);
+        searchSection.setAlignment(Pos.CENTER);
 
-        return removalSection;
-    }
+        searchSection.setPadding(new Insets(0,50,10,0));
+        searchSection.setMinHeight(180);
 
 
-    private VBox createSection(String titleText, String color) {
-        VBox section = new VBox(5);
-        section.setStyle("-fx-background-color: " + color + "; -fx-border-color: black; -fx-border-width: 1;");
-        section.setAlignment(Pos.TOP_CENTER);
-        section.setPadding(new Insets(15));
+        HBox contentBox = new HBox();
+        contentBox.getChildren().addAll(searchSection,mainContent);
+        HBox.setMargin(searchSection,new Insets(38,0,0,0));
+        contentBox.setSpacing(20);
+        contentBox.setPadding(new Insets(35,0,0,60));
+        outerLayout.setCenter(contentBox);
 
-        Label title = new Label(titleText);
+        mainContent.prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.6));
+        mainContent.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.7));
+        searchSection.prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.5));
+        searchSection.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.7));
+        contentBox.prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.6));
+        contentBox.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.7));
+
+
+
+        // Personal Details Section
+        VBox personalDetailsSection = new VBox(5);
+        personalDetailsSection.setStyle("-fx-background-color: lightblue; -fx-border-color: black; -fx-border-width: 1;");
+        personalDetailsSection.setAlignment(Pos.TOP_CENTER);
+        personalDetailsSection.setPadding(new Insets(15));
+
+        Label title = new Label("Personal Details");
         title.setStyle("-fx-font-size: 18px; -fx-text-fill: black;");
-        section.getChildren().add(title);
+        personalDetailsSection.getChildren().add(title);
+
+        gender = new ToggleGroup();
+        male = new RadioButton("Male");
+        male.setToggleGroup(gender);
+        female = new RadioButton("Female");
+        female.setToggleGroup(gender);
+        other = new RadioButton("Other");
+        other.setToggleGroup(gender);
+        HBox hbox = new HBox(10, male, female, other);
+        hbox.setAlignment(Pos.CENTER_LEFT);
 
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(Pos.CENTER);
         gridPane.setHgap(10);
         gridPane.setVgap(10);
+        name = new TextField();
+        age = new TextField();
+        addFormField(gridPane, "Orphan Name:", name, 0);
+        gridPane.add(new Label("Gender:"),0,1);
+        gridPane.add(hbox, 1, 1);
+        addFormField(gridPane, "Orphan Age:", age, 2);
+        personalDetailsSection.getChildren().add(gridPane);
+        mainContent.getChildren().add(personalDetailsSection);
 
-        if ("Personal Details".equals(titleText)) {
-            addFormField(gridPane, "Staff Name:", new TextField(), 0);
-            gridPane.add(new Label("Gender:"),0,1);
-            gridPane.add(createGenderRadioButtons(), 1, 1);
-            addFormField(gridPane, "Staff Age:", new TextField(), 2);
-            addFormField(gridPane, "Date of Joining:", new DatePicker(), 3);
-        } else if ("Education Details".equals(titleText)) {
-            gridPane.add(new Label("Education status:"),0,0);
-            gridPane.add(createEducationStatusRadioButtons(),1,0);
-            addFormField(gridPane, "Degree name: ",new TextField(),1);
-            addFormField(gridPane,"Institute Name: ", new TextField(),2);
-        } else if ("Office Details".equals(titleText)) {
-            addFormField(gridPane, "Role:", new TextField(), 0);
-            addFormField(gridPane, "Pay:", new TextField(), 1);
-            addFormField(gridPane, "Contact:", new TextField(), 2);
-        }
+        // Education Details Section
+        VBox educationDetailsSection = new VBox(5);
+        educationDetailsSection.setStyle("-fx-background-color: lightblue; -fx-border-color: black; -fx-border-width: 1;");
+        educationDetailsSection.setAlignment(Pos.TOP_CENTER);
+        educationDetailsSection.setPadding(new Insets(15));
 
-        section.getChildren().add(gridPane);
-        return section;
+
+        Label educationTitle = new Label("Education Details");
+        educationTitle.setStyle("-fx-font-size: 18px; -fx-text-fill: black;");
+        educationDetailsSection.getChildren().add(educationTitle);
+
+        GridPane educationGridPane = new GridPane();
+        educationGridPane.setAlignment(Pos.CENTER);
+        educationGridPane.setHgap(10);
+        educationGridPane.setVgap(10);
+
+        degree = new TextField();
+        institute = new TextField();
+
+        status = new ToggleGroup();
+        educated = new RadioButton("Educated");
+        educated.setToggleGroup(status);
+        notEducated = new RadioButton("Not Educated");
+        notEducated.setToggleGroup(status);
+        HBox Educationhbox = new HBox(10, educated, notEducated);
+        Educationhbox.setAlignment(Pos.CENTER_LEFT);
+
+        educationGridPane.add(new Label("Education status:"),0,0);
+        educationGridPane.add(Educationhbox,1,0);
+        addFormField(educationGridPane, "Degree name: ",degree,1);
+        addFormField(educationGridPane,"Institute Name: ", institute,2);
+        educationDetailsSection.getChildren().add(educationGridPane);
+        mainContent.getChildren().add(educationDetailsSection);
+
+        // Office Details Section
+        VBox officeDetailsSection = new VBox(5);
+        officeDetailsSection.setStyle("-fx-background-color: lightblue; -fx-border-color: black; -fx-border-width: 1;");
+        officeDetailsSection.setAlignment(Pos.TOP_CENTER);
+        officeDetailsSection.setPadding(new Insets(15));
+
+        Label officeTitle = new Label("Office Details: ");
+        officeTitle.setStyle("-fx-font-size: 18px; -fx-text-fill: black;");
+        officeDetailsSection.getChildren().add(officeTitle);
+
+        GridPane officeGridPane = new GridPane();
+        officeGridPane.setAlignment(Pos.CENTER);
+        officeGridPane.setHgap(10);
+        officeGridPane.setVgap(10);
+
+        pay = new TextField();
+        role  = new TextField();
+        contact = new TextField();
+
+        addFormField(officeGridPane, "Skill Name:", role, 0);
+        addFormField(officeGridPane, "Skill Description:", pay, 1);
+        addFormField(officeGridPane, "Skill Description:", contact, 1);
+        officeDetailsSection.getChildren().add(officeGridPane);
+        mainContent.getChildren().add(officeDetailsSection);
+
+        // Buttons
+        HBox buttonBox = new HBox(10);
+        buttonBox.setAlignment(Pos.CENTER);
+
+        Button closeButton = new Button("Close");
+        Button saveChanges = new Button("Save changes");
+        buttonBox.getChildren().addAll(closeButton,saveChanges);
+        mainContent.getChildren().add(buttonBox);
+
+        searchButton.setOnAction(e -> setValues());
+        saveChanges.setOnAction(new inputData());
+
+        // Scene and Stage setup
+        Scene scene = new Scene(outerLayout);
+        primaryStage.setMaximized(true);
+        primaryStage.setTitle("Orphan Registration System");
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
     private void addFormField(GridPane gridPane, String labelText, Control inputControl, int rowIndex) {
@@ -170,30 +239,114 @@ public class UpdateStaff extends Application {
         gridPane.add(label, 0, rowIndex);
         gridPane.add(inputControl, 1, rowIndex);
     }
+    public void setValues(){
+        Staff staff = searchStaff();
 
-    private HBox createGenderRadioButtons() {
-        ToggleGroup group = new ToggleGroup();
-        RadioButton male = new RadioButton("Male");
-        male.setToggleGroup(group);
-        RadioButton female = new RadioButton("Female");
-        female.setToggleGroup(group);
-        RadioButton other = new RadioButton("Other");
-        other.setToggleGroup(group);
-        HBox hbox = new HBox(10, male, female, other);
-        hbox.setAlignment(Pos.CENTER_LEFT);
-        return hbox;
+        name.setText("");
+        age.setText("");
+        //gender.setText("");
+        //status.setText("");
+        degree.setText("");
+        institute.setText("");
+        role.setText("");
+        pay.setText("");
+        contact.setText("");
+
+        if (staff == null){
+            showAlert(Alert.AlertType.WARNING,"Staff not found","Please enter a valid id or name");
+        }else {
+            name.setText(staff.getName());
+            age.setText(Integer.toString(staff.getAge()));
+            String genderValue = staff.getGender();
+            if (genderValue.equalsIgnoreCase("Male"))
+                male.setSelected(true);
+            else if (genderValue.equalsIgnoreCase("Female"))
+                female.setSelected(true);
+            else other.setSelected(true);
+            if (staff.getEducation().getEducationLevel() == null) {
+                notEducated.setSelected(true);
+                degree.setText("None");
+                institute.setText("None");
+            } else {
+                educated.setSelected(true);
+                degree.setText(staff.getEducation().getEducationLevel());
+                institute.setText(staff.getEducation().getInstitute());
+            }
+            role.setText(staff.getRole());
+            pay.setText(Double.toString(staff.getPay()));
+            contact.setText(staff.getContact());
+        }
+    }
+    public Staff searchStaff(){
+
+        if (!idSearch.getText().isEmpty()){
+            for (Staff staff: staffArrayList){
+                if (staff.getId()==Integer.parseInt(idSearch.getText()))
+                    return staff;
+            }
+        } else if (!nameSearch.getText().isEmpty()){
+            for (Staff staff: staffArrayList){
+                if (staff.getName().equalsIgnoreCase(nameSearch.getText()))
+                    return staff;
+            }
+        }
+        return null;
+    }
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+    class inputData implements EventHandler<ActionEvent> {
+
+        @Override
+        public void handle(ActionEvent actionEvent) {
+
+            if (name.getText().isEmpty() || status.getSelectedToggle()==null || age.getText().isEmpty() || gender.getSelectedToggle() ==null){
+                showAlert(Alert.AlertType.WARNING, "Empty fields", "Fill all compulsory fields");
+            }else {
+                staff = searchStaff();
+                //orphan.setId(orphanArrayList.size()+1);
+                staff.setName(name.getText());
+
+                RadioButton selectedGender = (RadioButton) gender.getSelectedToggle();
+                staff.setGender(selectedGender.getText());
+                try {
+                    staff.setAge(Integer.parseInt(age.getText()));
+                } catch (NoNegativeValueException | InvalidAgeException e) {
+                    throw new RuntimeException(e);
+                }
+                Education education = new Education();
+                RadioButton educationButton = (RadioButton) status.getSelectedToggle();
+                if (educationButton.getText().equals("Educated")){
+                    education.setEducationLevel(degree.getText());
+                    education.setInstitute(institute.getText());
+                }else {
+                    education.setEducationLevel("None");
+                    education.setInstitute("None");
+                }
+                staff.setEducation(education);
+                ArrayList<Skill> skillArrayList = new ArrayList<>();
+                staff.setRole(role.getText());
+                try {
+                    staff.setPay(Double.parseDouble(pay.getText()));
+                } catch (NoNegativeValueException e) {
+                    throw new RuntimeException(e);
+                }
+                try {
+                    staff.setContact(contact.getText());
+                } catch (InvalidContactNumberException e) {
+                    throw new RuntimeException(e);
+                }
+
+                showAlert(Alert.AlertType.CONFIRMATION, "Orphan Updated", "Orphan Updated successfully ");
+                Staff.writeStaffToFile(staffArrayList);
+            }
+        }
     }
 
-    private HBox createEducationStatusRadioButtons() {
-        ToggleGroup group = new ToggleGroup();
-        RadioButton educated = new RadioButton("Educated");
-        educated.setToggleGroup(group);
-        RadioButton notEducated = new RadioButton("Not Educated");
-        notEducated.setToggleGroup(group);
-        HBox hbox = new HBox(10, educated, notEducated);
-        hbox.setAlignment(Pos.CENTER_LEFT);
-        return hbox;
-    }
 
     public static void main(String[] args) {
         launch(args);

@@ -18,6 +18,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javaxdevelopers.OOMS.Admin;
+import javaxdevelopers.OOMS.OOM;
 import org.example.javafxfinalproject.Khizar.MainMenu;
 
 import java.io.FileOutputStream;
@@ -50,7 +51,7 @@ public class SignUp extends Application {
     }
 
     private GridPane createRegistrationFormPane(Stage primaryStage) {
-        Image backgroundImage = new Image("file:///JAVAFX FINAL PROJECT/background2.jpg");
+        Image backgroundImage = new Image("file:///D:\\2nd sem\\OOPs\\JAVAFX-FINAL-PROJECT-FX\\background2.jpg");
 
         BackgroundImage background = new BackgroundImage(
                 backgroundImage,
@@ -134,8 +135,11 @@ public class SignUp extends Application {
                 }
                 else if(password.equals(confirmPassword) && !username.isBlank() && !password.isBlank() && !confirmPassword.isBlank())
                 {
-                    ArrayList<Admin> admins = (ArrayList<Admin>) Admin.readAdminsFromFile();
-                    Admin newAdmin = new Admin(username, password);
+                    OOM organization = new OOM();
+                    ArrayList<Admin> admins = organization.getAdministrators();
+                    ArrayList<String> passwords = new ArrayList<>();
+                    passwords.add(password);
+                    Admin newAdmin = new Admin(username, passwords);
                     admins.add(newAdmin);
                     Admin.writeAdminToFile(admins);
                     showAlert(Alert.AlertType.CONFIRMATION, "Success", "You have been registered!");

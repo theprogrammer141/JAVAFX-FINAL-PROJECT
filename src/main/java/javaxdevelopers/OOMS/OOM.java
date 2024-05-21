@@ -29,6 +29,7 @@ public class OOM {
         readDonationFromFile();
         readOrphanFromFile();
         readAdminFromFile();
+        //setAdministrators(new ArrayList<>());
         readItemFromFile();
 
 

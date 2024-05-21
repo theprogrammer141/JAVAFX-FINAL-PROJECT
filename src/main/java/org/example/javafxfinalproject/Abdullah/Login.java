@@ -21,6 +21,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javaxdevelopers.OOMS.Admin;
+import javaxdevelopers.OOMS.OOM;
 import org.example.javafxfinalproject.Khizar.MainMenu;
 
 import java.util.ArrayList;
@@ -148,7 +149,9 @@ public class Login extends Application {
                 String username = usernameField.getText();
                 String password = passwordField.getText();
 
-                ArrayList<Admin> admins = (ArrayList<Admin>) Admin.readAdminsFromFile();
+                OOM organization = new OOM();
+
+                ArrayList<Admin> admins = organization.getAdministrators();
 
                 boolean loggedIn = logIn(admins, username, password);
 
@@ -193,7 +196,7 @@ public class Login extends Application {
         alert.showAndWait();
     }
 
-    public static boolean logIn(List<Admin> administrators, String username, String password) {
+    public static boolean logIn(ArrayList<Admin> administrators, String username, String password) {
         for (Admin administrator : administrators) {
             if (username.equalsIgnoreCase(administrator.getAdminName())) {
                 for (String storedPassword : administrator.getPasswords()) {
