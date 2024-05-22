@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import org.example.javafxfinalproject.Khizar.MainMenu;
 
 public class InventoryItemsMenu extends Application {
 

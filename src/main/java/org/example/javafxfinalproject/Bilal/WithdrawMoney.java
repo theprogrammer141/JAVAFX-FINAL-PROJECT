@@ -92,7 +92,7 @@ public class WithdrawMoney extends Application {
             }
             OOM oom = new OOM();
             Account account = oom.getBankAccount();
-            account.withdrawMoney();
+            account.withdrawMoney(amount);
             showAlert(Alert.AlertType.INFORMATION, "Success", "Amount " + amount + " withdrawn successfully.");
         } catch (NumberFormatException e) {
             showAlert(Alert.AlertType.ERROR, "Invalid Input", "Please enter a valid number.");
