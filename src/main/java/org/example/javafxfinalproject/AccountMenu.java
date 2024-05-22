@@ -1,4 +1,7 @@
 package org.example.javafxfinalproject;
+import javafx.scene.control.TextField;
+import javaxdevelopers.OOMS.OOM;
+import javaxdevelopers.OOMS.Account;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -51,9 +54,10 @@ public class AccountMenu extends Application {
         bankNameLabel.setTextFill(Color.WHITE);
         mainGrid.add(bankNameLabel, 0, 1);
 
-        ComboBox<String> comboBox = new ComboBox<>();
-        comboBox.setItems(FXCollections.observableArrayList("HBL"));
-        comboBox.setPromptText("Select Bank");
+        Label comboBox = new Label("HBL");
+        //comboBox.setItems(FXCollections.observableArrayList("HBL"));
+        //comboBox.setPromptText("Select Bank");
+        comboBox.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-padding: 5;");
         comboBox.setMaxSize(150,20);
         comboBox.setStyle("-fx-background-color: white; -fx-border-radius: 5px; -fx-border-color: gray;");
         mainGrid.add(comboBox, 1, 1);
@@ -64,9 +68,10 @@ public class AccountMenu extends Application {
         accountIdLabel.setTextFill(Color.WHITE);
         mainGrid.add(accountIdLabel, 0, 2);
 
-        ComboBox<String> comboBox2 = new ComboBox<>();
-        comboBox2.setItems(FXCollections.observableArrayList("abl234245534343"));
-        comboBox2.setPromptText("Select Account");
+        Label comboBox2 = new Label("abl234245534343");
+        //comboBox2.setItems(FXCollections.observableArrayList("abl234245534343"));
+        //comboBox2.setPromptText("Select Account");
+        comboBox2.setStyle("-fx-border-color: black; -fx-border-width: 10; -fx-padding: 10;");
         comboBox2.setMaxSize(150,20);
         comboBox2.setStyle("-fx-background-color: white; -fx-border-radius: 5px; -fx-border-color: gray;");
         mainGrid.add(comboBox2, 1, 2);
@@ -77,9 +82,25 @@ public class AccountMenu extends Application {
 
         // Buttons
         Button depositMoney = new Button("Deposit Money");
+        depositMoney.setOnAction(e->{
+            DepositMoney depositMoney1 = new DepositMoney();
+            depositMoney1.start(primaryStage);
+        });
         Button withdrawMoney = new Button("Withdraw Money");
+        withdrawMoney.setOnAction(e->{
+            WithdrawMoney withdraw = new WithdrawMoney();
+            withdraw.start(primaryStage);
+        });
         Button checkMoney = new Button("Check Balance");
+        checkMoney.setOnAction(e->{
+            CheckBalance checkBalance = new CheckBalance();
+            checkBalance.start(primaryStage);
+        });
         Button displayAccount = new Button("Display Account");
+        displayAccount.setOnAction(e->{
+            DisplayAccountDetails displayAccountDetails = new DisplayAccountDetails();
+            displayAccountDetails.start(primaryStage);
+        });
 
         // Button Styles
         String buttonStyle = "-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-size: 15px; -fx-background-radius: 5px; -fx-padding: 10px 20px;";
@@ -116,6 +137,10 @@ public class AccountMenu extends Application {
 
         // Return Button
         Button returnButton = new Button("Return");
+        returnButton.setOnAction(e->{
+            MainMenu mainMenu = new MainMenu();
+            mainMenu.start(primaryStage);
+        });
         returnButton.setStyle(buttonStyle);
         mainGrid.add(returnButton, 1, 4);
         GridPane.setMargin(returnButton, new Insets(20, 0, 0, 0));

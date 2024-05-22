@@ -5,15 +5,21 @@ import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javaxdevelopers.OOMS.InventoryItem;
+import javaxdevelopers.OOMS.OOM;
+import javaxdevelopers.exceptionhandlers.NoNegativeValueException;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class UpdateItems extends Application {
+
+    private OOM organization; // Assuming this is your main data structure
 
     public static void main(String[] args) {
         launch(args);
@@ -21,6 +27,7 @@ public class UpdateItems extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        organization = new OOM(); // Initialize your organization or retrieve from where it's stored
 
         // Load Background Image
         Image image = new Image("file:///JAVAFX FINAL PROJECT/rec.jpeg");
@@ -71,15 +78,23 @@ public class UpdateItems extends Application {
         ComboBox<String> attributeComboBox = new ComboBox<>(FXCollections.observableArrayList("Name", "Price", "Quantity", "Type"));
         centerGrid.add(attributeComboBox, 1, 2);
 
+        // Text Field for New Value
+        TextField newValueTextField = new TextField();
+        centerGrid.add(newValueTextField, 1, 3);
+
         // Button "Update"
         Button updateButton = new Button("Update");
         updateButton.setStyle("-fx-background-color: #FF6347; -fx-text-fill: white; -fx-font-size: 16px;");
-        centerGrid.add(updateButton, 0, 3, 2, 1); // ColumnSpan: 2, RowSpan: 1
+        centerGrid.add(updateButton, 0, 4, 2, 1); // ColumnSpan: 2, RowSpan: 1
 
         // Button "Return"
         Button returnButton = new Button("Return");
         returnButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 16px;");
-        centerGrid.add(returnButton, 0, 4, 2, 1); // ColumnSpan: 2, RowSpan: 1
+        returnButton.setOnAction(e -> {
+            InventoryItemsMenu inventoryItemsMenu = new InventoryItemsMenu();
+            inventoryItemsMenu.start(primaryStage);
+        });
+        centerGrid.add(returnButton, 0, 5, 2, 1); // ColumnSpan: 2, RowSpan: 1
 
         // Add Center Layout to Main BorderPane
         borderPane.setCenter(centerGrid);
@@ -89,5 +104,89 @@ public class UpdateItems extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("Update Item");
         primaryStage.show();
+
+        // Event handling for the Update button
+        updateButton.setOnAction(e -> {
+            int id = Integer.parseInt(idTextField.getText());
+            String attribute = attributeComboBox.getValue();
+            String newValue = newValueTextField.getText();
+
+            // Find the item by ID
+            InventoryItem itemToUpdate = findItemByID(id);
+            if (itemToUpdate == null) {
+                showAlert(Alert.AlertType.ERROR, "Item not found", "Item with ID " + id + " not found.");
+                return;
+            }
+
+            // Update the chosen attribute
+            switch (attribute) {
+                case "Name":
+                    itemToUpdate.setItemName(newValue);
+                    break;
+                case "Price":
+                    try {
+                        double newPrice = Double.parseDouble(newValue);
+                        itemToUpdate.setItemPrice(newPrice);
+                    } catch (NumberFormatException | NoNegativeValueException ex) {
+                        showAlert(Alert.AlertType.ERROR, "Invalid input", "Please enter a valid price.");
+                        return;
+                    }
+                    break;
+                case "Quantity":
+                    try {
+                        int newQuantity = Integer.parseInt(newValue);
+                        itemToUpdate.setQuantity(newQuantity);
+                    } catch (NumberFormatException | NoNegativeValueException ex) {
+                        showAlert(Alert.AlertType.ERROR, "Invalid input", "Please enter a valid quantity.");
+                        return;
+                    }
+                    break;
+                case "Type":
+                    itemToUpdate.setItemType(newValue);
+                    break;
+                default:
+                    showAlert(Alert.AlertType.ERROR, "Invalid attribute", "Please select a valid attribute.");
+                    return;
+            }
+
+            // Update the item in the organization and save to file
+            updateItemInOrganization(itemToUpdate);
+            writeItemToFile(organization.getItemsList());
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Item updated successfully!");
+        });
+    }
+
+    private InventoryItem findItemByID(int id) {
+        for (InventoryItem item : organization.getItemsList()) {
+            if (item.getItemID() == id) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    private void updateItemInOrganization(InventoryItem updatedItem) {
+        for (int i = 0; i < organization.getItemsList().size(); i++) {
+            if (organization.getItemsList().get(i).getItemID() == updatedItem.getItemID()) {
+                organization.getItemsList().set(i, updatedItem);
+                return;
+            }
+        }
+    }
+
+    private void writeItemToFile(ArrayList<InventoryItem> items) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("itemData.ser"))) {
+            oos.writeObject(items);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void showAlert(Alert.AlertType type, String title, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

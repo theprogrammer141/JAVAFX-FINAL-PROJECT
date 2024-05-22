@@ -8,6 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javaxdevelopers.OOMS.OOM;
+import javaxdevelopers.OOMS.InventoryItem;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -19,6 +21,7 @@ public class InventoryItemsMenu extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        //OOM organization = new OOM();
         // Background Image
         Image image2 = new Image("file:///D:/JAVA/JAVAFX-FINAL-PROJECT/src/tf.jpeg");
         BackgroundSize backgroundSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, true);
@@ -49,10 +52,18 @@ public class InventoryItemsMenu extends Application {
         Button addItems = new Button("Add Item");
         addItems.setStyle("-fx-background-color: cyan; -fx-text-fill: black; -fx-font-size: 18px; -fx-font-family: 'Arial';");
         addItems.setPrefSize(180, 45);
+        addItems.setOnAction(e->{
+            AddItems addItems1 = new AddItems();
+            addItems1.start(primaryStage);
+        });
 
         Button removeItems = new Button("Remove Item");
         removeItems.setStyle("-fx-background-color: navy; -fx-text-fill: white; -fx-font-size: 18px; -fx-font-family: 'Arial';");
         removeItems.setPrefSize(180, 45);
+        removeItems.setOnAction(e->{
+            RemoveItems removeItems1 = new RemoveItems();
+            removeItems1.start(primaryStage);
+        });
 
         rightVBox.getChildren().addAll(addItems, removeItems);
         borderPane.setRight(rightVBox);
@@ -66,10 +77,18 @@ public class InventoryItemsMenu extends Application {
         Button displayItems = new Button("Display Item");
         displayItems.setStyle("-fx-background-color: cyan; -fx-text-fill: black; -fx-font-size: 18px; -fx-font-family: 'Arial';");
         displayItems.setPrefSize(180, 45);
+        displayItems.setOnAction(e->{
+            DisplayItems displayItems1 = new DisplayItems();
+            displayItems1.start(primaryStage);
+        });
 
         Button updateItems = new Button("Update Item");
         updateItems.setStyle("-fx-background-color: navy; -fx-text-fill: white; -fx-font-size: 18px; -fx-font-family: 'Arial';");
         updateItems.setPrefSize(180, 45);
+        updateItems.setOnAction(e->{
+            UpdateItems updateItems1= new UpdateItems();
+            updateItems1.start(primaryStage);
+        });
 
         leftVBox.getChildren().addAll(displayItems, updateItems);
         borderPane.setLeft(leftVBox);
@@ -78,6 +97,10 @@ public class InventoryItemsMenu extends Application {
         Button returnButton = new Button("Return");
         returnButton.setStyle("-fx-background-color: lime; -fx-text-fill: black; -fx-font-size: 18px; -fx-font-family: 'Arial';");
         returnButton.setPrefSize(180, 45);
+        returnButton.setOnAction(e->{
+            MainMenu mainMenu = new MainMenu();
+            mainMenu.start(primaryStage);
+        });
 
         HBox bottomHBox = new HBox(returnButton);
         bottomHBox.setAlignment(Pos.CENTER);

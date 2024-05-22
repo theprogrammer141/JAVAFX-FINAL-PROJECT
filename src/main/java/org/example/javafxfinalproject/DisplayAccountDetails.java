@@ -1,4 +1,6 @@
 package org.example.javafxfinalproject;
+import javaxdevelopers.OOMS.OOM;
+import javaxdevelopers.OOMS.Account;
 
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -14,6 +16,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class DisplayAccountDetails extends Application {
 
@@ -85,12 +90,15 @@ public class DisplayAccountDetails extends Application {
         lbl4.setTextFill(Color.WHITE);
         grid.add(lbl4, 0, 4);
 
-        TextField tx4 = new TextField();
+        TextArea tx4 = new TextArea();
         tx4.setMaxSize(150,20);
         grid.add(tx4,1,4);
 
         Button rtrn = new Button("Return");
-
+        rtrn.setOnAction(e->{
+            AccountMenu accountMenu = new AccountMenu();
+            accountMenu.start(primaryStage);
+        });
         rtrn.setStyle("-fx-background-color: Navy");
 
         rtrn.setTextFill(Color.CYAN);
@@ -101,5 +109,20 @@ public class DisplayAccountDetails extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("Account details");
         primaryStage.show();
+        displayAccountDetails(tx1, tx2, tx3, tx4);
+    }
+    private void displayAccountDetails(TextField accountIdField, TextField nameField, TextField balanceField, TextArea transactionHistoryArea) {
+        OOM oom = new OOM(); // Assuming OOM is the class managing accounts
+        Account account = oom.getBankAccount(); // Fetching the account object
+
+        // Setting account details into UI fields
+        accountIdField.setText(String.valueOf(account.getAccountID()));
+        nameField.setText(account.getBankName());
+        balanceField.setText(String.valueOf(account.getBalance()));
+        List<Double> transactions = account.getTransactions();
+        String formattedTransactions = transactions.stream()
+                .map(amount -> String.format("%.2f",amount)) // Format amounts to two decimal places
+                .collect(Collectors.joining("\n")); // Join transactions with newline
+        transactionHistoryArea.setText(formattedTransactions);
     }
 }

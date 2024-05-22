@@ -4,20 +4,31 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import javaxdevelopers.OOMS.Account;
+import javaxdevelopers.OOMS.OOM;
+
+import java.util.Scanner;
 
 public class WithdrawMoney extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        // Load Background Image
         Image image = new Image("file:///JAVAFX FINAL PROJECT/Premium Vector _ Geometric gradient background.jpeg");
-        // Background Image Settings
         BackgroundImage backgroundImage = new BackgroundImage(
                 image,
                 BackgroundRepeat.NO_REPEAT,
@@ -25,52 +36,45 @@ public class WithdrawMoney extends Application {
                 BackgroundPosition.CENTER,
                 new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, true)
         );
-
-        // Create Background with Image
         Background background = new Background(backgroundImage);
 
-        // Main Layout - BorderPane
         BorderPane borderPane = new BorderPane();
         borderPane.setBackground(background);
 
-        // Center Layout - VBox
-        VBox centerBox = new VBox(10); // Spacing between components
+        VBox centerBox = new VBox(10);
         centerBox.setAlignment(Pos.CENTER);
         centerBox.setPadding(new Insets(25));
 
-        // Title Label "Withdraw Money"
         Label titleLabel = new Label("Withdraw Money");
         titleLabel.setStyle("-fx-text-fill: white; -fx-font-size: 24px;");
         centerBox.getChildren().add(titleLabel);
 
-        // Label "Enter Amount to Withdraw"
         Label enterAmountLabel = new Label("Enter Amount to Withdraw:");
         enterAmountLabel.setStyle("-fx-text-fill: white; -fx-font-size: 18px;");
         centerBox.getChildren().add(enterAmountLabel);
 
-        // HBox for Text Field and Label
-        HBox textFieldBox = new HBox(10); // Spacing between components
+        HBox textFieldBox = new HBox(10);
         textFieldBox.setAlignment(Pos.CENTER);
 
-        // Text Field for Entering Amount to Withdraw
         TextField amountTextField = new TextField();
-        textFieldBox.getChildren().addAll( enterAmountLabel,amountTextField);
+        textFieldBox.getChildren().addAll(enterAmountLabel, amountTextField);
         centerBox.getChildren().add(textFieldBox);
 
-        // Button "Withdraw"
         Button withdrawButton = new Button("Withdraw");
         withdrawButton.setStyle("-fx-background-color: #FF6347; -fx-text-fill: white; -fx-font-size: 16px;");
+        withdrawButton.setOnAction(e -> handleWithdraw(primaryStage, amountTextField.getText()));
         centerBox.getChildren().add(withdrawButton);
 
-        // Button "Return"
         Button returnButton = new Button("Return");
+        returnButton.setOnAction(e -> {
+            AccountMenu accountMenu = new AccountMenu();
+            accountMenu.start(primaryStage);
+        });
         returnButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 16px;");
         centerBox.getChildren().add(returnButton);
 
-        // Add Center Layout to Main BorderPane
         borderPane.setCenter(centerBox);
 
-        // Set Up Scene
         Scene scene = new Scene(borderPane, 800, 600);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Withdraw Money");
@@ -79,5 +83,31 @@ public class WithdrawMoney extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    private void handleWithdraw(Stage stage, String amountText) {
+        try {
+            double amount = Double.parseDouble(amountText);
+            if (amount <= 0) {
+                showAlert(Alert.AlertType.ERROR, "Invalid Amount", "Please enter a positive amount.");
+                return;
+            }
+            OOM oom = new OOM();
+            Account account = oom.getBankAccount();
+            account.withdrawMoney();
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Amount " + amount + " withdrawn successfully.");
+        } catch (NumberFormatException e) {
+            showAlert(Alert.AlertType.ERROR, "Invalid Input", "Please enter a valid number.");
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Withdrawal Failed", e.getMessage());
+        }
+    }
+
+    private void showAlert(Alert.AlertType type, String title, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
