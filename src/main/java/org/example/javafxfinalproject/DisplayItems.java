@@ -23,6 +23,7 @@ public class DisplayItems extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        Image image = new Image("file:///JAVAFX FINAL PROJECT/rec.jpeg");
         // Background Image Settings
         Image image = new Image("file:///D:/JAVA/JAVAFX-FINAL-PROJECT/src/op.jpeg");
         BackgroundImage backgroundImage = new BackgroundImage(

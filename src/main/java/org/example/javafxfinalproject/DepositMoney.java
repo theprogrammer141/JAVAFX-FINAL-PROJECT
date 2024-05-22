@@ -15,7 +15,7 @@ public class DepositMoney extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Image image = new Image("file:///D:/JAVA/JAVAFX-FINAL-PROJECT/src/Premium Vector _ Geometric gradient background.jpeg");
+        Image image = new Image("file:///JAVAFX FINAL PROJECT/Premium Vector _ Geometric gradient background.jpeg");
         // Background Image Settings
         BackgroundImage backgroundImage = new BackgroundImage(
                 image,

@@ -1,4 +1,4 @@
-package org.example.javafxfinalproject;
+package org.example.javafxfinalproject.Abdullah;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -6,6 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
@@ -50,7 +51,7 @@ public class OrphansReport extends Application {
         root.getChildren().add(title);
 
         Label totalOrphansLabel = new Label("Total Orphans: " + organization.getOrphansList().size());
-        totalOrphansLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+        totalOrphansLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 20px");
         totalOrphansLabel.setFont(Font.font(20));
         root.getChildren().add(totalOrphansLabel);
 
@@ -58,7 +59,7 @@ public class OrphansReport extends Application {
         {
             for(Orphan orphan : orphans) {
                 Label orphanIdLabel = new Label("Orphan ID: " + orphan.getId());
-                orphanIdLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+                orphanIdLabel.setStyle("-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 15px");
                 root.getChildren().add(orphanIdLabel);
 
                 Label orphanNameLabel = new Label("Name: " + orphan.getName());
@@ -93,7 +94,12 @@ public class OrphansReport extends Application {
         grid.add(root, 0, 0);
         grid.add(backButton, 0, 10);
 
-        Scene scene = new Scene(grid, 800, 600);
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setContent(grid);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setFitToHeight(true);
+
+        Scene scene = new Scene(scrollPane, 800, 600);
         primaryStage.setTitle("Orphans Report");
         primaryStage.setScene(scene);
         primaryStage.show();

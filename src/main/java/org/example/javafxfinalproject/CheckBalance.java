@@ -26,6 +26,8 @@ public class CheckBalance extends Application {
 
         // Create Background Image Settings
         BackgroundSize backgroundSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, true);
+        Image image = new Image("file:///JAVAFX FINAL PROJECT/rec.jpeg");
+        // Background Image Settings
         BackgroundImage backgroundImage = new BackgroundImage(
                 image,
                 BackgroundRepeat.NO_REPEAT,

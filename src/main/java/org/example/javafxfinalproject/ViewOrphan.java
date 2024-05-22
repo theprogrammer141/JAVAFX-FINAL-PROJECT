@@ -5,189 +5,160 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 public class ViewOrphan extends Application {
 
     @Override
-    public void start(Stage primaryStage) {
-        // Outermost layout with dark green background and black border
+    public void start(Stage primaryStage){
+        Image image = new Image("file:///D:\\2nd sem\\OOPs\\JAVAFX-FINAL-PROJECT-FX\\createaccount.png");
+        BackgroundImage backgroundImage = new BackgroundImage(
+                image,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.CENTER,
+                new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, true)
+        );
+        Background background = new Background(backgroundImage);
         BorderPane outerLayout = new BorderPane();
-        outerLayout.setStyle("-fx-background-color: #47a690; -fx-border-color: black; -fx-border-width: 1;");
+        outerLayout.setBackground(background);
+        outerLayout.setStyle("-fx-border-width: 5px; -fx-border-color: black;");
 
-        // Title
-        Label titleLabel = new Label("View Orphan");
-        titleLabel.setStyle("-fx-font-size: 24px; -fx-text-fill: white; -fx-alignment: center;");
-        titleLabel.setMaxWidth(Double.MAX_VALUE);
-        titleLabel.setAlignment(Pos.CENTER);
+        Label titleLabel = new Label("Search an Orphan");
+        titleLabel.setStyle("-fx-font-size: 30px; -fx-font-family: Arial");
         outerLayout.setTop(titleLabel);
-        BorderPane.setAlignment(titleLabel, Pos.CENTER);
-        BorderPane.setMargin(titleLabel, new Insets(12, 0, 12, 0));
+        outerLayout.setPadding(new Insets(20));
+        BorderPane.setAlignment(titleLabel,Pos.CENTER);
 
-        // Main content VBox
-        VBox mainContent = new VBox(2);
-        mainContent.setAlignment(Pos.TOP_CENTER);
-        mainContent.setPadding(new Insets(0, 50, 10, 0));
-        //mainContent.setMinHeight(500);
-        //mainContent.setMinWidth(450);
+        HBox content = new HBox();
+        outerLayout.setCenter(content);
+        content.setStyle("-fx-padding: 20px;");
+        content.setSpacing(20);
 
-        VBox removalSection = createRemovalSection();
-        removalSection.setAlignment(Pos.CENTER);
 
-        removalSection.setPadding(new Insets(0,50,10,0));
-        //removalSection.setMinWidth(350);
-        //removalSection.setMinHeight(180);
+        Label searchLabel = new Label("Search Orphan: ");
+        searchLabel.setStyle("-fx-font-size: 24;-fx-font-weight: bold");
+        Label searchByID = new Label("Search by id: ");
+        searchByID.setStyle("-fx-font-size: 18px");
+        TextField idSearch = new TextField();
+        Label searchByName = new Label("Search By Name: ");
+        searchByName.setStyle("-fx-font-size: 18px");
+        TextField nameSearch = new TextField();
+        Button search = new Button("Search Orphan");
+        search.setStyle("-fx-background-radius: 30px;-fx-background-color: #2abd2a;-fx-border-width: 2px;-fx-border-color: black;-fx-border-radius: 40px");
+        Button returnButton = new Button("Return");
+        returnButton.setStyle("-fx-background-radius: 30px;-fx-background-color: #c04141;-fx-border-width: 2px;-fx-border-color: black;-fx-border-radius: 40px");
+        HBox buttonBox = new HBox(search,returnButton);
+        buttonBox.setStyle("-fx-font-size: 15px");
+        buttonBox.setSpacing(65);
 
-        HBox contentBox = new HBox();
-        contentBox.getChildren().addAll(removalSection,mainContent);
-        contentBox.setSpacing(20);
-        contentBox.setPadding(new Insets(35,0,0,60));
-        outerLayout.setCenter(contentBox);
+        HBox searchTitle = new HBox(searchLabel);
+        HBox idSearchBox = new HBox(searchByID,idSearch);
+        idSearchBox.setSpacing(36);
+        HBox nameSearchBox = new HBox(searchByName,nameSearch);
+        nameSearchBox.setSpacing(2);
+        VBox searchBox = new VBox(searchTitle,idSearchBox,nameSearchBox,buttonBox);
+        content.getChildren().add(searchBox);
+        searchBox.setSpacing(13);
+        searchBox.setStyle("-fx-border-color: black; -fx-border-width: 2px;-fx-border-radius: 12%;-fx-padding: 20px;");
+        searchBox.setMaxHeight(210);
+        searchBox.setMinWidth(300);
+
+        VBox mainContent = new VBox();
+        mainContent.setStyle("-fx-border-color: black;-fx-background-radius: 15%; -fx-border-width: 2px;-fx-border-radius: 15%;-fx-padding: 10px;-fx-font-size: 22px");
+        BorderPane.setAlignment(mainContent,Pos.CENTER);
+        mainContent.setSpacing(20);
+        content.getChildren().add(mainContent);
+
+
+        Label personalHeading = new Label("Personal Details:");
+        personalHeading.setStyle("-fx-font-weight: bold;-fx-font-size: 24px");
+        Label nameLabel = new Label("Name: ");
+        Label name = new Label();
+        Label genderLabel = new Label("Gender: ");
+        Label gender = new Label();
+        Label ageLabel = new Label("Age:");
+        Label age = new Label();
+        Label dateOfEnrollmentLabel = new Label("Date Of Enrollment:");
+        Label dateOfEnrollment = new Label();
+
+
+
+        HBox personalHeadingBox = new HBox(personalHeading);
+        HBox nameBox = new HBox(nameLabel, name);
+        HBox genderBox = new HBox(genderLabel,gender);
+        HBox ageBox = new HBox(ageLabel,age);
+        HBox dateBox = new HBox(dateOfEnrollmentLabel,dateOfEnrollment);
+
+        VBox personalDetails = new VBox(personalHeadingBox,nameBox,genderBox,ageBox,dateBox);
+        personalDetails.setSpacing(7);
+       /* nameBox.setSpacing(10);
+        ageBox.setSpacing(10);
+        genderBox.setSpacing(10);
+        dateBox.setSpacing(10);
+
+        */
+        personalDetails.setPadding(new Insets(10,0,10,60));
+        personalHeadingBox.setAlignment(Pos.CENTER);
+        mainContent.getChildren().add(personalDetails);
+
+        //Education details
+
+        Label educationHeading = new Label("Education Details:");
+        educationHeading.setStyle("-fx-font-weight: bold;-fx-font-size: 24px");
+        Label statusLabel = new Label("Education Status: ");
+        Label status = new Label();
+        Label degreeLabel = new Label("Highest Degree: ");
+        Label degree = new Label();
+        Label instituteLabel = new Label("Institute name:");
+        Label institute = new Label();
+
+        HBox educationHeadingBox = new HBox(educationHeading);
+        HBox statusBox = new HBox(statusLabel, status);
+        HBox degreeBox = new HBox(degreeLabel,degree);
+        HBox instituteBox = new HBox(instituteLabel,institute);
+        VBox educationDetails = new VBox(educationHeadingBox,statusBox,degreeBox,instituteBox);
+        educationDetails.setSpacing(7);
+        statusBox.setSpacing(10);
+        degreeBox.setSpacing(10);
+        instituteBox.setSpacing(10);
+        educationDetails.setPadding(new Insets(10,0,10,60));
+        educationHeadingBox.setAlignment(Pos.CENTER);
+        mainContent.getChildren().add(educationDetails);
+
+        //skill details
+        Label skillHeading = new Label("Skill Details:");
+        skillHeading.setStyle("-fx-font-weight: bold;-fx-font-size: 24px");
+        Label skillNameLabel = new Label("Skill Name: ");
+        Label skillName = new Label();
+        Label skillDescriptionLabel = new Label("Skill Description: ");
+        Label skillDescription = new Label();
+
+        HBox skillHeadingBox = new HBox(skillHeading);
+        HBox skillNameBox = new HBox(skillNameLabel, skillName);
+        HBox skillDescriptionBox = new HBox(skillDescriptionLabel,skillDescription);
+        VBox skillDetails = new VBox(skillHeadingBox,skillNameBox,skillDescriptionBox);
+        skillDetails.setSpacing(7);
+        skillNameBox.setSpacing(10);
+        skillDescriptionBox.setSpacing(10);
+        skillDetails.setPadding(new Insets(10,0,10,60));
+        skillHeadingBox.setAlignment(Pos.CENTER);
+        skillDetails.setMaxHeight(100);
+        mainContent.getChildren().add(skillDetails);
+
+
 
         mainContent.prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.5));
         mainContent.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.7));
-        removalSection.prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.5));
-        removalSection.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.7));
-        contentBox.prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.5));
-        contentBox.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.7));
 
-
-
-        // Personal Details Section
-        VBox personalDetailsSection = createSection("Personal Details", "lightblue");
-        mainContent.getChildren().add(personalDetailsSection);
-
-        // Education Details Section
-        VBox educationDetailsSection = createSection("Education Details", "lightblue");
-        mainContent.getChildren().add(educationDetailsSection);
-
-        // Skill Details Section
-        VBox skillDetailsSection = createSection("Skill Details", "lightblue");
-        mainContent.getChildren().add(skillDetailsSection);
-
-
-        // Buttons
-        HBox buttonBox = new HBox(10);
-        buttonBox.setAlignment(Pos.CENTER);
-
-        Button closeButton = new Button("Close");
-        buttonBox.getChildren().addAll(closeButton);
-        mainContent.getChildren().add(buttonBox);
-
-
-        // Scene and Stage setup
-        Scene scene = new Scene(outerLayout, 800, 600);
-        primaryStage.setTitle("Orphan Registration System");
+        Scene scene = new Scene(outerLayout);
+        primaryStage.setMaximized(true);
         primaryStage.setScene(scene);
+        primaryStage.setTitle("View Orphan");
         primaryStage.show();
     }
-    private VBox createRemovalSection() {
-        VBox removalSection = new VBox(2);
-        removalSection.setStyle("-fx-background-color: lightblue; -fx-border-color: black; -fx-border-width: 1;");
-        removalSection.setAlignment(Pos.TOP_CENTER);
-        removalSection.setPadding(new Insets(5));
-
-        Label removalLabel = new Label("To View an Orphan");
-        removalLabel.setStyle("-fx-font-size: 18px; -fx-text-fill: black;");
-        removalLabel.setAlignment(Pos.CENTER);
-        removalSection.getChildren().add(removalLabel);
-
-        HBox idBox = new HBox(5);
-        Label idLabel = new Label("View Orphan by ID:");
-        TextField idField = new TextField();
-        idBox.getChildren().addAll(idLabel, idField);
-        idBox.setAlignment(Pos.CENTER);
-        idBox.setSpacing(12);
-        removalSection.getChildren().add(idBox);
-
-        HBox nameBox = new HBox(5);
-        Label nameLabel = new Label("View Orphan by Name:");
-        TextField nameField = new TextField();
-        nameBox.getChildren().addAll(nameLabel, nameField);
-        nameBox.setAlignment(Pos.CENTER);
-        removalSection.getChildren().add(nameBox);
-        //removalSection.setAlignment(Pos.TOP_CENTER);
-
-        Button confirmButton = new Button("Search");
-        confirmButton.setAlignment(Pos.BASELINE_RIGHT);
-        removalSection.getChildren().add(confirmButton);
-        removalSection.setMaxHeight(180);
-        removalSection.setMaxWidth(500);
-        removalSection.setSpacing(10);
-
-        return removalSection;
-    }
-
-    private VBox createSection(String titleText, String color) {
-        VBox section = new VBox(5);
-        section.setStyle("-fx-background-color: " + color + "; -fx-border-color: black; -fx-border-width: 1;");
-        section.setAlignment(Pos.TOP_CENTER);
-        section.setPadding(new Insets(15));
-
-        Label title = new Label(titleText);
-        title.setStyle("-fx-font-size: 18px; -fx-text-fill: black;");
-        section.getChildren().add(title);
-
-        GridPane gridPane = new GridPane();
-        gridPane.setAlignment(Pos.CENTER);
-        gridPane.setHgap(10);
-        gridPane.setVgap(10);
-
-        if ("Personal Details".equals(titleText)) {
-            addFormField(gridPane, "Orphan Name:", new TextField(), 0);
-            gridPane.add(new Label("Gender:"),0,1);
-            gridPane.add(createGenderRadioButtons(), 1, 1);
-            addFormField(gridPane, "Orphan Age:", new TextField(), 2);
-            addFormField(gridPane, "Date of Enrollment:", new DatePicker(), 3);
-        } else if ("Education Details".equals(titleText)) {
-            gridPane.add(new Label("Education status:"),0,0);
-            gridPane.add(createEducationStatusRadioButtons(),1,0);
-            addFormField(gridPane, "Degree name: ",new TextField(),1);
-            addFormField(gridPane,"Institute Name: ", new TextField(),2);
-        } else if ("Skill Details".equals(titleText)) {
-            addFormField(gridPane, "Skill Name:", new TextField(), 0);
-            addFormField(gridPane, "Skill Description:", new TextArea(), 1);
-        }
-
-        section.getChildren().add(gridPane);
-        return section;
-    }
-
-    private void addFormField(GridPane gridPane, String labelText, Control inputControl, int rowIndex) {
-        Label label = new Label(labelText);
-        if (inputControl instanceof TextArea){
-            inputControl.setMaxWidth(250);
-            inputControl.setMaxHeight(300);
-        }
-        gridPane.add(label, 0, rowIndex);
-        gridPane.add(inputControl, 1, rowIndex);
-    }
-
-    private HBox createGenderRadioButtons() {
-        ToggleGroup group = new ToggleGroup();
-        RadioButton male = new RadioButton("Male");
-        male.setToggleGroup(group);
-        RadioButton female = new RadioButton("Female");
-        female.setToggleGroup(group);
-        RadioButton other = new RadioButton("Other");
-        other.setToggleGroup(group);
-        HBox hbox = new HBox(10, male, female, other);
-        hbox.setAlignment(Pos.CENTER_LEFT);
-        return hbox;
-    }
-
-    private HBox createEducationStatusRadioButtons() {
-        ToggleGroup group = new ToggleGroup();
-        RadioButton educated = new RadioButton("Educated");
-        educated.setToggleGroup(group);
-        RadioButton notEducated = new RadioButton("Not Educated");
-        notEducated.setToggleGroup(group);
-        HBox hbox = new HBox(10, educated, notEducated);
-        hbox.setAlignment(Pos.CENTER_LEFT);
-        return hbox;
-    }
-
     public static void main(String[] args) {
         launch(args);
     }
