@@ -16,11 +16,6 @@ public class Admin implements Serializable {
 
     }
 
-    public Admin(String adminName, String password) {
-        this.adminName = adminName;
-        this.passwords = new ArrayList<>();
-        this.passwords.add(password);
-    }
 
     public static void writeAdminToFile(ArrayList<Admin> admin) {
         try (ObjectOutputStream oos= new ObjectOutputStream( new FileOutputStream("adminData.ser")) ){
@@ -34,19 +29,6 @@ public class Admin implements Serializable {
         }
     }
 
-    public static List<Admin> readAdminsFromFile() {
-        File file = new File("adminData.ser");
-        if (!file.exists()) {
-            return new ArrayList<>();
-        }
-
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
-            return (List<Admin>) ois.readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            return new ArrayList<>();
-        }
-    }
 
 
     public Admin(String adminName, ArrayList<String> passwords) {

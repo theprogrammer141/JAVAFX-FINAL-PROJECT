@@ -1,4 +1,4 @@
-package org.example.javafxfinalproject;
+package org.example.javafxfinalproject.Khizar;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -164,34 +164,44 @@ public class addOrphan extends Application {
 
         @Override
         public void handle(ActionEvent actionEvent) {
-            Orphan orphan = new Orphan();
-            orphan.setId(orphanArrayList.size()+1);
-            orphan.setName(nameField.getText());
 
-            RadioButton selectedGender = (RadioButton) group.getSelectedToggle();
-            orphan.setGender(selectedGender.getText());
-            orphan.setEntryDate(date.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-            try {
-                orphan.setAge(Integer.parseInt(ageField.getText()));
-            } catch (NoNegativeValueException | InvalidAgeException e) {
-                throw new RuntimeException(e);
+            if (nameField.getText().isEmpty() || educationGroup.getSelectedToggle()==null || ageField.getText().isEmpty() || date.getValue() ==null || group.getSelectedToggle() ==null){
+                showAlert(Alert.AlertType.WARNING, "Empty fields", "Fill all compulsory fields");
+            }else {
+                Orphan orphan = new Orphan();
+                orphan.setId(orphanArrayList.size()+1);
+                orphan.setName(nameField.getText());
+
+                RadioButton selectedGender = (RadioButton) group.getSelectedToggle();
+                orphan.setGender(selectedGender.getText());
+                String dateValue = date.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                orphan.setEntryDate(dateValue);
+                try {
+                    orphan.setAge(Integer.parseInt(ageField.getText()));
+                } catch (NoNegativeValueException | InvalidAgeException e) {
+                    throw new RuntimeException(e);
+                }
+                Education education = new Education();
+                RadioButton educationButton = (RadioButton) educationGroup.getSelectedToggle();
+                if (educationButton.getText().equals("Educated")){
+                    education.setEducationLevel(degreeName.getText());
+                    education.setInstitute(instituteName.getText());
+                }else {
+                    education.setEducationLevel("None");
+                    education.setInstitute("None");
+                }
+                orphan.setEducation(education);
+                ArrayList<Skill> skillArrayList = new ArrayList<>();
+                Skill skill = new Skill();
+                skill.setSkillName(skillName.getText());
+                skill.setSkillDescription(skillDescription.getText());
+                skill.setSkillID(0);
+                skillArrayList.add(skill);
+                orphan.setSkillSet(skillArrayList);
+                showAlert(Alert.AlertType.CONFIRMATION, "Orphan added", "Orphan added successfully ");
+                orphanArrayList.add(orphan);
+                Orphan.writeOrphanToFile(orphanArrayList);
             }
-            Education education = new Education();
-            RadioButton educationButton = (RadioButton) educationGroup.getSelectedToggle();
-            if (educationButton.getText().equals("Educated")){
-                education.setEducationLevel(degreeName.getText());
-                education.setInstitute(instituteName.getText());
-            }
-            orphan.setEducation(education);
-            ArrayList<Skill> skillArrayList = new ArrayList<>();
-            Skill skill = new Skill();
-            skill.setSkillName(skillName.getText());
-            skill.setSkillDescription(skillDescription.getText());
-            skill.setSkillID(0);
-            skillArrayList.add(skill);
-            orphan.setSkillSet(skillArrayList);
-            orphanArrayList.add(orphan);
-            Orphan.writeOrphanToFile(orphanArrayList);
         }
     }
     private void addFormField(GridPane gridPane, String labelText, Control inputControl, int rowIndex) {
@@ -224,6 +234,13 @@ public class addOrphan extends Application {
         HBox hbox = new HBox(10, educated, notEducated);
         hbox.setAlignment(Pos.CENTER_LEFT);
         return hbox;
+    }
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     public static void main(String[] args) {

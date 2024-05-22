@@ -41,15 +41,48 @@ public class GenerateReports extends Application {
 
         Button orphanReportButton = new Button("Generate Orphans Report");
         orphanReportButton.setStyle("-fx-text-fill: white; -fx-background-color: black; -fx-border-color: white; -fx-border-radius: 40px; -fx-background-radius: 30px");
+
+        orphanReportButton.setOnAction(handler ->
+        {
+            new OrphansReport().start(new Stage());
+            primaryStage.close();
+        });
+
         Button staffReportButton = new Button("Generate Staff Report");
         staffReportButton.setStyle("-fx-text-fill: white; -fx-background-color: black; -fx-border-color: white; -fx-border-radius: 40px; -fx-background-radius: 30px");
+
+        staffReportButton.setOnAction(handler ->
+        {
+            new StaffReport().start(new Stage());
+            primaryStage.close();
+        });
+
         Button inventoryReportButton = new Button("Generate Inventory Report");
        inventoryReportButton.setStyle("-fx-text-fill: white; -fx-background-color: black; -fx-border-color: white; -fx-border-radius: 40px; -fx-background-radius: 30px");
-        Button donationReportButton = new Button("Generate Donation Report");
+
+       inventoryReportButton.setOnAction(handler ->
+       {
+           new InventoryReport().start(new Stage());
+           primaryStage.close();
+       });
+
+       Button donationReportButton = new Button("Generate Donation Report");
         donationReportButton.setStyle("-fx-text-fill: white; -fx-background-color: black; -fx-border-color: white; -fx-border-radius: 40px; -fx-background-radius: 30px");
+
+        donationReportButton.setOnAction(handler ->
+        {
+            new DonationsReport().start(new Stage());
+            primaryStage.close();
+        });
 
         Button backButton = new Button("Back");
         backButton.setStyle(" -fx-text-fill: white;-fx-background-color: black; -fx-background-radius: 30px; -fx-border-color: white; -fx-border-radius: 40px");
+
+        backButton.setOnAction(handler ->
+        {
+            new GenerateReports().start(new Stage());
+            primaryStage.close();
+        });
 
         VBox root = new VBox(10);
         root.setAlignment(Pos.CENTER);
