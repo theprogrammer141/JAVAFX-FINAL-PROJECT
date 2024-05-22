@@ -1,10 +1,8 @@
-package org.example.javafxfinalproject;
+package org.example.javafxfinalproject.Bilal;
 
 import javafx.scene.control.*;
 import javaxdevelopers.OOMS.OOM;
 import javaxdevelopers.OOMS.InventoryItem;
-import javaxdevelopers.exceptionhandlers.InvalidAgeException;
-import javaxdevelopers.exceptionhandlers.InvalidContactNumberException;
 import javaxdevelopers.exceptionhandlers.NoNegativeValueException;
 
 import javafx.application.Application;

@@ -1,4 +1,4 @@
-package org.example.javafxfinalproject;
+package org.example.javafxfinalproject.Bilal;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -8,9 +8,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javaxdevelopers.OOMS.OOM;
-import javaxdevelopers.OOMS.InventoryItem;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class InventoryItemsMenu extends Application {

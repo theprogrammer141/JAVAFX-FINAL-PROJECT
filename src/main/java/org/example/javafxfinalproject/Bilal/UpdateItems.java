@@ -1,4 +1,4 @@
-package org.example.javafxfinalproject;
+package org.example.javafxfinalproject.Bilal;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -15,7 +15,6 @@ import javaxdevelopers.exceptionhandlers.NoNegativeValueException;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class UpdateItems extends Application {
 

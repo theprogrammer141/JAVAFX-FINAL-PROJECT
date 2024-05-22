@@ -1,4 +1,4 @@
-package org.example.javafxfinalproject;
+package org.example.javafxfinalproject.Bilal;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -21,8 +21,6 @@ import javafx.stage.Stage;
 
 import javaxdevelopers.OOMS.Account;
 import javaxdevelopers.OOMS.OOM;
-
-import java.util.Scanner;
 
 public class WithdrawMoney extends Application {
 
