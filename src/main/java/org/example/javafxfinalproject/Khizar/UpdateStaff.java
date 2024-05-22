@@ -244,7 +244,9 @@ public class UpdateStaff extends Application {
 
         name.setText("");
         age.setText("");
-        //gender.setText("");
+        male.setSelected(false);
+        female.setSelected(false);
+        other.setSelected(false);
         //status.setText("");
         degree.setText("");
         institute.setText("");

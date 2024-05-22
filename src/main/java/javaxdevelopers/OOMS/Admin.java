@@ -11,6 +11,8 @@ public class Admin implements Serializable {
     private String adminName;
 
     private ArrayList<String> passwords;
+    @Serial
+    private static final long serialVersionUID = 8158421488580793875L;
 
     public Admin() {
 

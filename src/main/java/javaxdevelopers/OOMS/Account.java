@@ -10,10 +10,14 @@ import java.util.regex.Pattern;
 
 //there is only one account of organization so accountID and bank name are preset
 public class Account implements Serializable {
-    private String accountID;
+    //private String accountID;
+    public String accountID;
     private String bankName;
     private double balance;
     private ArrayList<Double> transactions = new ArrayList<>();
+    @Serial
+    private static final long serialVersionUID = 4599783527172519866L;
+
 
 
     public static void writeAccountToFile(Account account) {
@@ -22,14 +26,14 @@ public class Account implements Serializable {
             //boolean append = new File("accountData.ser").length() > 0;
             //ObjectOutputStream oos = append ? new AppendingObjectOutputStream(fos) : new ObjectOutputStream(fos);
             oos.writeObject(account);
+            //System.out.println(ObjectStreamClass.lookup(Account.class).getSerialVersionUID());
             oos.close(); // Close the stream
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-
-    public void depositMoney() throws NoNegativeValueException{
+    public void depositMoney(int i) throws NoNegativeValueException{
         //used to deposit money in account
         Scanner input=new Scanner(System.in);
             System.out.println("Enter amount to deposit: ");
@@ -49,7 +53,7 @@ public class Account implements Serializable {
         this.balance+=amount;
         this.transactions.add(+amount);
         writeAccountToFile(this);
-        System.out.println("Amount added successfully!");
+        //System.out.println("Amount added successfully!");
     }
     public void withdrawMoney(double amount){
 
@@ -98,12 +102,7 @@ public class Account implements Serializable {
         return balance;
     }
 
-    public void setBalance(double balance) throws NoNegativeValueException{
-        if(balance > 0)
-            this.balance = balance;
-        else
-            throw new NoNegativeValueException("Exception: Balance cannot be less than 0!");
-    }
+
 
     public boolean isValidAccountID(String accountID)
     {

@@ -152,6 +152,11 @@ public class addOrphan extends Application {
             new OrphanTab().start(new Stage());
             primaryStage.close();
         });
+        resetButton.setOnAction(e ->{
+            nameField.setText("");
+            ageField.setText("");
+
+        });
 
         // Scene and Stage setup
         Scene scene = new Scene(outerLayout);

@@ -17,8 +17,8 @@ import javafx.util.Duration;
 import org.example.javafxfinalproject.Abdullah.AddDonation;
 import org.example.javafxfinalproject.Abdullah.GenerateReports;
 import org.example.javafxfinalproject.Abdullah.Login;
-import org.example.javafxfinalproject.Account;
-import org.example.javafxfinalproject.InventoryItems;
+import org.example.javafxfinalproject.Bilal.AccountMenu;
+import org.example.javafxfinalproject.Bilal.InventoryItemsMenu;
 
 public class MainMenu extends Application {
     @Override
@@ -124,13 +124,13 @@ public class MainMenu extends Application {
 
         btnAccount.setOnAction(handler ->
         {
-            new Account().start(new Stage());
+            new AccountMenu().start(new Stage());
             primaryStage.close();
         });
 
         btnInventory.setOnAction(handler ->
         {
-            new InventoryItems().start(new Stage());
+            new InventoryItemsMenu().start(new Stage());
             primaryStage.close();
         });
 
