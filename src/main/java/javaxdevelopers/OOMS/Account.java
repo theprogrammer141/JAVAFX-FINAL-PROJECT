@@ -51,19 +51,16 @@ public class Account implements Serializable {
         writeAccountToFile(this);
         System.out.println("Amount added successfully!");
     }
-    public void withdrawMoney(){
-        Scanner input=new Scanner(System.in);
-        System.out.println("Enter amount to withdraw: ");
-        double amount= input.nextDouble();
+    public void withdrawMoney(double amount){
+
+
         if(balance>=amount){
             balance-=amount;
-            System.out.println("Withdrawal successful!");
             this.checkBalance();
             this.transactions.add(-amount);
             writeAccountToFile(this);
         }
         else {
-            System.out.println("Insufficient balance");
         }
 
 
