@@ -11,6 +11,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.example.javafxfinalproject.Khizar.MainMenu;
 
 public class GenerateReports extends Application {
     public static void main(String[] args) {
@@ -82,7 +83,7 @@ public class GenerateReports extends Application {
 
         backButton.setOnAction(handler ->
         {
-            new GenerateReports().start(new Stage());
+            new MainMenu().start(new Stage());
             primaryStage.close();
         });
 
