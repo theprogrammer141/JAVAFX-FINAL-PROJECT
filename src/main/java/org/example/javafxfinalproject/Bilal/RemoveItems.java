@@ -33,7 +33,7 @@ public class RemoveItems extends Application {
     @Override
     public void start(Stage primaryStage) {
         // Load Background Image
-        Image image = new Image("file:///D:/JAVA/JAVAFX-FINAL-PROJECT/src/rec.jpeg");
+        Image image = new Image("file:///JAVAFX FINAL PROJECT/pr.jpeg");
         // Background Image Settings
         BackgroundImage backgroundImage = new BackgroundImage(
                 image,
@@ -76,7 +76,7 @@ public class RemoveItems extends Application {
 
         // Button "Remove"
         Button removeButton = new Button("Remove");
-        removeButton.setStyle("-fx-background-color: #FF6347; -fx-text-fill: white; -fx-font-size: 16px;");
+        removeButton.setStyle("-fx-background-color: darkblue; -fx-text-fill: white; -fx-font-size: 16px;");
         removeButton.setOnAction(e -> {
             String idText = idTextField.getText();
             if (idText.isEmpty()) {
@@ -106,7 +106,7 @@ public class RemoveItems extends Application {
 
         // Button "Return"
         Button returnButton = new Button("Return");
-        returnButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 16px;");
+        returnButton.setStyle("-fx-background-color: darkblue; -fx-text-fill: white; -fx-font-size: 16px;");
         returnButton.setOnAction(e -> {
             InventoryItemsMenu inventoryItemsMenu = new InventoryItemsMenu();
             inventoryItemsMenu.start(primaryStage);
@@ -194,7 +194,7 @@ public class RemoveItems extends Application {
 
         Scene scene = new Scene(grid, 600, 600);
         confirmationStage.setScene(scene);
-        confirmationStage.setTitle("ARE YOU SURE?");
+        confirmationStage.setTitle("ARE YOU SURE TO DELET THIS ITEM?");
         confirmationStage.show();
     }
 

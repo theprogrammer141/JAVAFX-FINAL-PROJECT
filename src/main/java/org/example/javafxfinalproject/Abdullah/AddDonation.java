@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class AddDonation extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        Image image = new Image("file:///JAVAFX FINAL PROJECT/pr.jpeg");
+        Image image = new Image("file:///JAVAFX FINAL PROJECT/background2.jpg");
 
         BackgroundImage backgroundImage = new BackgroundImage(
                 image,
@@ -91,7 +91,7 @@ public class AddDonation extends Application {
         buttonsBox.setAlignment(Pos.CENTER);
 
         Button add = new Button("Add");
-        add.setStyle("-fx-background-color: darkblue; -fx-background-radius: 30px; -fx-border-color: white; -fx-border-radius: 10px; -fx-text-fill: white");
+        add.setStyle("-fx-background-color: purple; -fx-background-radius: 30px; -fx-border-color: white; -fx-border-radius: 10px; -fx-text-fill: white");
         add.setOnAction(handler ->
         {
             String getDonationID = donationIDField.getText();
@@ -132,7 +132,7 @@ public class AddDonation extends Application {
         });
 
         Button cancel = new Button("Cancel");
-        cancel.setStyle("-fx-background-color: darkblue; -fx-background-radius: 30px; -fx-border-color: white; -fx-border-radius: 10px; -fx-text-fill: white");
+        cancel.setStyle("-fx-background-color: purple; -fx-background-radius: 30px; -fx-border-color: white; -fx-border-radius: 10px; -fx-text-fill: white");
 
         cancel.setOnAction(handler ->
         {
@@ -145,7 +145,7 @@ public class AddDonation extends Application {
         });
 
         Button back = new Button("Back");
-        back.setStyle("-fx-background-color: darkblue; -fx-background-radius: 30px; -fx-border-color: white; -fx-border-radius: 10px; -fx-text-fill: white");
+        back.setStyle("-fx-background-color: purple; -fx-background-radius: 30px; -fx-border-color: white; -fx-border-radius: 10px; -fx-text-fill: white");
         buttonsBox.getChildren().addAll(add, cancel, back);
         buttonsBox.setAlignment(Pos.BASELINE_CENTER);
 

@@ -19,7 +19,7 @@ public class AccountMenu extends Application {
 
     public void start(Stage primaryStage) {
         // Background Image
-        Image backgroundImage = new Image("file:///D:/JAVA/JAVAFX-FINAL-PROJECT/src/pr.jpeg");
+        Image backgroundImage = new Image("file:///JAVAFX FINAL PROJECT/pr.jpeg");
         BackgroundImage background = new BackgroundImage(
                 backgroundImage,
                 BackgroundRepeat.NO_REPEAT,
@@ -51,8 +51,6 @@ public class AccountMenu extends Application {
         mainGrid.add(bankNameLabel, 0, 1);
 
         Label comboBox = new Label("HBL");
-        //comboBox.setItems(FXCollections.observableArrayList("HBL"));
-        //comboBox.setPromptText("Select Bank");
         comboBox.setStyle("-fx-border-color: black; -fx-border-width: 2; -fx-padding: 5;");
         comboBox.setMaxSize(150,20);
         comboBox.setStyle("-fx-background-color: white; -fx-border-radius: 5px; -fx-border-color: gray;");
@@ -64,9 +62,7 @@ public class AccountMenu extends Application {
         accountIdLabel.setTextFill(Color.WHITE);
         mainGrid.add(accountIdLabel, 0, 2);
 
-        Label comboBox2 = new Label("abl234245534343");
-        //comboBox2.setItems(FXCollections.observableArrayList("abl234245534343"));
-        //comboBox2.setPromptText("Select Account");
+        Label comboBox2 = new Label("abl2234q44344");
         comboBox2.setStyle("-fx-border-color: black; -fx-border-width: 10; -fx-padding: 10;");
         comboBox2.setMaxSize(150,20);
         comboBox2.setStyle("-fx-background-color: white; -fx-border-radius: 5px; -fx-border-color: gray;");
@@ -124,7 +120,7 @@ public class AccountMenu extends Application {
         borderPane.setBottom(bottomBox);
         BorderPane.setMargin(bottomBox, new Insets(10, 0, 10, 0));
 
-        // Right Button
+        // vBox
         VBox rightBox = new VBox(depositMoney);
         rightBox.setAlignment(Pos.CENTER);
         rightBox.setSpacing(20);

@@ -14,10 +14,12 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javaxdevelopers.OOMS.Account;
 import org.example.javafxfinalproject.Abdullah.AddDonation;
 import org.example.javafxfinalproject.Abdullah.GenerateReports;
 import org.example.javafxfinalproject.Abdullah.Login;
 import org.example.javafxfinalproject.Bilal.AccountMenu;
+import org.example.javafxfinalproject.Bilal.InventoryItems;
 import org.example.javafxfinalproject.Bilal.InventoryItemsMenu;
 
 public class MainMenu extends Application {

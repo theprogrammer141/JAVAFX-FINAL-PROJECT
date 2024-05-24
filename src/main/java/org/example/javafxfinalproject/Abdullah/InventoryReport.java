@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -31,7 +32,7 @@ public class InventoryReport extends Application {
     public void start(Stage primaryStage) {
         loadInventoryData();
 
-        Image backgroundImage = new Image("file:///JAVAFX FINAL PROJECT/ReportGeneratorBackground.jpeg");
+        Image backgroundImage = new Image("file:///JAVAFX FINAL PROJECT/background2.jpg");
 
         BackgroundImage image = new BackgroundImage(
                 backgroundImage,
@@ -53,6 +54,7 @@ public class InventoryReport extends Application {
 
         Label title = new Label("INVENTORY REPORT");
         title.setFont(Font.font("Impact", 40));
+        title.setTextFill(Paint.valueOf("white"));
         root.getChildren().add(title);
 
         Label totalItemsLabel = new Label("Total Items: " + organization.getItemsList().size());
@@ -85,13 +87,13 @@ public class InventoryReport extends Application {
                 root.getChildren().add(itemTypeLabel);
 
                 Label line = new Label("----------------------");
-                line.setStyle("-fx-font-weight: bold; -fx-font-size: 20");
+                line.setStyle("-fx-font-weight: bold; -fx-font-size: 20; -fx-text-fill: white");
                 root.getChildren().add(line);
             }
         }
 
         Button backButton = new Button("Back");
-        backButton.setStyle(" -fx-text-fill: white;-fx-background-color: black; -fx-background-radius: 30px; -fx-border-color: white; -fx-border-radius: 40px");
+        backButton.setStyle(" -fx-text-fill: white;-fx-background-color: purple; -fx-background-radius: 30px; -fx-border-color: white; -fx-border-radius: 40px");
 
         backButton.setOnAction(handler ->
         {

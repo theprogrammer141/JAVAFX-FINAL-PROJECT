@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
@@ -13,6 +14,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javaxdevelopers.OOMS.Account;
+import javaxdevelopers.OOMS.OOM;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class CheckBalance extends Application {
 
@@ -22,12 +28,9 @@ public class CheckBalance extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-
-
-        // Create Background Image Settings
         BackgroundSize backgroundSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, true);
-        Image image = new Image("file:///JAVAFX FINAL PROJECT/rec.jpeg");
-        // Background Image Settings
+        Image image = new Image("file:///JAVAFX FINAL PROJECT/pr.jpeg");
+
         BackgroundImage backgroundImage = new BackgroundImage(
                 image,
                 BackgroundRepeat.NO_REPEAT,
@@ -36,7 +39,7 @@ public class CheckBalance extends Application {
                 backgroundSize
         );
 
-        // Create Background with Image
+
         Background background = new Background(backgroundImage);
         GridPane grid = new GridPane();
         grid.setVgap(10);
@@ -50,7 +53,7 @@ public class CheckBalance extends Application {
 
         Text scenetitle = new Text("----Available Balance----");
         scenetitle.setFont(Font.font("Times New Roman", FontWeight.BOLD, 20));
-        scenetitle.setFill(Color.BLACK);
+        scenetitle.setFill(Color.WHITE);
         grid.add(scenetitle, 1, 0);
 
         // Bank Name Label and ComboBox
@@ -72,13 +75,17 @@ public class CheckBalance extends Application {
         TextField tx3 = new TextField();
         tx3.setMaxSize(200,20);
         grid.add(tx3,1,2);
+        displayAccountDetails(tx1,tx3);
 
 
         Button rtrn = new Button("Return");
-
         rtrn.setStyle("-fx-background-color: Navy");
-
         rtrn.setTextFill(Color.CYAN);
+        rtrn.setOnAction(e ->
+        {
+            new AccountMenu().start(new Stage());
+            primaryStage.close();
+        });
 
         grid.add(rtrn,4,6);
 
@@ -86,5 +93,13 @@ public class CheckBalance extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("Display Balance");
         primaryStage.show();
+    }
+    private void displayAccountDetails(TextField accountIdField, TextField balanceField) {
+        OOM oom = new OOM(); // Assuming OOM is the class managing accounts
+        Account account = oom.getBankAccount(); // Fetching the account object
+
+        // Setting account details into UI fields
+        accountIdField.setText(String.valueOf(account.getAccountID()));
+        balanceField.setText(String.valueOf(account.getBalance()));
     }
 }

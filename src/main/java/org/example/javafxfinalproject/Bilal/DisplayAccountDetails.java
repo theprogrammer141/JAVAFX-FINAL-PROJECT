@@ -28,7 +28,7 @@ public class DisplayAccountDetails extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Image image = new Image("file:///JAVAFX FINAL PROJECT/rec.jpeg");
+        Image image = new Image("file:///JAVAFX FINAL PROJECT/pr.jpeg");
 
         // Create Background Image Settings
         BackgroundSize backgroundSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, true);
@@ -54,7 +54,7 @@ public class DisplayAccountDetails extends Application {
 
         Text scenetitle = new Text("----Account Details----");
         scenetitle.setFont(Font.font("Times New Roman", FontWeight.BOLD, 20));
-        scenetitle.setFill(Color.BLACK);
+        scenetitle.setFill(Color.WHITE);
         grid.add(scenetitle, 1, 0);
 
         // Bank Name Label and ComboBox

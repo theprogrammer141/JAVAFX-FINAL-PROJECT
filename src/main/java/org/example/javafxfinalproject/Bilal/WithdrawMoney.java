@@ -26,7 +26,7 @@ public class WithdrawMoney extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Image image = new Image("file:///JAVAFX FINAL PROJECT/Premium Vector _ Geometric gradient background.jpeg");
+        Image image = new Image("file:///JAVAFX FINAL PROJECT/pr.jpeg");
         BackgroundImage backgroundImage = new BackgroundImage(
                 image,
                 BackgroundRepeat.NO_REPEAT,
@@ -59,7 +59,7 @@ public class WithdrawMoney extends Application {
         centerBox.getChildren().add(textFieldBox);
 
         Button withdrawButton = new Button("Withdraw");
-        withdrawButton.setStyle("-fx-background-color: #FF6347; -fx-text-fill: white; -fx-font-size: 16px;");
+        withdrawButton.setStyle("-fx-background-color: darkblue; -fx-text-fill: white; -fx-font-size: 16px;");
         withdrawButton.setOnAction(e -> handleWithdraw(primaryStage, amountTextField.getText()));
         centerBox.getChildren().add(withdrawButton);
 
@@ -68,7 +68,7 @@ public class WithdrawMoney extends Application {
             AccountMenu accountMenu = new AccountMenu();
             accountMenu.start(primaryStage);
         });
-        returnButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 16px;");
+        returnButton.setStyle("-fx-background-color: darkblue; -fx-text-fill: white; -fx-font-size: 16px;");
         centerBox.getChildren().add(returnButton);
 
         borderPane.setCenter(centerBox);
@@ -77,10 +77,6 @@ public class WithdrawMoney extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("Withdraw Money");
         primaryStage.show();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 
     private void handleWithdraw(Stage stage, String amountText) {
@@ -107,5 +103,9 @@ public class WithdrawMoney extends Application {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
     }
 }

@@ -2,14 +2,11 @@ package javaxdevelopers.OOMS;
 
 import javaxdevelopers.exceptionhandlers.NoNegativeValueException;
 
-import java.io.ObjectStreamClass;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Test {
-    public static void main(String[] args) {
-        System.out.println(ObjectStreamClass.lookup(Staff.class).getSerialVersionUID());
-
+    public static void main(String[] args) throws NoNegativeValueException {
         OOM organization = new OOM();
 
         if(!authenticationInput(organization))
@@ -190,7 +187,7 @@ public class Test {
             }
         }
     }
-    public static void accountChoice(OOM organization){
+    public static void accountChoice(OOM organization) throws NoNegativeValueException {
         Scanner input = new Scanner(System.in);
 
         while (true) {
@@ -206,16 +203,13 @@ public class Test {
             switch (input.nextInt()){
                 case 1:
                     while(true) {
-                        try {
-                            organization.getBankAccount().depositMoney(1);
-                            break;
-                        } catch (NoNegativeValueException e) {
-                            System.out.println(e.getMessage());
-                        }
+                        System.out.println("Enter amount");
+                        organization.getBankAccount().depositMoney(input.nextDouble());
+                        break;
                     }
                     break;
                 case 2:
-                    //organization.getBankAccount().withdrawMoney();
+                    organization.getBankAccount().withdrawMoney(input.nextDouble());
                     break;
                 case 3:
                     organization.getBankAccount().checkBalance();
