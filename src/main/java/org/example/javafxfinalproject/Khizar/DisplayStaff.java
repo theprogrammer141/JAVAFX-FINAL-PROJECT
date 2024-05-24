@@ -33,7 +33,7 @@ public class DisplayStaff extends Application {
     public void start(Stage primaryStage) {
 
         BorderPane outerLayout = new BorderPane();
-        outerLayout.setStyle("-fx-border-width: 3px; -fx-border-color: black;-fx-background-color: rgba(232,209,64,0.94)");
+        outerLayout.setStyle("-fx-border-width: 3px; -fx-border-color: black;-fx-background-color: #7CB9E8");
         outerLayout.setPadding(new Insets(10,60,30,60));
 
         Label titleLabel = new Label("Display Staff");
@@ -169,9 +169,8 @@ public class DisplayStaff extends Application {
             primaryStage.close();
         });
 
-        Scene scene = new Scene(outerLayout);
+        Scene scene = new Scene(outerLayout, 800, 600);
         primaryStage.setScene(scene);
-        primaryStage.setMaximized(true);
         primaryStage.setTitle("Display Orphan");
         primaryStage.show();
     }

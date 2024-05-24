@@ -119,10 +119,9 @@ public class OrphanTab extends Application {
         btnReturn.prefHeightProperty().bind(root.heightProperty().divide(10));
 
         // Scene
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(root, 800, 600);
         primaryStage.setTitle("Orphanage Management System");
         primaryStage.setScene(scene);
-        primaryStage.setMaximized(true);
         primaryStage.show();
 
         primaryStage.show();

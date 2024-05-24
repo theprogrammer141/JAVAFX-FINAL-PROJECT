@@ -58,7 +58,7 @@ public class UpdateOrphan extends Application {
         BorderPane.setMargin(titleLabel, new Insets(12, 0, 12, 0));
 
         Label update = new Label("Make Desired Changes!");
-        update.setStyle("-fx-font-size: 24px; -fx-text-fill: yellow;");
+        update.setStyle("-fx-font-size: 24px; -fx-text-fill: black;");
         update.setAlignment(Pos.CENTER);
         update.setMaxWidth(Double.MAX_VALUE);
 
@@ -229,8 +229,7 @@ public class UpdateOrphan extends Application {
         });
 
         // Scene and Stage setup
-        Scene scene = new Scene(outerLayout);
-        primaryStage.setMaximized(true);
+        Scene scene = new Scene(outerLayout, 800, 600);
         primaryStage.setTitle("Orphan Registration System");
         primaryStage.setScene(scene);
         primaryStage.show();

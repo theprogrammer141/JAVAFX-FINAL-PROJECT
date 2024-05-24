@@ -159,10 +159,9 @@ public class addOrphan extends Application {
         });
 
         // Scene and Stage setup
-        Scene scene = new Scene(outerLayout);
+        Scene scene = new Scene(outerLayout, 800, 600);
         primaryStage.setTitle("Orphan Registration Form");
         primaryStage.setScene(scene);
-        primaryStage.setMaximized(true);
         primaryStage.show();
     }
     public void resetData(){

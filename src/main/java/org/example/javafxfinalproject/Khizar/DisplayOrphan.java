@@ -178,9 +178,8 @@ public class DisplayOrphan extends Application {
             primaryStage.close();
         });
 
-        Scene scene = new Scene(outerLayout);
+        Scene scene = new Scene(outerLayout, 800, 600);
         primaryStage.setScene(scene);
-        primaryStage.setMaximized(true);
         primaryStage.setTitle("Display Orphan");
         primaryStage.show();
     }

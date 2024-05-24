@@ -178,8 +178,7 @@ public class ViewOrphan extends Application {
         }
         );
 
-        primaryStage.setMaximized(true);
-        Scene scene = new Scene(outerLayout);
+        Scene scene = new Scene(outerLayout, 800, 600);
         primaryStage.setScene(scene);
         primaryStage.setTitle("View Orphan");
 

@@ -33,7 +33,7 @@ public class RemoveStaff extends Application {
 
     @Override
     public void start(Stage primaryStage){
-        Image image = new Image("file:///JAVAFX FINAL PROJECT/staffBackground.jpg");
+        Image image = new Image("file:///JAVAFX FINAL PROJECT/createaccount.png");
         BackgroundImage backgroundImage = new BackgroundImage(
                 image,
                 BackgroundRepeat.NO_REPEAT,
@@ -44,7 +44,7 @@ public class RemoveStaff extends Application {
         Background background = new Background(backgroundImage);
         BorderPane outerLayout = new BorderPane();
         outerLayout.setBackground(background);
-        outerLayout.setStyle("-fx-border-width: 5px; -fx-border-color: black;-fx-background-color: rgba(232,209,64,0.94)");
+        outerLayout.setStyle("-fx-border-width: 5px; -fx-border-color: black;-fx-background-color: #7CB9E8");
 
         Label titleLabel = new Label("Remove a Staff");
         titleLabel.setStyle("-fx-font-size: 30px; -fx-font-family: Arial");
@@ -203,11 +203,9 @@ public class RemoveStaff extends Application {
             }
         });
 
-        primaryStage.setMaximized(true);
-        Scene scene = new Scene(outerLayout);
+        Scene scene = new Scene(outerLayout, 800, 600);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Remove Staff");
-
         primaryStage.show();
     }
     public void setValues(){

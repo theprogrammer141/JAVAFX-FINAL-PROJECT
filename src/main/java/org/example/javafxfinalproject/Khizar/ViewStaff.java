@@ -34,7 +34,7 @@ public class ViewStaff extends Application {
     public void start(Stage primaryStage){
 
         BorderPane outerLayout = new BorderPane();
-        outerLayout.setStyle("-fx-border-width: 5px; -fx-border-color: black;-fx-background-color: rgba(232,209,64,0.94)");
+        outerLayout.setStyle("-fx-border-width: 5px; -fx-border-color: black;-fx-background-color: #7CB9E8");
 
         Label titleLabel = new Label("Search a Staff");
         titleLabel.setStyle("-fx-font-size: 30px; -fx-font-family: Arial");
@@ -169,8 +169,7 @@ public class ViewStaff extends Application {
                 }
         );
 
-        primaryStage.setMaximized(true);
-        Scene scene = new Scene(outerLayout);
+        Scene scene = new Scene(outerLayout, 800, 600);
         primaryStage.setScene(scene);
         primaryStage.setTitle("View Staff");
 
