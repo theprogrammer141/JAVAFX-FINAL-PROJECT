@@ -31,7 +31,7 @@ public class DisplayOrphan extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Image image = new Image("file:///D:\\2nd sem\\OOPs\\JAVAFX-FINAL-PROJECT-FX\\createaccount.png");
+        Image image = new Image("file:///JAVAFX FINAL PROJECT/createaccount.png");
         BackgroundImage backgroundImage = new BackgroundImage(
                 image,
                 BackgroundRepeat.NO_REPEAT,
