@@ -94,14 +94,15 @@ public class AddItems extends Application {
         Button rtrn = new Button("Return");
         rtrn.setOnAction(e -> {
             InventoryItemsMenu inventoryItemsMenu = new InventoryItemsMenu();
-            inventoryItemsMenu.start(primaryStage);
+            inventoryItemsMenu.start(new Stage());
+            primaryStage.close();
         });
         Button add = new Button("Add Item");
         add.setOnAction(new InputData(tx1, tx2, tx3, tx4));
         rtrn.setStyle("-fx-background-color: Navy");
-        add.setStyle("-fx-background-color: cyan");
-        rtrn.setTextFill(Color.CYAN);
-        add.setTextFill(Color.NAVY);
+        add.setStyle("-fx-background-color: navy");
+        rtrn.setTextFill(Color.WHITE);
+        add.setTextFill(Color.WHITE);
         grid.add(rtrn, 6, 8);
         grid.add(add, 4, 8);
 

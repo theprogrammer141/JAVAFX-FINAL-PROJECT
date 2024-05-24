@@ -109,7 +109,8 @@ public class RemoveItems extends Application {
         returnButton.setStyle("-fx-background-color: darkblue; -fx-text-fill: white; -fx-font-size: 16px;");
         returnButton.setOnAction(e -> {
             InventoryItemsMenu inventoryItemsMenu = new InventoryItemsMenu();
-            inventoryItemsMenu.start(primaryStage);
+            inventoryItemsMenu.start(new Stage());
+            primaryStage.close();
         });
 
         centerBox.getChildren().addAll(removeButton, returnButton);

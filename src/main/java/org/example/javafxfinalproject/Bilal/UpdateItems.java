@@ -26,12 +26,10 @@ public class UpdateItems extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        organization = new OOM(); // Initialize your organization or retrieve from where it's stored
+        organization = new OOM();
 
-        // Load Background Image
         Image image = new Image("file:///JAVAFX FINAL PROJECT/pr.jpeg");
 
-        // Background Image Settings
         BackgroundImage backgroundImage = new BackgroundImage(
                 image,
                 BackgroundRepeat.NO_REPEAT,

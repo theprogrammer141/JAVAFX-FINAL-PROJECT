@@ -97,11 +97,12 @@ public class DisplayAccountDetails extends Application {
         Button rtrn = new Button("Return");
         rtrn.setOnAction(e->{
             AccountMenu accountMenu = new AccountMenu();
-            accountMenu.start(primaryStage);
+            accountMenu.start(new Stage());
+            primaryStage.close();
         });
         rtrn.setStyle("-fx-background-color: Navy");
 
-        rtrn.setTextFill(Color.CYAN);
+        rtrn.setTextFill(Color.WHITE);
 
         grid.add(rtrn,6,8);
 

@@ -72,7 +72,7 @@ public class DisplayItems extends Application {
 
         // Search Button
         Button searchButton = new Button("Search");
-        searchButton.setStyle("-fx-background-color: lightgray; -fx-text-fill: navy; -fx-font-size: 16px; -fx-font-family: 'Arial';");
+        searchButton.setStyle("-fx-background-color: navy; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-family: 'Arial';");
         searchButton.setPrefWidth(100);
         searchButton.setOnAction(e -> displayItemDetails());
         grid.add(searchButton, 1, 6);
@@ -80,11 +80,12 @@ public class DisplayItems extends Application {
 
         // Return Button
         Button returnButton = new Button("Return");
-        returnButton.setStyle("-fx-background-color: lightgray; -fx-text-fill: navy; -fx-font-size: 16px; -fx-font-family: 'Arial';");
+        returnButton.setStyle("-fx-background-color: navy; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-family: 'Arial';");
         returnButton.setPrefWidth(100);
         returnButton.setOnAction(e -> {
             InventoryItemsMenu inventoryItemsMenu = new InventoryItemsMenu();
-            inventoryItemsMenu.start(primaryStage);
+            inventoryItemsMenu.start(new Stage());
+            primaryStage.close();
         });
         grid.add(returnButton, 1, 7);
         GridPane.setMargin(returnButton, new Insets(20, 0, 0, 0));

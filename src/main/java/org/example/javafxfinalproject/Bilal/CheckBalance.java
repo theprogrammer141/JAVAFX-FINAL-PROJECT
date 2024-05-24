@@ -80,7 +80,7 @@ public class CheckBalance extends Application {
 
         Button rtrn = new Button("Return");
         rtrn.setStyle("-fx-background-color: Navy");
-        rtrn.setTextFill(Color.CYAN);
+        rtrn.setTextFill(Color.WHITE);
         rtrn.setOnAction(e ->
         {
             new AccountMenu().start(new Stage());

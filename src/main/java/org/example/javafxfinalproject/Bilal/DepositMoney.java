@@ -68,7 +68,7 @@ public class DepositMoney extends Application {
 
         // Button "Deposit"
         Button depositButton = new Button("Deposit");
-        depositButton.setStyle("-fx-background-color: #FF6347; -fx-text-fill: white; -fx-font-size: 16px;");
+        depositButton.setStyle("-fx-background-color: navy; -fx-text-fill: white; -fx-font-size: 16px;");
         centerBox.getChildren().add(depositButton);
         depositButton.setOnAction(e -> handleDeposit(primaryStage, amountTextField.getText()));
 
@@ -78,7 +78,7 @@ public class DepositMoney extends Application {
             AccountMenu accountMenu = new AccountMenu();
             accountMenu.start(primaryStage);
         });
-        returnButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 16px;");
+        returnButton.setStyle("-fx-background-color: navy; -fx-text-fill: white; -fx-font-size: 16px;");
         centerBox.getChildren().add(returnButton);
 
         // Add Center Layout to Main BorderPane

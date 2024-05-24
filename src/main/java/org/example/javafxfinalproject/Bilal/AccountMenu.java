@@ -131,7 +131,8 @@ public class AccountMenu extends Application {
         Button returnButton = new Button("Return");
         returnButton.setOnAction(e->{
             MainMenu mainMenu = new MainMenu();
-            mainMenu.start(primaryStage);
+            mainMenu.start(new Stage());
+            primaryStage.close();
         });
         returnButton.setStyle(buttonStyle);
         mainGrid.add(returnButton, 1, 4);
