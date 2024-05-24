@@ -167,7 +167,8 @@ public class MainMenu extends Application {
         ParallelTransition parallelTransition = new ParallelTransition(fadeTransition, translateTransition);
         parallelTransition.play();
 
-        Scene scene = new Scene(root, 600, 400);
+        Scene scene = new Scene(root);
+        primaryStage.setMaximized(true);
         primaryStage.setTitle("Orphanage Management System");
         primaryStage.setScene(scene);
         primaryStage.show();

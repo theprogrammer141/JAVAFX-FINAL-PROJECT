@@ -223,6 +223,10 @@ public class UpdateOrphan extends Application {
 
         searchButton.setOnAction(e -> setValues());
         saveChanges.setOnAction(new inputData());
+        closeButton.setOnAction(e ->{
+            new OrphanTab().start(new Stage());
+            primaryStage.close();
+        });
 
         // Scene and Stage setup
         Scene scene = new Scene(outerLayout);
@@ -241,18 +245,22 @@ public class UpdateOrphan extends Application {
         gridPane.add(label, 0, rowIndex);
         gridPane.add(inputControl, 1, rowIndex);
     }
-    public void setValues(){
-        orphan = searchOrphan();
-
+    public void resetValues(){
         name.setText("");
         age.setText("");
-        //gender.setText("");
-        //dateOfEnrollment.
-        //status.setText("");
+        if (gender.getSelectedToggle()!=null)
+            gender.getSelectedToggle().setSelected(false);
+        if (status.getSelectedToggle()!=null)
+            status.getSelectedToggle().setSelected(false);        dateOfEnrollment.setText("");
         degree.setText("");
         institute.setText("");
         skillName.setText("");
         skillDescription.setText("");
+    }
+    public void setValues(){
+        orphan = searchOrphan();
+
+
 
         if (orphan == null){
             showAlert(Alert.AlertType.WARNING,"Orphan not found","Please enter a valid id or name");
@@ -344,6 +352,7 @@ public class UpdateOrphan extends Application {
                 orphan.setSkillSet(skillArrayList);
                 showAlert(Alert.AlertType.CONFIRMATION, "Orphan Updated", "Orphan Updated successfully ");
                 Orphan.writeOrphanToFile(orphanArrayList);
+                resetValues();
             }
         }
     }

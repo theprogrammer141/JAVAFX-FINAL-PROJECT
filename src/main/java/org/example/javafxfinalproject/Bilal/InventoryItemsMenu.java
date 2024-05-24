@@ -13,9 +13,6 @@ import org.example.javafxfinalproject.Khizar.MainMenu;
 
 public class InventoryItemsMenu extends Application {
 
-    public static void main(String[] args) {
-        launch(args);
-    }
 
     @Override
     public void start(Stage primaryStage) {
@@ -52,7 +49,7 @@ public class InventoryItemsMenu extends Application {
         addItems.setPrefSize(180, 45);
         addItems.setOnAction(e->{
             AddItems addItems1 = new AddItems();
-            addItems1.start(primaryStage);
+            addItems1.start(new Stage());
         });
 
         Button removeItems = new Button("Remove Item");
@@ -60,7 +57,7 @@ public class InventoryItemsMenu extends Application {
         removeItems.setPrefSize(180, 45);
         removeItems.setOnAction(e->{
             RemoveItems removeItems1 = new RemoveItems();
-            removeItems1.start(primaryStage);
+            removeItems1.start(new Stage());
         });
 
         rightVBox.getChildren().addAll(addItems, removeItems);
@@ -77,7 +74,7 @@ public class InventoryItemsMenu extends Application {
         displayItems.setPrefSize(180, 45);
         displayItems.setOnAction(e->{
             DisplayItems displayItems1 = new DisplayItems();
-            displayItems1.start(primaryStage);
+            displayItems1.start(new Stage());
         });
 
         Button updateItems = new Button("Update Item");
@@ -85,7 +82,7 @@ public class InventoryItemsMenu extends Application {
         updateItems.setPrefSize(180, 45);
         updateItems.setOnAction(e->{
             UpdateItems updateItems1= new UpdateItems();
-            updateItems1.start(primaryStage);
+            updateItems1.start(new Stage());
         });
 
         leftVBox.getChildren().addAll(displayItems, updateItems);
@@ -97,7 +94,7 @@ public class InventoryItemsMenu extends Application {
         returnButton.setPrefSize(180, 45);
         returnButton.setOnAction(e->{
             MainMenu mainMenu = new MainMenu();
-            mainMenu.start(primaryStage);
+            mainMenu.start(new Stage());
         });
 
         HBox bottomHBox = new HBox(returnButton);
@@ -112,4 +109,8 @@ public class InventoryItemsMenu extends Application {
         primaryStage.setTitle("Inventory Menu");
         primaryStage.show();
     }
+    public static void main(String[] args) {
+        launch(args);
+    }
+
 }

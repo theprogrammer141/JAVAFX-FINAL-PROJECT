@@ -74,18 +74,12 @@ public class RemoveStaff extends Application {
         buttonBox.setStyle("-fx-font-size: 15px");
         buttonBox.setSpacing(65);
 
-        HBox warningBox = new HBox();
-        Label warning = new Label("Cannot find Staff!");
-        warningBox.getChildren().add(warning);
-        warning.setStyle("-fx-font-size: 20px;-fx-text-fill: red;-fx-font-weight: bold");
-        warningBox.setStyle("visibility: false");
-
         HBox searchTitle = new HBox(searchLabel);
         HBox idSearchBox = new HBox(searchByID,idSearch);
         idSearchBox.setSpacing(46);
         HBox nameSearchBox = new HBox(searchByName,nameSearch);
         nameSearchBox.setSpacing(12);
-        VBox searchBox = new VBox(searchTitle,idSearchBox,nameSearchBox,buttonBox,warningBox);
+        VBox searchBox = new VBox(searchTitle,idSearchBox,nameSearchBox,buttonBox);
         content.getChildren().add(searchBox);
         searchBox.setSpacing(13);
         searchBox.setStyle("-fx-border-color: black; -fx-border-width: 2px;-fx-border-radius: 12%;-fx-padding: 20px;");
@@ -183,7 +177,7 @@ public class RemoveStaff extends Application {
         mainContent.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.7));
 
 
-        search.setOnAction(e -> setValues(warningBox));
+        search.setOnAction(e -> setValues());
         returnButton.setOnAction(e ->
                 {
                     new StaffTab().start(new Stage());
@@ -191,6 +185,7 @@ public class RemoveStaff extends Application {
                 }
         );
         confirmRemove.setOnAction(e ->{
+            staff=searchStaff();
             if (staff != null){
                 staffArrayList.remove(staff);
                 // System.out.println("Orphan Removed");
@@ -204,6 +199,7 @@ public class RemoveStaff extends Application {
                 institute.setText("");
                 role.setText("");
                 contact.setText("");
+                showAlert(Alert.AlertType.CONFIRMATION, "Staff Removed", "Staff successfully removed!");
             }
         });
 
@@ -214,7 +210,7 @@ public class RemoveStaff extends Application {
 
         primaryStage.show();
     }
-    public void setValues(HBox warning){
+    public void setValues(){
         staff = searchStaff();
 
         name.setText("");
@@ -228,9 +224,8 @@ public class RemoveStaff extends Application {
         contact.setText("");
 
         if (staff == null){
-            warning.setStyle("visibility: true");
+            showAlert(Alert.AlertType.WARNING, "Staff not found", "Please enter a valid name or ID ");
         }else {
-            warning.setStyle("visibility: false");
             name.setText(staff.getName());
             age.setText(Integer.toString(staff.getAge()));
             gender.setText(staff.getGender());
@@ -260,8 +255,16 @@ public class RemoveStaff extends Application {
                 if (staff.getName().equalsIgnoreCase(nameSearch.getText()))
                     return staff;
             }
-        }
+        }else
+            showAlert(Alert.AlertType.WARNING, "Empty search", "Please enter a name or ID ");
         return null;
+    }
+    public static void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     public static void main(String[] args) {

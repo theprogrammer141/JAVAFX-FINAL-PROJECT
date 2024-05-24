@@ -47,7 +47,7 @@ public class UpdateStaff extends Application {
         outerLayout.setStyle("-fx-background-color: #47a690; -fx-border-color: black; -fx-border-width: 1;-fx-font-size: 15");
 
         // Title
-        Label titleLabel = new Label("Update Orphan");
+        Label titleLabel = new Label("Update Staff");
         titleLabel.setStyle("-fx-font-size: 24px; -fx-text-fill: white; -fx-alignment: center;");
         titleLabel.setMaxWidth(Double.MAX_VALUE);
         titleLabel.setAlignment(Pos.CENTER);
@@ -144,10 +144,10 @@ public class UpdateStaff extends Application {
         gridPane.setVgap(10);
         name = new TextField();
         age = new TextField();
-        addFormField(gridPane, "Orphan Name:", name, 0);
+        addFormField(gridPane, "Staff Name:", name, 0);
         gridPane.add(new Label("Gender:"),0,1);
         gridPane.add(hbox, 1, 1);
-        addFormField(gridPane, "Orphan Age:", age, 2);
+        addFormField(gridPane, "Staff Age:", age, 2);
         personalDetailsSection.getChildren().add(gridPane);
         mainContent.getChildren().add(personalDetailsSection);
 
@@ -204,9 +204,9 @@ public class UpdateStaff extends Application {
         role  = new TextField();
         contact = new TextField();
 
-        addFormField(officeGridPane, "Skill Name:", role, 0);
-        addFormField(officeGridPane, "Skill Description:", pay, 1);
-        addFormField(officeGridPane, "Skill Description:", contact, 1);
+        addFormField(officeGridPane, "Role:", role, 0);
+        addFormField(officeGridPane, "Pay:", pay, 1);
+        addFormField(officeGridPane, "Contact:", contact, 2);
         officeDetailsSection.getChildren().add(officeGridPane);
         mainContent.getChildren().add(officeDetailsSection);
 
@@ -221,11 +221,15 @@ public class UpdateStaff extends Application {
 
         searchButton.setOnAction(e -> setValues());
         saveChanges.setOnAction(new inputData());
+        closeButton.setOnAction(e ->{
+            new StaffTab().start(new Stage());
+            primaryStage.close();
+        });
 
         // Scene and Stage setup
         Scene scene = new Scene(outerLayout);
         primaryStage.setMaximized(true);
-        primaryStage.setTitle("Orphan Registration System");
+        primaryStage.setTitle("Update staff");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -244,9 +248,10 @@ public class UpdateStaff extends Application {
 
         name.setText("");
         age.setText("");
-        male.setSelected(false);
-        female.setSelected(false);
-        other.setSelected(false);
+        if (gender.getSelectedToggle()!=null)
+            gender.getSelectedToggle().setSelected(false);
+        if (status.getSelectedToggle()!=null)
+            status.getSelectedToggle().setSelected(false);
         //status.setText("");
         degree.setText("");
         institute.setText("");
@@ -343,11 +348,12 @@ public class UpdateStaff extends Application {
                     throw new RuntimeException(e);
                 }
 
-                showAlert(Alert.AlertType.CONFIRMATION, "Orphan Updated", "Orphan Updated successfully ");
+                showAlert(Alert.AlertType.CONFIRMATION, "Staff Updated", "Orphan Updated successfully ");
                 Staff.writeStaffToFile(staffArrayList);
             }
         }
     }
+
 
 
     public static void main(String[] args) {

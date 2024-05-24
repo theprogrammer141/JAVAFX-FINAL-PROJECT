@@ -170,10 +170,38 @@ public class addStaff extends Application {
         primaryStage.setScene(scene);
 
         addButton.setOnAction(new InputData(nameField,ageField,genderGroup,education,degree,institute,pay,role,contact));
+        resetButton.setOnAction(e -> resetData(nameField,ageField,genderGroup,education,degree,institute,pay,role,contact));
+        closeButton.setOnAction(e ->{
+            new StaffTab().start(new Stage());
+            primaryStage.close();
+        });
+
 
 
         primaryStage.show();
     }
+    public static void resetData(TextField nameField, TextField age, ToggleGroup gender, ToggleGroup educationStatus, TextField degree, TextField institute, TextField pay, TextField role, TextField contact){
+        nameField.setText("");
+        age.setText("");
+        degree.setText("");
+        institute.setText("");
+        role.setText("");
+        pay.setText("");
+        contact.setText("");
+        if (gender.getSelectedToggle()!=null)
+            gender.getSelectedToggle().setSelected(false);
+        if (educationStatus.getSelectedToggle()!=null)
+            educationStatus.getSelectedToggle().setSelected(false);
+
+    }
+    public static void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
 
 
     public static void main(String[] args) {
@@ -204,43 +232,54 @@ class InputData implements EventHandler<ActionEvent>{
         this.contact = contact;
     }
 
+
+
     @Override
     public void handle(ActionEvent actionEvent) {
-        OOM organization = new OOM();
-        ArrayList<Staff> staffList = organization.getStaffList();
-        Staff staff = new Staff();
-        staff.setId(staffList.size()+1);
-        staff.setName(nameField.getText());
-        try {
-            staff.setAge(Integer.parseInt(age.getText()));
-        } catch (NoNegativeValueException | InvalidAgeException e) {
-            throw new RuntimeException(e);
+
+        if (nameField.getText().isEmpty() || educationStatus.getSelectedToggle()==null || age.getText().isEmpty() ||  gender.getSelectedToggle() ==null){
+            addStaff.showAlert(Alert.AlertType.WARNING, "Empty fields", "Fill all compulsory fields (Personal and education details)");
+        } else {
+            OOM organization = new OOM();
+            ArrayList<Staff> staffList = organization.getStaffList();
+            Staff staff = new Staff();
+            staff.setId(staffList.size() + 1);
+            staff.setName(nameField.getText());
+            try {
+                staff.setAge(Integer.parseInt(age.getText()));
+            } catch (NoNegativeValueException | InvalidAgeException e) {
+                throw new RuntimeException(e);
+            }
+            RadioButton selectedGender = (RadioButton) gender.getSelectedToggle();
+            staff.setGender(selectedGender.getText());
+            Education education = new Education();
+            RadioButton educationButton = (RadioButton) educationStatus.getSelectedToggle();
+            if (educationButton.getText().equals("Educated")) {
+                education.setEducationLevel(degree.getText());
+                education.setInstitute(institute.getText());
+            } else {
+                education.setEducationLevel("None");
+                education.setInstitute("None");
+            }
+            staff.setEducation(education);
+            staff.setRole(role.getText());
+            try {
+                staff.setContact(contact.getText());
+            } catch (InvalidContactNumberException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+                staff.setPay(Double.parseDouble(pay.getText()));
+            } catch (NoNegativeValueException e) {
+                throw new RuntimeException(e);
+            }
+            staffList.add(staff);
+            Staff.writeStaffToFile(staffList);
+            addStaff.resetData(nameField,age,gender,educationStatus,degree,institute,pay,role,contact);
+            addStaff.showAlert(Alert.AlertType.CONFIRMATION, "Staff added", "Staff added successfully ");
+
+
         }
-        RadioButton selectedGender = (RadioButton) gender.getSelectedToggle();
-        staff.setGender(selectedGender.getText());
-        Education education = new Education();
-        RadioButton educationButton = (RadioButton) educationStatus.getSelectedToggle();
-        if (educationButton.getText().equals("Educated")){
-            education.setEducationLevel(degree.getText());
-            education.setInstitute(institute.getText());
-        }else {
-            education.setEducationLevel("None");
-            education.setInstitute("None");
-        }
-        staff.setEducation(education);
-        staff.setRole(role.getText());
-        try {
-            staff.setContact(contact.getText());
-        } catch (InvalidContactNumberException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            staff.setPay(Double.parseDouble(pay.getText()));
-        } catch (NoNegativeValueException e) {
-            throw new RuntimeException(e);
-        }
-        staffList.add(staff);
-        Staff.writeStaffToFile(staffList);
 
     }
 }

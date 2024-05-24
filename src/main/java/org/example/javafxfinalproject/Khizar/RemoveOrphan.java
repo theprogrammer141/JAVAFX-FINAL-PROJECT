@@ -73,18 +73,14 @@ public class RemoveOrphan extends Application {
         buttonBox.setStyle("-fx-font-size: 15px");
         buttonBox.setSpacing(65);
 
-        HBox warningBox = new HBox();
-        Label warning = new Label("Cannot find Orphan!");
-        warningBox.getChildren().add(warning);
-        warning.setStyle("-fx-font-size: 20px;-fx-text-fill: red;-fx-font-weight: bold");
-        warningBox.setStyle("visibility: false");
+
 
         HBox searchTitle = new HBox(searchLabel);
         HBox idSearchBox = new HBox(searchByID,idSearch);
         idSearchBox.setSpacing(46);
         HBox nameSearchBox = new HBox(searchByName,nameSearch);
         nameSearchBox.setSpacing(12);
-        VBox searchBox = new VBox(searchTitle,idSearchBox,nameSearchBox,buttonBox,warningBox);
+        VBox searchBox = new VBox(searchTitle,idSearchBox,nameSearchBox,buttonBox);
         content.getChildren().add(searchBox);
         searchBox.setSpacing(13);
         searchBox.setStyle("-fx-border-color: black; -fx-border-width: 2px;-fx-border-radius: 12%;-fx-padding: 20px;");
@@ -183,7 +179,7 @@ public class RemoveOrphan extends Application {
         mainContent.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.7));
 
 
-        search.setOnAction(e -> setValues(warningBox));
+        search.setOnAction(e -> setValues());
         returnButton.setOnAction(e ->
                 {
                     new OrphanTab().start(new Stage());
@@ -204,6 +200,7 @@ public class RemoveOrphan extends Application {
                 institute.setText("");
                 skillName.setText("");
                 skillDescription.setText("");
+                showAlert(Alert.AlertType.CONFIRMATION, "Orphan removed", "Orphan Data removed successfully");
             }
         });
 
@@ -214,7 +211,7 @@ public class RemoveOrphan extends Application {
 
         primaryStage.show();
     }
-    public void setValues(HBox warning){
+    public void setValues(){
         orphan = searchOrphan();
 
         name.setText("");
@@ -228,9 +225,8 @@ public class RemoveOrphan extends Application {
         skillDescription.setText("");
 
         if (orphan == null){
-            warning.setStyle("visibility: true");
+            showAlert(Alert.AlertType.WARNING, "Orphan not found", "Please enter a valid name or ID ");
         }else {
-            warning.setStyle("visibility: false");
             name.setText(orphan.getName());
             age.setText(Integer.toString(orphan.getAge()));
             dateOfEnrollment.setText(orphan.getEntryDate());
@@ -262,8 +258,16 @@ public class RemoveOrphan extends Application {
                 if (orphan1.getName().equalsIgnoreCase(nameSearch.getText()))
                     return orphan1;
             }
-        }
+        }else
+            showAlert(Alert.AlertType.WARNING, "Empty search", "Please enter a name or ID ");
         return null;
+    }
+    public static void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     public static void main(String[] args) {

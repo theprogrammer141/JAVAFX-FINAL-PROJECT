@@ -145,17 +145,23 @@ public class DisplayStaff extends Application {
         mainContent.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.7));
 
 
-        display();
+        display(0);
         nextButton.setOnAction(e ->{
             if (id<staffList.size()-1 && id >=0) {
                 id++;
-                display();
+                display(id);
+            }else if (id == staffList.size()-1) {
+                resetData();
+                showAlert(Alert.AlertType.WARNING, "Staff not found", "No more Staff Record available");
             }
         });
         previousButton.setOnAction(e ->{
             if (id<staffList.size() && id >0) {
                 id--;
-                display();
+                display(id);
+            }else if (id <= 0) {
+                resetData();
+                showAlert(Alert.AlertType.WARNING, "Staff not found", "No more Staff Record available");
             }
         });
         returnButton.setOnAction(e -> {
@@ -169,7 +175,19 @@ public class DisplayStaff extends Application {
         primaryStage.setTitle("Display Orphan");
         primaryStage.show();
     }
-    public void display() {
+    public void resetData(){
+        name.setText("");
+        age.setText("");
+        gender.setText("");
+        pay.setText("");
+        status.setText("");
+        degree.setText("");
+        institute.setText("");
+        role.setText("");
+        contact.setText("");
+    }
+    public void display(int value) {
+       //resetData();
         name.setText("");
         age.setText("");
         gender.setText("");
@@ -180,7 +198,7 @@ public class DisplayStaff extends Application {
         role.setText("");
         contact.setText("");
 
-        Staff staff = staffList.get(id);
+        Staff staff = staffList.get(value);
 
         name.setText(staff.getName());
         age.setText(Integer.toString(staff.getAge()));
@@ -198,6 +216,13 @@ public class DisplayStaff extends Application {
         role.setText(staff.getRole());
         contact.setText(staff.getContact());
 
+    }
+    public static void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
 

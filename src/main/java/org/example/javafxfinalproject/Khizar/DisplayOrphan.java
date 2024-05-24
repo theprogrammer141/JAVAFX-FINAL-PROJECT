@@ -152,18 +152,26 @@ public class DisplayOrphan extends Application {
         mainContent.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.7));
 
 
-        display();
+        display(0);
         nextButton.setOnAction(e ->{
             if (id<orphansList.size()-1 && id >=0) {
                 id++;
-                display();
+                display(id);
+            } else if (id == orphansList.size()-1) {
+                resetData();
+                showAlert(Alert.AlertType.WARNING, "Orphan not found", "No more Orphan Record available");
             }
         });
         previousButton.setOnAction(e ->{
             if (id<orphansList.size() && id >0) {
                 id--;
-                display();
+                display(id);
             }
+            else if (id<=0) {
+                resetData();
+                showAlert(Alert.AlertType.WARNING, "Orphan not found", "No more Orphan");
+            }
+
         });
         returnButton.setOnAction(e -> {
             new OrphanTab().start(new Stage());
@@ -176,7 +184,7 @@ public class DisplayOrphan extends Application {
         primaryStage.setTitle("Display Orphan");
         primaryStage.show();
     }
-    public void display() {
+    public void resetData(){
         name.setText("");
         age.setText("");
         gender.setText("");
@@ -187,24 +195,44 @@ public class DisplayOrphan extends Application {
         skillName.setText("");
         skillDescription.setText("");
 
-            Orphan orphan = orphansList.get(id);
-
-            name.setText(orphan.getName());
-            age.setText(Integer.toString(orphan.getAge()));
-            dateOfEnrollment.setText(orphan.getEntryDate());
-            gender.setText(orphan.getGender());
-            if (orphan.getEducation().getEducationLevel() == null) {
-                status.setText("Non-educated");
-            } else {
-                status.setText("Educated");
-                degree.setText(orphan.getEducation().getEducationLevel());
-                institute.setText(orphan.getEducation().getInstitute());
-            }
-            if (!orphan.getSkillSet().isEmpty()) {
-                skillName.setText(orphan.getSkillSet().getFirst().getSkillName());
-                skillDescription.setText(orphan.getSkillSet().getFirst().getSkillDescription());
-            }
     }
+    public void display(int value) {
+
+        name.setText("");
+        age.setText("");
+        gender.setText("");
+        dateOfEnrollment.setText("");
+        status.setText("");
+        degree.setText("");
+        institute.setText("");
+        skillName.setText("");
+        skillDescription.setText("");
+        Orphan orphan = orphansList.get(value);
+
+        name.setText(orphan.getName());
+        age.setText(Integer.toString(orphan.getAge()));
+        dateOfEnrollment.setText(orphan.getEntryDate());
+        gender.setText(orphan.getGender());
+        if (orphan.getEducation().getEducationLevel() == null) {
+            status.setText("Non-educated");
+        } else {
+            status.setText("Educated");
+            degree.setText(orphan.getEducation().getEducationLevel());
+            institute.setText(orphan.getEducation().getInstitute());
+        }
+        if (!orphan.getSkillSet().isEmpty()) {
+            skillName.setText(orphan.getSkillSet().getFirst().getSkillName());
+            skillDescription.setText(orphan.getSkillSet().getFirst().getSkillDescription());
+        }
+    }
+    public static void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
 
 
 

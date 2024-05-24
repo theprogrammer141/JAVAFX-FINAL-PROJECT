@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.util.converter.LocalDateStringConverter;
 import javaxdevelopers.OOMS.Education;
 import javaxdevelopers.OOMS.OOM;
 import javaxdevelopers.OOMS.Orphan;
@@ -17,6 +18,7 @@ import javaxdevelopers.OOMS.Skill;
 import javaxdevelopers.exceptionhandlers.InvalidAgeException;
 import javaxdevelopers.exceptionhandlers.NoNegativeValueException;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
@@ -84,7 +86,7 @@ public class addOrphan extends Application {
         addFormField(gridPane, "Orphan Name:", nameField, 0);
         gridPane.add(new Label("Gender:"),0,1);
         gridPane.add(createGenderRadioButtons(), 1, 1);
-        addFormField(gridPane, "Staff Age:", ageField, 2);
+        addFormField(gridPane, "Orphan Age:", ageField, 2);
         addFormField(gridPane, "Date of Enrollment:", date, 3);
         personalDetailsSection.getChildren().add(gridPane);
         mainContent.getChildren().add(personalDetailsSection);
@@ -153,9 +155,7 @@ public class addOrphan extends Application {
             primaryStage.close();
         });
         resetButton.setOnAction(e ->{
-            nameField.setText("");
-            ageField.setText("");
-
+           resetData();
         });
 
         // Scene and Stage setup
@@ -164,6 +164,20 @@ public class addOrphan extends Application {
         primaryStage.setScene(scene);
         primaryStage.setMaximized(true);
         primaryStage.show();
+    }
+    public void resetData(){
+        nameField.setText("");
+        ageField.setText("");
+        degreeName.setText("");
+        instituteName.setText("");
+        skillDescription.setText("");
+        skillName.setText("");
+        if (group.getSelectedToggle()!=null)
+            group.getSelectedToggle().setSelected(false);
+        if (educationGroup.getSelectedToggle()!=null)
+            educationGroup.getSelectedToggle().setSelected(false);
+        date.getEditor().clear();
+        date.setValue(null);
     }
     class inputData implements EventHandler<ActionEvent>{
 
@@ -198,14 +212,17 @@ public class addOrphan extends Application {
                 orphan.setEducation(education);
                 ArrayList<Skill> skillArrayList = new ArrayList<>();
                 Skill skill = new Skill();
-                skill.setSkillName(skillName.getText());
-                skill.setSkillDescription(skillDescription.getText());
+                if (!skillName.getText().isEmpty())
+                    skill.setSkillName(skillName.getText());
+                if (!skillDescription.getText().isEmpty())
+                    skill.setSkillDescription(skillDescription.getText());
                 skill.setSkillID(0);
                 skillArrayList.add(skill);
                 orphan.setSkillSet(skillArrayList);
                 showAlert(Alert.AlertType.CONFIRMATION, "Orphan added", "Orphan added successfully ");
                 orphanArrayList.add(orphan);
                 Orphan.writeOrphanToFile(orphanArrayList);
+                resetData();
             }
         }
     }

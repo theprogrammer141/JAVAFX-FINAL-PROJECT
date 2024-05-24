@@ -19,7 +19,6 @@ public class Account implements Serializable {
     private static final long serialVersionUID = 4599783527172519866L;
 
 
-
     public static void writeAccountToFile(Account account) {
         try (ObjectOutputStream oos  = new ObjectOutputStream( new FileOutputStream("accountData.ser"))) {
             // Check if the file is already created and not empty
