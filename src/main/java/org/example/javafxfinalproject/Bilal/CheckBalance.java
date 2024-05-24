@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
@@ -13,6 +14,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javaxdevelopers.OOMS.Account;
+import javaxdevelopers.OOMS.OOM;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class CheckBalance extends Application {
 
@@ -69,6 +75,7 @@ public class CheckBalance extends Application {
         TextField tx3 = new TextField();
         tx3.setMaxSize(200,20);
         grid.add(tx3,1,2);
+        displayAccountDetails(tx1,tx3);
 
 
         Button rtrn = new Button("Return");
@@ -86,5 +93,13 @@ public class CheckBalance extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("Display Balance");
         primaryStage.show();
+    }
+    private void displayAccountDetails(TextField accountIdField, TextField balanceField) {
+        OOM oom = new OOM(); // Assuming OOM is the class managing accounts
+        Account account = oom.getBankAccount(); // Fetching the account object
+
+        // Setting account details into UI fields
+        accountIdField.setText(String.valueOf(account.getAccountID()));
+        balanceField.setText(String.valueOf(account.getBalance()));
     }
 }

@@ -194,7 +194,7 @@ public class RemoveItems extends Application {
 
         Scene scene = new Scene(grid, 600, 600);
         confirmationStage.setScene(scene);
-        confirmationStage.setTitle("ARE YOU SURE?");
+        confirmationStage.setTitle("ARE YOU SURE TO DELET THIS ITEM?");
         confirmationStage.show();
     }
 

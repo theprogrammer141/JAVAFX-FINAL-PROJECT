@@ -62,7 +62,7 @@ public class AccountMenu extends Application {
         accountIdLabel.setTextFill(Color.WHITE);
         mainGrid.add(accountIdLabel, 0, 2);
 
-        Label comboBox2 = new Label("abl234245534343");
+        Label comboBox2 = new Label("abl2234q44344");
         comboBox2.setStyle("-fx-border-color: black; -fx-border-width: 10; -fx-padding: 10;");
         comboBox2.setMaxSize(150,20);
         comboBox2.setStyle("-fx-background-color: white; -fx-border-radius: 5px; -fx-border-color: gray;");
