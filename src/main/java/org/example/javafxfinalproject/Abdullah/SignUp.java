@@ -51,7 +51,7 @@ public class SignUp extends Application {
     }
 
     private GridPane createRegistrationFormPane(Stage primaryStage) {
-        Image backgroundImage = new Image("file:///D:\\2nd sem\\OOPs\\JAVAFX-FINAL-PROJECT-FX\\background2.jpg");
+        Image backgroundImage = new Image("file:///JAVAFX FINAL PROJECT/background2.jpg");
 
         BackgroundImage background = new BackgroundImage(
                 backgroundImage,

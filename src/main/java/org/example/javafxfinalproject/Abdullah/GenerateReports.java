@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -20,7 +21,7 @@ public class GenerateReports extends Application {
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Report Generator");
 
-        Image backgroundImage = new Image("file:///JAVAFX FINAL PROJECT/ReportGeneratorBackground.jpeg");
+        Image backgroundImage = new Image("file:///JAVAFX FINAL PROJECT/background2.jpg");
         BackgroundImage image = new BackgroundImage(
                 backgroundImage,
                 BackgroundRepeat.NO_REPEAT,
@@ -38,9 +39,10 @@ public class GenerateReports extends Application {
 
         Text title = new Text("REPORT GENERATOR");
         title.setFont(Font.font("Impact", 40));
+        title.setFill(Paint.valueOf("white"));
 
         Button orphanReportButton = new Button("Generate Orphans Report");
-        orphanReportButton.setStyle("-fx-text-fill: white; -fx-background-color: black; -fx-border-color: white; -fx-border-radius: 40px; -fx-background-radius: 30px");
+        orphanReportButton.setStyle("-fx-text-fill: white; -fx-background-color: purple; -fx-border-color: white; -fx-border-radius: 40px; -fx-background-radius: 30px");
 
         orphanReportButton.setOnAction(handler ->
         {
@@ -49,7 +51,7 @@ public class GenerateReports extends Application {
         });
 
         Button staffReportButton = new Button("Generate Staff Report");
-        staffReportButton.setStyle("-fx-text-fill: white; -fx-background-color: black; -fx-border-color: white; -fx-border-radius: 40px; -fx-background-radius: 30px");
+        staffReportButton.setStyle("-fx-text-fill: white; -fx-background-color: purple; -fx-border-color: white; -fx-border-radius: 40px; -fx-background-radius: 30px");
 
         staffReportButton.setOnAction(handler ->
         {
@@ -58,7 +60,7 @@ public class GenerateReports extends Application {
         });
 
         Button inventoryReportButton = new Button("Generate Inventory Report");
-       inventoryReportButton.setStyle("-fx-text-fill: white; -fx-background-color: black; -fx-border-color: white; -fx-border-radius: 40px; -fx-background-radius: 30px");
+       inventoryReportButton.setStyle("-fx-text-fill: white; -fx-background-color: purple; -fx-border-color: white; -fx-border-radius: 40px; -fx-background-radius: 30px");
 
        inventoryReportButton.setOnAction(handler ->
        {
@@ -67,7 +69,7 @@ public class GenerateReports extends Application {
        });
 
        Button donationReportButton = new Button("Generate Donation Report");
-        donationReportButton.setStyle("-fx-text-fill: white; -fx-background-color: black; -fx-border-color: white; -fx-border-radius: 40px; -fx-background-radius: 30px");
+        donationReportButton.setStyle("-fx-text-fill: white; -fx-background-color: purple; -fx-border-color: white; -fx-border-radius: 40px; -fx-background-radius: 30px");
 
         donationReportButton.setOnAction(handler ->
         {
@@ -76,7 +78,7 @@ public class GenerateReports extends Application {
         });
 
         Button backButton = new Button("Back");
-        backButton.setStyle(" -fx-text-fill: white;-fx-background-color: black; -fx-background-radius: 30px; -fx-border-color: white; -fx-border-radius: 40px");
+        backButton.setStyle(" -fx-text-fill: white;-fx-background-color: purple; -fx-background-radius: 30px; -fx-border-color: white; -fx-border-radius: 40px");
 
         backButton.setOnAction(handler ->
         {
