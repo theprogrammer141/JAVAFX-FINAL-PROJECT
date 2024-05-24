@@ -30,7 +30,7 @@ public class DepositMoney extends Application {
         oom = new OOM(); // Initialize OOM instance
 
         // Load background image
-        Image image = new Image("file:///JAVAFX FINAL PROJECT/Premium Vector _ Geometric gradient background.jpeg");
+        Image image = new Image("file:///JAVAFX FINAL PROJECT/pr.jpeg");
         BackgroundImage backgroundImage = new BackgroundImage(
                 image,
                 BackgroundRepeat.NO_REPEAT,

@@ -25,7 +25,7 @@ public class DisplayItems extends Application {
     public void start(Stage primaryStage) {
 
         // Background Image Settings
-        Image image = new Image("file:///D:/JAVA/JAVAFX-FINAL-PROJECT/src/op.jpeg");
+        Image image = new Image("file:///JAVAFX FINAL PROJECT/pr.jpeg");
         BackgroundImage backgroundImage = new BackgroundImage(
                 image,
                 BackgroundRepeat.NO_REPEAT,
@@ -46,14 +46,14 @@ public class DisplayItems extends Application {
         // Scene Title
         Text scenetitle = new Text("-----Item Details-----");
         scenetitle.setFont(Font.font("Arial", FontWeight.BOLD, 26));
-        scenetitle.setFill(Color.NAVY);
+        scenetitle.setFill(Color.WHITE);
         grid.add(scenetitle, 0, 0, 2, 1); // Column span for centering
 
         // Labels and TextFields
-        createLabelAndTextField(grid, "Name", 0, 1, Color.NAVY);
-        createLabelAndTextField(grid, "Price", 0, 2, Color.NAVY);
-        createLabelAndTextField(grid, "Quantity", 0, 3, Color.NAVY);
-        createLabelAndTextField(grid, "Item Type", 0, 4, Color.NAVY);
+        createLabelAndTextField(grid, "Name", 0, 1, Color.WHITE);
+        createLabelAndTextField(grid, "Price", 0, 2, Color.WHITE);
+        createLabelAndTextField(grid, "Quantity", 0, 3, Color.WHITE);
+        createLabelAndTextField(grid, "Item Type", 0, 4, Color.WHITE);
 
         // Return Button
         Button br = new Button("Return");

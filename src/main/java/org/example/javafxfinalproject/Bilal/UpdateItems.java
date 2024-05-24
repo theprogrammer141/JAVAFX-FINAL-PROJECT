@@ -29,7 +29,7 @@ public class UpdateItems extends Application {
         organization = new OOM(); // Initialize your organization or retrieve from where it's stored
 
         // Load Background Image
-        Image image = new Image("file:///JAVAFX FINAL PROJECT/rec.jpeg");
+        Image image = new Image("file:///JAVAFX FINAL PROJECT/pr.jpeg");
 
         // Background Image Settings
         BackgroundImage backgroundImage = new BackgroundImage(
@@ -76,6 +76,7 @@ public class UpdateItems extends Application {
         // Combo Box for Attribute Selection
         ComboBox<String> attributeComboBox = new ComboBox<>(FXCollections.observableArrayList("Name", "Price", "Quantity", "Type"));
         centerGrid.add(attributeComboBox, 1, 2);
+        attributeComboBox.setPromptText("Select");
 
         // Text Field for New Value
         TextField newValueTextField = new TextField();
@@ -83,12 +84,12 @@ public class UpdateItems extends Application {
 
         // Button "Update"
         Button updateButton = new Button("Update");
-        updateButton.setStyle("-fx-background-color: #FF6347; -fx-text-fill: white; -fx-font-size: 16px;");
+        updateButton.setStyle("-fx-background-color: darkblue; -fx-text-fill: white; -fx-font-size: 16px;");
         centerGrid.add(updateButton, 0, 4, 2, 1); // ColumnSpan: 2, RowSpan: 1
 
         // Button "Return"
         Button returnButton = new Button("Return");
-        returnButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 16px;");
+        returnButton.setStyle("-fx-background-color: darkblue; -fx-text-fill: white; -fx-font-size: 16px;");
         returnButton.setOnAction(e -> {
             InventoryItemsMenu inventoryItemsMenu = new InventoryItemsMenu();
             inventoryItemsMenu.start(primaryStage);

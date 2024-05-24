@@ -22,12 +22,9 @@ public class CheckBalance extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-
-
-        // Create Background Image Settings
         BackgroundSize backgroundSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, true);
-        Image image = new Image("file:///JAVAFX FINAL PROJECT/rec.jpeg");
-        // Background Image Settings
+        Image image = new Image("file:///JAVAFX FINAL PROJECT/pr.jpeg");
+
         BackgroundImage backgroundImage = new BackgroundImage(
                 image,
                 BackgroundRepeat.NO_REPEAT,
@@ -36,7 +33,7 @@ public class CheckBalance extends Application {
                 backgroundSize
         );
 
-        // Create Background with Image
+
         Background background = new Background(backgroundImage);
         GridPane grid = new GridPane();
         grid.setVgap(10);
@@ -50,7 +47,7 @@ public class CheckBalance extends Application {
 
         Text scenetitle = new Text("----Available Balance----");
         scenetitle.setFont(Font.font("Times New Roman", FontWeight.BOLD, 20));
-        scenetitle.setFill(Color.BLACK);
+        scenetitle.setFill(Color.WHITE);
         grid.add(scenetitle, 1, 0);
 
         // Bank Name Label and ComboBox
@@ -75,10 +72,13 @@ public class CheckBalance extends Application {
 
 
         Button rtrn = new Button("Return");
-
         rtrn.setStyle("-fx-background-color: Navy");
-
         rtrn.setTextFill(Color.CYAN);
+        rtrn.setOnAction(e ->
+        {
+            new AccountMenu().start(new Stage());
+            primaryStage.close();
+        });
 
         grid.add(rtrn,4,6);
 
