@@ -90,7 +90,8 @@ public class UpdateItems extends Application {
         returnButton.setStyle("-fx-background-color: darkblue; -fx-text-fill: white; -fx-font-size: 16px;");
         returnButton.setOnAction(e -> {
             InventoryItemsMenu inventoryItemsMenu = new InventoryItemsMenu();
-            inventoryItemsMenu.start(primaryStage);
+            inventoryItemsMenu.start(new Stage());
+            primaryStage.close();
         });
         centerGrid.add(returnButton, 0, 5, 2, 1); // ColumnSpan: 2, RowSpan: 1
 
@@ -106,11 +107,17 @@ public class UpdateItems extends Application {
 
         // Event handling for the Update button
         updateButton.setOnAction(e -> {
-            int id = Integer.parseInt(idTextField.getText());
+            String idText = idTextField.getText();
             String attribute = attributeComboBox.getValue();
             String newValue = newValueTextField.getText();
 
+            if (idText.isEmpty() || attribute == null || newValue.isEmpty()) {
+                showAlert(Alert.AlertType.ERROR, "Validation Error", "Fields cannot be empty!");
+                return;
+            }
+
             // Find the item by ID
+            int id = Integer.parseInt(idTextField.getText());
             InventoryItem itemToUpdate = findItemByID(id);
             if (itemToUpdate == null) {
                 showAlert(Alert.AlertType.ERROR, "Item not found", "Item with ID " + id + " not found.");
