@@ -1,5 +1,8 @@
 package org.example.javafxfinalproject.Khizar;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
+import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Insets;
@@ -13,6 +16,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class OrphanTab extends Application {
 
@@ -117,6 +121,17 @@ public class OrphanTab extends Application {
 
         btnReturn.prefWidthProperty().bind(root.widthProperty().divide(4));
         btnReturn.prefHeightProperty().bind(root.heightProperty().divide(10));
+
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(2), root);
+        fadeTransition.setFromValue(0);
+        fadeTransition.setToValue(20);
+
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(3), root);
+        translateTransition.setFromY(-primaryStage.getHeight());
+        translateTransition.setToY(0);
+
+        ParallelTransition parallelTransition = new ParallelTransition(fadeTransition, translateTransition);
+        parallelTransition.play();
 
         // Scene
         Scene scene = new Scene(root);

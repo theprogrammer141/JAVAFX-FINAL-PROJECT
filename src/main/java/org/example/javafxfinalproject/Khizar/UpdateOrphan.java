@@ -1,5 +1,8 @@
 package org.example.javafxfinalproject.Khizar;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
+import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -9,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javaxdevelopers.OOMS.Education;
 import javaxdevelopers.OOMS.OOM;
 import javaxdevelopers.OOMS.Orphan;
@@ -232,6 +236,17 @@ public class UpdateOrphan extends Application {
         ScrollPane scrollable = new ScrollPane(outerLayout);
         scrollable.setFitToHeight(true);
         scrollable.setFitToWidth(true);
+
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(2), scrollable);
+        fadeTransition.setFromValue(0);
+        fadeTransition.setToValue(20);
+
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(3), scrollable);
+        translateTransition.setFromY(-primaryStage.getHeight());
+        translateTransition.setToY(0);
+
+        ParallelTransition parallelTransition = new ParallelTransition(fadeTransition, translateTransition);
+        parallelTransition.play();
 
         // Scene and Stage setup
         Scene scene = new Scene(scrollable);

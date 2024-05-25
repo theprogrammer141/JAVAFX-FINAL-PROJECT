@@ -1,5 +1,8 @@
 package org.example.javafxfinalproject.Khizar;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
+import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Insets;
@@ -10,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class StaffTab extends Application {
     @Override
@@ -123,6 +127,17 @@ public class StaffTab extends Application {
 
         btnReturn.prefWidthProperty().bind(root.widthProperty().divide(4));
         btnReturn.prefHeightProperty().bind(root.heightProperty().divide(10));
+
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(2), root);
+        fadeTransition.setFromValue(0);
+        fadeTransition.setToValue(20);
+
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(3), root);
+        translateTransition.setFromY(-primaryStage.getHeight());
+        translateTransition.setToY(0);
+
+        ParallelTransition parallelTransition = new ParallelTransition(fadeTransition, translateTransition);
+        parallelTransition.play();
 
         // Scene
         Scene scene = new Scene(root);

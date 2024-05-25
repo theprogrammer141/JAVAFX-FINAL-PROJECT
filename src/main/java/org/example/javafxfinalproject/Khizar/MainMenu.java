@@ -156,11 +156,11 @@ public class MainMenu extends Application {
             primaryStage.close();
         });
 
-        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(3), root);
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(2), root);
         fadeTransition.setFromValue(0);
         fadeTransition.setToValue(20);
 
-        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(5), root);
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(3), root);
         translateTransition.setFromY(-primaryStage.getHeight());
         translateTransition.setToY(0);
 
