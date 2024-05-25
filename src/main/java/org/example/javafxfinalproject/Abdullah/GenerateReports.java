@@ -1,5 +1,8 @@
 package org.example.javafxfinalproject.Abdullah;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
+import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -11,6 +14,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.example.javafxfinalproject.Khizar.MainMenu;
 
 public class GenerateReports extends Application {
@@ -99,6 +103,17 @@ public class GenerateReports extends Application {
         );
 
         grid.add(root, 0, 0);
+
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(2), root);
+        fadeTransition.setFromValue(0);
+        fadeTransition.setToValue(20);
+
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(3), root);
+        translateTransition.setFromY(-primaryStage.getHeight());
+        translateTransition.setToY(0);
+
+        ParallelTransition parallelTransition = new ParallelTransition(fadeTransition, translateTransition);
+        parallelTransition.play();
 
         Scene scene = new Scene(grid);
         primaryStage.setScene(scene);

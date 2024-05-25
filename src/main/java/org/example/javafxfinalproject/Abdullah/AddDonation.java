@@ -1,5 +1,8 @@
 package org.example.javafxfinalproject.Abdullah;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
+import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -11,6 +14,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javaxdevelopers.OOMS.Donation;
 import javaxdevelopers.exceptionhandlers.NoNegativeValueException;
 import org.example.javafxfinalproject.Khizar.MainMenu;
@@ -156,6 +160,17 @@ public class AddDonation extends Application {
         });
 
         mainLayout.getChildren().addAll(titleBox, formGrid, buttonsBox);
+
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(2), mainLayout);
+        fadeTransition.setFromValue(0);
+        fadeTransition.setToValue(20);
+
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(3), mainLayout);
+        translateTransition.setFromY(stage.getHeight());
+        translateTransition.setToY(0);
+
+        ParallelTransition parallelTransition = new ParallelTransition(fadeTransition, translateTransition);
+        parallelTransition.play();
 
         Scene scene = new Scene(mainLayout);
         stage.setMaximized(true);

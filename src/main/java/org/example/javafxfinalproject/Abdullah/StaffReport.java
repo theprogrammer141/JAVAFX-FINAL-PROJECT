@@ -1,5 +1,8 @@
 package org.example.javafxfinalproject.Abdullah;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
+import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -12,6 +15,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javaxdevelopers.OOMS.*;
 
 import java.io.FileInputStream;
@@ -118,6 +122,19 @@ public class StaffReport extends Application {
         scrollPane.setContent(grid);
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
+
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(2), root);
+        fadeTransition.setFromValue(0);
+        fadeTransition.setToValue(20);
+
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(3), root);
+        translateTransition.setFromY(-primaryStage.getHeight());
+        translateTransition.setToY(0);
+
+        ParallelTransition parallelTransition = new ParallelTransition(fadeTransition, translateTransition);
+        parallelTransition.play();
+
+
 
         Scene scene = new Scene(scrollPane);
         primaryStage.setMaximized(true);

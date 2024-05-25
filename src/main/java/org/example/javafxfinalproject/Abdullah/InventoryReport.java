@@ -101,11 +101,11 @@ public class InventoryReport extends Application {
             primaryStage.close();
         });
 
-        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(3), grid);
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(2), grid);
         fadeTransition.setFromValue(0);
         fadeTransition.setToValue(20);
 
-        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(5), grid);
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(3), grid);
         translateTransition.setFromY(-primaryStage.getHeight());
         translateTransition.setToY(0);
 

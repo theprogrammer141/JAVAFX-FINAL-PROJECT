@@ -34,11 +34,11 @@ public class SignUp extends Application {
 
         GridPane gridPane = createRegistrationFormPane(primaryStage);
 
-        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(3), gridPane);
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(2), gridPane);
         fadeTransition.setFromValue(0);
         fadeTransition.setToValue(20);
 
-        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(5), gridPane);
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(3), gridPane);
         translateTransition.setFromY(-primaryStage.getHeight());
         translateTransition.setToY(0);
 

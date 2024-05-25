@@ -125,7 +125,7 @@ public class Login extends Application {
         fadeTransition.setFromValue(0);
         fadeTransition.setToValue(1);
 
-        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(1), overlayPane);
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(2), overlayPane);
         translateTransition.setFromY(-primaryStage.getHeight());
         translateTransition.setToY(0);
 
