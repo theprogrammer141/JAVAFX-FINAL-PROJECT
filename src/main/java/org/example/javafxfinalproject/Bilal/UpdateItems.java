@@ -1,5 +1,8 @@
 package org.example.javafxfinalproject.Bilal;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
+import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
@@ -9,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javaxdevelopers.OOMS.InventoryItem;
 import javaxdevelopers.OOMS.OOM;
 import javaxdevelopers.exceptionhandlers.NoNegativeValueException;
@@ -97,6 +101,17 @@ public class UpdateItems extends Application {
 
         // Add Center Layout to Main BorderPane
         borderPane.setCenter(centerGrid);
+
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(2), borderPane);
+        fadeTransition.setFromValue(0);
+        fadeTransition.setToValue(20);
+
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(3), borderPane);
+        translateTransition.setFromY(-primaryStage.getHeight());
+        translateTransition.setToY(0);
+
+        ParallelTransition parallelTransition = new ParallelTransition(fadeTransition, translateTransition);
+        parallelTransition.play();
 
         // Set Up Scene
         Scene scene = new Scene(borderPane);

@@ -1,5 +1,8 @@
 package org.example.javafxfinalproject.Bilal;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
+import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -14,6 +17,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javaxdevelopers.OOMS.Account;
 import javaxdevelopers.OOMS.OOM;
 
@@ -88,6 +92,17 @@ public class CheckBalance extends Application {
         });
 
         grid.add(rtrn,4,6);
+
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(2), grid);
+        fadeTransition.setFromValue(0);
+        fadeTransition.setToValue(20);
+
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(3), grid);
+        translateTransition.setFromY(-primaryStage.getHeight());
+        translateTransition.setToY(0);
+
+        ParallelTransition parallelTransition = new ParallelTransition(fadeTransition, translateTransition);
+        parallelTransition.play();
 
         Scene scene = new Scene(grid);
         primaryStage.setMaximized(true);

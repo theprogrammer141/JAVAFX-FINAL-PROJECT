@@ -1,5 +1,8 @@
 package org.example.javafxfinalproject.Bilal;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
+import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -9,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.example.javafxfinalproject.Khizar.MainMenu;
 
 public class InventoryItemsMenu extends Application {
@@ -88,6 +92,17 @@ public class InventoryItemsMenu extends Application {
         vBox.setSpacing(10);
         vBox.getChildren().addAll(addItems, removeItems, updateItems, displayItems, returnButton);
         borderPane.setCenter(vBox);
+
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(2), borderPane);
+        fadeTransition.setFromValue(0);
+        fadeTransition.setToValue(20);
+
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(3), borderPane);
+        translateTransition.setFromY(-primaryStage.getHeight());
+        translateTransition.setToY(0);
+
+        ParallelTransition parallelTransition = new ParallelTransition(fadeTransition, translateTransition);
+        parallelTransition.play();
 
         // Scene Setup
         Scene scene = new Scene(borderPane);

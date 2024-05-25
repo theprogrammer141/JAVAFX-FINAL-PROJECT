@@ -1,5 +1,8 @@
 package org.example.javafxfinalproject.Bilal;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
+import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -16,6 +19,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javaxdevelopers.OOMS.OOM;
 import javaxdevelopers.OOMS.InventoryItem;
 
@@ -117,6 +121,17 @@ public class RemoveItems extends Application {
 
         // Add Center Layout to Main BorderPane
         borderPane.setCenter(centerBox);
+
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(2), borderPane);
+        fadeTransition.setFromValue(0);
+        fadeTransition.setToValue(20);
+
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(3), borderPane);
+        translateTransition.setFromY(-primaryStage.getHeight());
+        translateTransition.setToY(0);
+
+        ParallelTransition parallelTransition = new ParallelTransition(fadeTransition, translateTransition);
+        parallelTransition.play();
 
         // Set Up Scene
         Scene scene = new Scene(borderPane);

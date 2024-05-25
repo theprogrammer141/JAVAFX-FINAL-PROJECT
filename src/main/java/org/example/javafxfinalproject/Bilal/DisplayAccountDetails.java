@@ -1,4 +1,8 @@
 package org.example.javafxfinalproject.Bilal;
+import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
+import javafx.animation.TranslateTransition;
+import javafx.util.Duration;
 import javaxdevelopers.OOMS.OOM;
 import javaxdevelopers.OOMS.Account;
 
@@ -105,6 +109,17 @@ public class DisplayAccountDetails extends Application {
         rtrn.setTextFill(Color.WHITE);
 
         grid.add(rtrn,6,8);
+
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(2), grid);
+        fadeTransition.setFromValue(0);
+        fadeTransition.setToValue(20);
+
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(3), grid);
+        translateTransition.setFromY(-primaryStage.getHeight());
+        translateTransition.setToY(0);
+
+        ParallelTransition parallelTransition = new ParallelTransition(fadeTransition, translateTransition);
+        parallelTransition.play();
 
         Scene scene = new Scene(grid);
         primaryStage.setMaximized(true);

@@ -1,5 +1,8 @@
 package org.example.javafxfinalproject.Bilal;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
+import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -18,6 +21,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javaxdevelopers.OOMS.OOM;
 import javaxdevelopers.OOMS.Account;
 
@@ -83,6 +87,17 @@ public class DepositMoney extends Application {
 
         // Add Center Layout to Main BorderPane
         borderPane.setCenter(centerBox);
+
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(2), borderPane);
+        fadeTransition.setFromValue(0);
+        fadeTransition.setToValue(20);
+
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(3), borderPane);
+        translateTransition.setFromY(-primaryStage.getHeight());
+        translateTransition.setToY(0);
+
+        ParallelTransition parallelTransition = new ParallelTransition(fadeTransition, translateTransition);
+        parallelTransition.play();
 
         // Set Up Scene
         Scene scene = new Scene(borderPane);

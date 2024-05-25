@@ -1,5 +1,8 @@
 package org.example.javafxfinalproject.Bilal;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
+import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -13,6 +16,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.example.javafxfinalproject.Khizar.MainMenu;
 
 public class AccountMenu extends Application {
@@ -137,6 +141,17 @@ public class AccountMenu extends Application {
         returnButton.setStyle(buttonStyle);
         mainGrid.add(returnButton, 1, 4);
         GridPane.setMargin(returnButton, new Insets(20, 0, 0, 0));
+
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(2), mainGrid);
+        fadeTransition.setFromValue(0);
+        fadeTransition.setToValue(20);
+
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(3), mainGrid);
+        translateTransition.setFromY(-primaryStage.getHeight());
+        translateTransition.setToY(0);
+
+        ParallelTransition parallelTransition = new ParallelTransition(fadeTransition, translateTransition);
+        parallelTransition.play();
 
         // Scene Setup
         Scene scene = new Scene(mainGrid);
