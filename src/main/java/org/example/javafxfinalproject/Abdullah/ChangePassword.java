@@ -38,7 +38,8 @@ public class ChangePassword extends Application {
         ParallelTransition parallelTransition = new ParallelTransition(fadeTransition, translateTransition);
         parallelTransition.play();
 
-        Scene scene = new Scene(gridPane, 600, 600);
+        Scene scene = new Scene(gridPane);
+        primaryStage.setMaximized(true);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

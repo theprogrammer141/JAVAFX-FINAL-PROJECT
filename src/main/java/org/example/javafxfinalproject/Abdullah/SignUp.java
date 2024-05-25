@@ -45,7 +45,8 @@ public class SignUp extends Application {
         ParallelTransition parallelTransition = new ParallelTransition(fadeTransition, translateTransition);
         parallelTransition.play();
 
-        Scene scene = new Scene(gridPane, 800, 600);
+        Scene scene = new Scene(gridPane);
+        primaryStage.setMaximized(true);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

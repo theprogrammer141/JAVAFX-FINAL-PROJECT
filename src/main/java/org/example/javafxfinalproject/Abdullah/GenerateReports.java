@@ -100,9 +100,9 @@ public class GenerateReports extends Application {
 
         grid.add(root, 0, 0);
 
-        Scene scene = new Scene(grid, 800, 600);
+        Scene scene = new Scene(grid);
         primaryStage.setScene(scene);
-
+        primaryStage.setMaximized(true);
         primaryStage.show();
     }
 }

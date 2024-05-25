@@ -119,7 +119,8 @@ public class StaffReport extends Application {
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
 
-        Scene scene = new Scene(scrollPane, 800, 600);
+        Scene scene = new Scene(scrollPane);
+        primaryStage.setMaximized(true);
         primaryStage.setTitle("Staff Report");
         primaryStage.setScene(scene);
         primaryStage.show();

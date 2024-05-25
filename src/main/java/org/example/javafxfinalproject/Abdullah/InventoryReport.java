@@ -120,7 +120,8 @@ public class InventoryReport extends Application {
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
 
-        Scene scene = new Scene(scrollPane, 800, 600);
+        Scene scene = new Scene(scrollPane);
+        primaryStage.setMaximized(true);
         primaryStage.setTitle("Inventory Report");
         primaryStage.setScene(scene);
         primaryStage.show();

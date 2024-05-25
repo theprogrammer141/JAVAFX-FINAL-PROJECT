@@ -157,7 +157,8 @@ public class AddDonation extends Application {
 
         mainLayout.getChildren().addAll(titleBox, formGrid, buttonsBox);
 
-        Scene scene = new Scene(mainLayout, 800, 600);
+        Scene scene = new Scene(mainLayout);
+        stage.setMaximized(true);
         stage.setTitle("Add Donation");
         stage.setScene(scene);
         stage.show();

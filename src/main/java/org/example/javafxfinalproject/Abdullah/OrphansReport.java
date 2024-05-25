@@ -122,7 +122,8 @@ public class OrphansReport extends Application {
         ParallelTransition parallelTransition = new ParallelTransition(fadeTransition, translateTransition);
         parallelTransition.play();
 
-        Scene scene = new Scene(scrollPane, 800, 600);
+        Scene scene = new Scene(scrollPane);
+        primaryStage.setMaximized(true);
         primaryStage.setTitle("Orphans Report");
         primaryStage.setScene(scene);
         primaryStage.show();

@@ -183,7 +183,8 @@ public class Login extends Application {
             }
         });
 
-        Scene scene = new Scene(grid, 800, 600);
+        Scene scene = new Scene(grid);
+        primaryStage.setMaximized(true);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
