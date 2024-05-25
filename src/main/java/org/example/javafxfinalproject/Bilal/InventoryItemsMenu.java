@@ -43,6 +43,7 @@ public class InventoryItemsMenu extends Application {
         addItems.setOnAction(e->{
             AddItems addItems1 = new AddItems();
             addItems1.start(new Stage());
+            primaryStage.close();
         });
 
         Button removeItems = new Button("Remove Item");
@@ -51,6 +52,7 @@ public class InventoryItemsMenu extends Application {
         removeItems.setOnAction(e->{
             RemoveItems removeItems1 = new RemoveItems();
             removeItems1.start(new Stage());
+            primaryStage.close();
         });
 
         Button displayItems = new Button("Display Item");
@@ -59,6 +61,7 @@ public class InventoryItemsMenu extends Application {
         displayItems.setOnAction(e->{
             DisplayItems displayItems1 = new DisplayItems();
             displayItems1.start(new Stage());
+            primaryStage.close();
         });
 
         Button updateItems = new Button("Update Item");
@@ -67,6 +70,7 @@ public class InventoryItemsMenu extends Application {
         updateItems.setOnAction(e->{
             UpdateItems updateItems1= new UpdateItems();
             updateItems1.start(new Stage());
+            primaryStage.close();
         });
 
         // Adjusted Bottom HBox for Return Button
