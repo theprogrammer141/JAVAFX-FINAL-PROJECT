@@ -86,7 +86,8 @@ public class InventoryItemsMenu extends Application {
         borderPane.setCenter(vBox);
 
         // Scene Setup
-        Scene scene = new Scene(borderPane, 600, 600);
+        Scene scene = new Scene(borderPane);
+        primaryStage.setMaximized(true);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Inventory Menu");
         primaryStage.show();

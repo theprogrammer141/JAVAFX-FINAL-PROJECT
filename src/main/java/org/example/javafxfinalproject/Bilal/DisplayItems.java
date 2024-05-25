@@ -91,7 +91,8 @@ public class DisplayItems extends Application {
         GridPane.setMargin(returnButton, new Insets(20, 0, 0, 0));
 
         // Scene Setup
-        Scene scene = new Scene(grid, 600, 600);
+        Scene scene = new Scene(grid);
+        primaryStage.setMaximized(true);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Display Item");
         primaryStage.show();

@@ -85,7 +85,8 @@ public class DepositMoney extends Application {
         borderPane.setCenter(centerBox);
 
         // Set Up Scene
-        Scene scene = new Scene(borderPane, 800, 600);
+        Scene scene = new Scene(borderPane);
+        primaryStage.setMaximized(true);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Deposit Money");
         primaryStage.show();

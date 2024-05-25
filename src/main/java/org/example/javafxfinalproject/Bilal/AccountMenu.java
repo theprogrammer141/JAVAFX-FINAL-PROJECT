@@ -139,7 +139,8 @@ public class AccountMenu extends Application {
         GridPane.setMargin(returnButton, new Insets(20, 0, 0, 0));
 
         // Scene Setup
-        Scene scene = new Scene(mainGrid, 800, 600);
+        Scene scene = new Scene(mainGrid);
+        primaryStage.setMaximized(true);
         primaryStage.setTitle("Bank Account Main Menu");
         primaryStage.setScene(scene);
         primaryStage.show();

@@ -89,7 +89,8 @@ public class CheckBalance extends Application {
 
         grid.add(rtrn,4,6);
 
-        Scene scene = new Scene(grid, 800, 600);
+        Scene scene = new Scene(grid);
+        primaryStage.setMaximized(true);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Display Balance");
         primaryStage.show();

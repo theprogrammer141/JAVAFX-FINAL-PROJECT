@@ -98,7 +98,8 @@ public class UpdateItems extends Application {
         borderPane.setCenter(centerGrid);
 
         // Set Up Scene
-        Scene scene = new Scene(borderPane, 800, 600);
+        Scene scene = new Scene(borderPane);
+        primaryStage.setMaximized(true);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Update Item");
         primaryStage.show();

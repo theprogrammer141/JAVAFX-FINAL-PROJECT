@@ -106,7 +106,8 @@ public class DisplayAccountDetails extends Application {
 
         grid.add(rtrn,6,8);
 
-        Scene scene = new Scene(grid, 800, 600);
+        Scene scene = new Scene(grid);
+        primaryStage.setMaximized(true);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Account details");
         primaryStage.show();

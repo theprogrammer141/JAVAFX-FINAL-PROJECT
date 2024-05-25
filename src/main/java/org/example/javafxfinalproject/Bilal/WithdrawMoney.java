@@ -74,7 +74,8 @@ public class WithdrawMoney extends Application {
 
         borderPane.setCenter(centerBox);
 
-        Scene scene = new Scene(borderPane, 800, 600);
+        Scene scene = new Scene(borderPane);
+        primaryStage.setMaximized(true);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Withdraw Money");
         primaryStage.show();

@@ -106,7 +106,8 @@ public class AddItems extends Application {
         grid.add(rtrn, 6, 8);
         grid.add(add, 4, 8);
 
-        Scene scene = new Scene(grid, 800, 600);
+        Scene scene = new Scene(grid);
+        primaryStage.setMaximized(true);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Add Item");
         primaryStage.show();
