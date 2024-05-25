@@ -24,7 +24,7 @@ public class addStaff extends Application {
     @Override
     public void start(Stage primaryStage){
         BorderPane outerLayout = new BorderPane();
-    outerLayout.setStyle("-fx-background-color: #5D8AA8");
+        outerLayout.setStyle("-fx-background-color: #5D8AA8");
         //title label
         Label titleLabel = new Label("Staff Registration");
         titleLabel.setStyle("-fx-font-size: 26;-fx-font-weight: bold;");
@@ -165,7 +165,11 @@ public class addStaff extends Application {
         mainContent.getChildren().add(buttonBox);
 
         primaryStage.setTitle("Add Staff");
-        Scene scene = new Scene(outerLayout, 800, 600);
+        ScrollPane scrollable = new ScrollPane(outerLayout);
+        scrollable.setFitToHeight(true);
+        scrollable.setFitToWidth(true);
+        Scene scene = new Scene(scrollable);
+        primaryStage.setMaximized(true);
         primaryStage.setScene(scene);
 
         addButton.setOnAction(new InputData(nameField,ageField,genderGroup,education,degree,institute,pay,role,contact));
@@ -174,8 +178,6 @@ public class addStaff extends Application {
             new StaffTab().start(new Stage());
             primaryStage.close();
         });
-
-
 
         primaryStage.show();
     }

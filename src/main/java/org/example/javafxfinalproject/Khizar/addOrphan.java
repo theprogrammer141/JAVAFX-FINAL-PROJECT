@@ -158,8 +158,13 @@ public class addOrphan extends Application {
            resetData();
         });
 
+        ScrollPane scrollable = new ScrollPane(outerLayout);
+        scrollable.setFitToHeight(true);
+        scrollable.setFitToWidth(true);
+
         // Scene and Stage setup
-        Scene scene = new Scene(outerLayout, 800, 600);
+        Scene scene = new Scene(scrollable);
+        primaryStage.setMaximized(true);
         primaryStage.setTitle("Orphan Registration Form");
         primaryStage.setScene(scene);
         primaryStage.show();

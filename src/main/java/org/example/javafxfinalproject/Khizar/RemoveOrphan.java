@@ -204,8 +204,13 @@ public class RemoveOrphan extends Application {
             }
         });
 
+        ScrollPane scrollable = new ScrollPane(outerLayout);
+        scrollable.setFitToHeight(true);
+        scrollable.setFitToWidth(true);
 
-        Scene scene = new Scene(outerLayout, 800, 600);
+        // Scene and Stage setup
+        Scene scene = new Scene(scrollable);
+        primaryStage.setMaximized(true);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Remove Orphan");
 

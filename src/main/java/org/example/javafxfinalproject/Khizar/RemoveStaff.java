@@ -203,7 +203,13 @@ public class RemoveStaff extends Application {
             }
         });
 
-        Scene scene = new Scene(outerLayout, 800, 600);
+        ScrollPane scrollable = new ScrollPane(outerLayout);
+        scrollable.setFitToHeight(true);
+        scrollable.setFitToWidth(true);
+
+        // Scene and Stage setup
+        Scene scene = new Scene(scrollable);
+        primaryStage.setMaximized(true);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Remove Staff");
         primaryStage.show();

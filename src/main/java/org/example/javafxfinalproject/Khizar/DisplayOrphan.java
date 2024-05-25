@@ -154,20 +154,20 @@ public class DisplayOrphan extends Application {
 
         display(0);
         nextButton.setOnAction(e ->{
-            if (id<orphansList.size()-1 && id >=0) {
-                id++;
+            id++;
+            if (id<orphansList.size() && id>=0) {
                 display(id);
-            } else if (id == orphansList.size()-1) {
+            } else {
                 resetData();
                 showAlert(Alert.AlertType.WARNING, "Orphan not found", "No more Orphan Record available");
             }
         });
         previousButton.setOnAction(e ->{
-            if (id<orphansList.size() && id >0) {
-                id--;
+            id--;
+            if (id>=0 && id<orphansList.size()) {
                 display(id);
             }
-            else if (id<=0) {
+            else {
                 resetData();
                 showAlert(Alert.AlertType.WARNING, "Orphan not found", "No more Orphan");
             }
@@ -178,7 +178,12 @@ public class DisplayOrphan extends Application {
             primaryStage.close();
         });
 
-        Scene scene = new Scene(outerLayout, 800, 600);
+        ScrollPane scrollable = new ScrollPane(outerLayout);
+        scrollable.setFitToHeight(true);
+        scrollable.setFitToWidth(true);
+
+        Scene scene = new Scene(scrollable);
+        primaryStage.setMaximized(true);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Display Orphan");
         primaryStage.show();

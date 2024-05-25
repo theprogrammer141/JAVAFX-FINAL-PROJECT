@@ -227,7 +227,13 @@ public class UpdateStaff extends Application {
         });
 
         // Scene and Stage setup
-        Scene scene = new Scene(outerLayout, 800, 600);
+        ScrollPane scrollable = new ScrollPane(outerLayout);
+        scrollable.setFitToHeight(true);
+        scrollable.setFitToWidth(true);
+
+        // Scene and Stage setup
+        Scene scene = new Scene(scrollable);
+        primaryStage.setMaximized(true);
         primaryStage.setTitle("Update staff");
         primaryStage.setScene(scene);
         primaryStage.show();

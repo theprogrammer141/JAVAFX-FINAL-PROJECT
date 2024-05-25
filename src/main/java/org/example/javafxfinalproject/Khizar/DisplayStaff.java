@@ -147,19 +147,20 @@ public class DisplayStaff extends Application {
 
         display(0);
         nextButton.setOnAction(e ->{
-            if (id<staffList.size()-1 && id >=0) {
-                id++;
+            id++;
+            if (id<staffList.size() && id >=0) {
+
                 display(id);
-            }else if (id == staffList.size()-1) {
+            }else{
                 resetData();
                 showAlert(Alert.AlertType.WARNING, "Staff not found", "No more Staff Record available");
             }
         });
         previousButton.setOnAction(e ->{
-            if (id<staffList.size() && id >0) {
-                id--;
+            id--;
+            if (id<staffList.size() && id >=0) {
                 display(id);
-            }else if (id <= 0) {
+            }else {
                 resetData();
                 showAlert(Alert.AlertType.WARNING, "Staff not found", "No more Staff Record available");
             }
@@ -169,7 +170,11 @@ public class DisplayStaff extends Application {
             primaryStage.close();
         });
 
-        Scene scene = new Scene(outerLayout, 800, 600);
+        ScrollPane scrollable = new ScrollPane(outerLayout);
+        scrollable.setFitToHeight(true);
+        scrollable.setFitToWidth(true);
+        Scene scene = new Scene(scrollable);
+        primaryStage.setMaximized(true);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Display Orphan");
         primaryStage.show();
