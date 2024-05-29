@@ -80,22 +80,26 @@ public class AccountMenu extends Application {
         Button depositMoney = new Button("Deposit Money");
         depositMoney.setOnAction(e->{
             DepositMoney depositMoney1 = new DepositMoney();
-            depositMoney1.start(primaryStage);
+            depositMoney1.start(new Stage());
+            primaryStage.close();
         });
         Button withdrawMoney = new Button("Withdraw Money");
         withdrawMoney.setOnAction(e->{
             WithdrawMoney withdraw = new WithdrawMoney();
-            withdraw.start(primaryStage);
+            withdraw.start(new Stage());
+            primaryStage.close();
         });
         Button checkMoney = new Button("Check Balance");
         checkMoney.setOnAction(e->{
             CheckBalance checkBalance = new CheckBalance();
-            checkBalance.start(primaryStage);
+            checkBalance.start(new Stage());
+            primaryStage.close();
         });
         Button displayAccount = new Button("Display Account");
         displayAccount.setOnAction(e->{
             DisplayAccountDetails displayAccountDetails = new DisplayAccountDetails();
-            displayAccountDetails.start(primaryStage);
+            displayAccountDetails.start(new Stage());
+            primaryStage.close();
         });
 
         // Button Styles
