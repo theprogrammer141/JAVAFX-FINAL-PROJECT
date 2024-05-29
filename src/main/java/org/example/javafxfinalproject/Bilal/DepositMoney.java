@@ -80,7 +80,8 @@ public class DepositMoney extends Application {
         Button returnButton = new Button("Return");
         returnButton.setOnAction(e -> {
             AccountMenu accountMenu = new AccountMenu();
-            accountMenu.start(primaryStage);
+            accountMenu.start(new Stage());
+            primaryStage.close();
         });
         returnButton.setStyle("-fx-background-color: navy; -fx-text-fill: white; -fx-font-size: 16px;");
         centerBox.getChildren().add(returnButton);
