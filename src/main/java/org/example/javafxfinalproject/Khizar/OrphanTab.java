@@ -85,7 +85,7 @@ public class OrphanTab extends Application {
         ImageView imageView = new ImageView(orphanImage);
 
         // Footer
-        Label footerLabel = new Label("Credits: Your Name or Organization");
+        Label footerLabel = new Label("Credits: JAVA X DEVELOPERS");
         footerLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #000;");
 
         // Layout
